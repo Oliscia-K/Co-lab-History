@@ -1,10 +1,19 @@
 {
-  "name": "project-skeleton",
+  "name": "Co-lab History",
+  "description": "App for students looking for someone to work on a project with, who just want to learn more about whoever they were paired with for a project, and/or for professors when deciding who to pair up/group. ",
   "version": "0.1.0",
   "private": true,
   "contributors": [
-    "Team Member 1 <member1@middlebury.edu>",
-    "Team Member 2 <member2@middlebury.edu>"
+    "Evan Lin <elin@middlebury.edu>",
+    "Seunghwan Oh <seunghwano@middlebury.edu>",
+    "Andrew Kriter <akriter@middlebury.edu>",
+    "Oliscia Thornton <okthornton@middlebury.edu>",
+    "Seunghwan Oh <seunghwano@middlebury.edu>",
+    "Seunghwan Oh <seunghwano@middlebury.edu>",
+    "Cameron Hudson <chudson@middlebury.edu>",
+    "Dante Aguilar <daguilar@middlebury.edu",
+    "Tara Masri <tmasri@middlebury.edu>"
+
   ],
   "scripts": {
     "dev": "next dev",
