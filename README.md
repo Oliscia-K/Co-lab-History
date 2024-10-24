@@ -1,17 +1,15 @@
 # Project Skeleton
 
-TODO: Implement CI badges, provide a link to the deployed version of your application, and provide a brief description of the application functionality.
 ![workflow status](https://github.com/csci312-f24/project-cutts/actions/workflows/node.js.yml/badge.svg)
 
 Deployment link: https://cutts.csci312.dev
 
 When the app is launched, users must sign in, so that they can be validated as a member of the school and to have individual profiles.
-When users search, they can filter by name, class, or year, so that results are optimized for their purposes. 
+When users search, they can filter by name, class, or year, so that results are optimized for their purposes.
 When users edit profile, they can add people that they have partnered with as references, so that other uses can contact them.
-When users select another user, they are able to see their courses, year, major, and past partners that they have added and have been added by. 
-When users choose to contact to a student, the chat page opens, so that they may begin conversing on the app. 
+When users select another user, they are able to see their courses, year, major, and past partners that they have added and have been added by.
+When users choose to contact to a student, the chat page opens, so that they may begin conversing on the app.
 When users have unopened messages, an indicator will appear by the chat icon.
-
 
 ## Creation
 

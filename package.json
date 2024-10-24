@@ -1,5 +1,5 @@
 {
-  "name": "Co-lab History",
+  "name": "co-lab-history",
   "description": "App for students looking for someone to work on a project with, who just want to learn more about whoever they were paired with for a project, and/or for professors when deciding who to pair up/group. ",
   "version": "0.1.0",
   "private": true,
@@ -11,7 +11,6 @@
     "Cameron Hudson <chudson@middlebury.edu>",
     "Dante Aguilar <daguilar@middlebury.edu",
     "Tara Masri <tmasri@middlebury.edu>"
-
   ],
   "scripts": {
     "dev": "next dev",
