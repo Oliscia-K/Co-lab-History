@@ -1,0 +1,148 @@
+.profileContainer {
+  display: flex;
+  align-items: flex-start;
+  background-color: white;
+  padding: 20px;
+  border: 3px solid #00296f;
+  border-radius: 20px;
+  max-width: 500px;
+  margin: 10px auto;
+  flex-wrap: wrap;
+}
+
+/* large and small profile sizes */
+.large {
+  width: 100%;
+}
+
+.small {
+  width: 30%;
+  font-size: 0.8em;
+}
+
+/* profile image container */
+.profileImage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-right: 16px;
+}
+
+/* profile picture when uploaded */
+.profilePicture {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* profile pictures for small components */
+.profilePicture.small {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* placeholder for image, with just initials */
+.initialsCircle {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #e0e0e0;
+  font-size: 24px;
+  color: #666;
+  font-weight: bold;
+}
+
+.small .initialsCircle {
+  width: 40px;
+  height: 40px;
+  font-size: 20px;
+}
+
+/* basics container */
+.profileBasics {
+  flex: 1;
+}
+
+/* name and pronouns */
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 1px;
+}
+
+/* large and small names for different component sizes*/
+.largeName {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #00296f;
+}
+
+.smallName {
+  font-size: 1.2em;
+  color: #00296f;
+  font-weight: bold;
+}
+.nameInput {
+  border: 1px solid #ccc;
+  padding: 8px;
+  line-height: 1;
+  border-radius: 4px;
+  font-size: 0.9em;
+  max-width: 100px;
+  margin: 4px 0;
+}
+
+/* pronouns styles */
+.pronouns {
+  font-size: 0.9em;
+  color: #00296f;
+}
+
+.pronounsInput {
+  border: 1px solid #ccc;
+  padding: 8px;
+  line-height: 1;
+  border-radius: 4px;
+  font-size: 0.9em;
+  margin-left: 1px;
+  max-width: 100px;
+}
+
+/* (major and year) */
+.basics {
+  font-size: 0.9em;
+  color: #00296f;
+  margin: 1px 0;
+}
+
+.basicsInput {
+  border: 1px solid #ccc;
+  padding: 5px;
+  border-radius: 4px;
+  font-size: 0.9em;
+  margin: 3px 0px;
+  line-height: 1;
+}
+
+/* edit button */
+.editButton {
+  margin-top: 10px;
+  padding: 8px 12px;
+  background-color: #00296f;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  align-self: flex-start;
+}
+
+.editButton:hover {
+  background-color: #45a049;
+}
