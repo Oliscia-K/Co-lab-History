@@ -10,11 +10,8 @@ export default function MainApp() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <h1>Server Practical</h1>
-        <p>
-          There is no client application for this practical. The focus is on the
-          server.
-        </p>
+        <h1>Co-Lab History</h1>
+        <p>This should be replaced by authenticator when available</p>
       </main>
     </>
   );
