@@ -14,3 +14,19 @@ router.get(async (req, res) => {
 });
 
 export default router.handler({ onError });
+
+/* Example how to fetch from this 
+(but using the the vairable for the id number instead of one of course)
+fetch('/api/user/1/userProfile')
+      .then ((response) => {
+        if (!response.ok){
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data);
+      })
+      .catch((error) => console.log(error));
+
+*/
