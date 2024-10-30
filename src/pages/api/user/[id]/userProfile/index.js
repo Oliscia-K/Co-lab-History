@@ -1,6 +1,7 @@
 import { createRouter } from "next-connect";
 import knex from "../../../../../../knex/knex";
 import onError from "../../../../../lib/middleware";
+// import User from "../../../../../../models/User";
 
 const router = createRouter();
 
@@ -11,11 +12,17 @@ router.get(async (req, res) => {
   } else {
     res.status(404).end(`user with id ${req.query.id} not found`);
   }
+  /* Might come back to implement Objection ORM
+ 
+ const user = await User.query()
+    .findById(req.query.id)
+    .throwIfNotFound();
+  res.statusCode(200).json(user); */
 });
 
 export default router.handler({ onError });
 
-/* Example how to fetch from this 
+/* Example how to fetch user from this 
 (but using the the vairable for the id number instead of one of course)
 fetch('/api/user/1/userProfile')
       .then ((response) => {
@@ -28,5 +35,4 @@ fetch('/api/user/1/userProfile')
         console.log(data);
       })
       .catch((error) => console.log(error));
-
 */
