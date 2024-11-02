@@ -13,7 +13,9 @@
     "Tara Masri <tmasri@middlebury.edu>"
   ],
   "scripts": {
-    "dev": "next dev",
+    "predev": "docker compose -f docker-compose.dev.yml up -d",
+    "postdev": "docker compose -f docker-compose.dev.yml down",
+    "dev": "node ./dev-runner.js next dev",
     "build": "next build",
     "start": "next start",
     "test": "jest",
@@ -39,6 +41,7 @@
     "*.{js,css,md,json,jsx}": "prettier --write"
   },
   "devDependencies": {
+    "@testcontainers/postgresql": "^10.13.2",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "cross-env": "^7.0.3",
@@ -56,6 +59,7 @@
     "jest-environment-jsdom": "^29.7.0",
     "jest-extended": "^4.0.2",
     "lint-staged": "^15.2.2",
-    "prettier": "^3.2.5"
+    "prettier": "^3.2.5",
+    "testcontainers": "^10.13.2"
   }
 }
