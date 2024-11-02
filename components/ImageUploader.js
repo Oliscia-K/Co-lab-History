@@ -6,17 +6,18 @@ function ImageUploader({ onImageUpload }) {
   const handleImageChange = (e) => {
     const file = e.target.files[0];
     if (file) {
-      // create a BLOB (Binary Large Object)
-      const blob = new Blob([file], { type: file.type });
-      onImageUpload(blob);
+      const fileReader = new FileReader();
+      fileReader.onload = (event) => {
+        // array of bytes
+        const arrayBuffer = event.target.result;
+        const arrayOfBytes = new Uint8Array(arrayBuffer);
+        onImageUpload(arrayOfBytes);
+      };
+      fileReader.readAsArrayBuffer(file);
     }
   };
 
-  /*
-  const uploadBlob = async (blob, filename) =>{
-    
-  }
-  */
+  // const uploadArray = async (blob, filename) =>{
 
   return (
     <div>
