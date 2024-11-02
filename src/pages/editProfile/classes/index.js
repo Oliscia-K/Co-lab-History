@@ -1,7 +1,20 @@
-export default function EditClass() {
+import ClassesScrollBar from "../../../../components/ClassesScrollBar";
+
+export default function EditClasses() {
+  const classesTaken = [
+    { id: 1, name: "CSCI 201" },
+    { id: 2, name: "CSCI 202" },
+    { id: 3, name: "CSCI 318" },
+  ];
+
   return (
     <div>
-      <h1>Edit Class</h1>
+        <h2>Edit Classes</h2>
+        <ClassesScrollBar classesTaken={classesTaken} />
+        <button type="button">Add</button>
+        <button type="button">Cancel</button>
+        <button type="button">Save</button>
     </div>
+    
   );
 }

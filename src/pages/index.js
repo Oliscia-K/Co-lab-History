@@ -1,28 +1,20 @@
-import ScrollBar from "../../components/ScrollBar";
+import ClassesScrollBar from "../components/ClassesScrollBar";
 
 export default function MainApp() {
-  const previousPartners = [
-    { id: 1, name: "Previous Partner 1" },
-    { id: 2, name: "Previous Partner 2" },
-    { id: 3, name: "Previous Partner 3" },
-    { id: 1, name: "Previous Partner 1" },
-    { id: 2, name: "Previous Partner 2" },
-    { id: 3, name: "Previous Partner 3" },
-    { id: 1, name: "Previous Partner 1" },
-    { id: 2, name: "Previous Partner 2" },
-    { id: 3, name: "Previous Partner 3" },
-    { id: 1, name: "Previous Partner 1" },
-    { id: 2, name: "Previous Partner 2" },
-    { id: 3, name: "Previous Partner 3" },
+  const classesTaken = [
+    { id: 1, name: "CSCI 201" },
+    { id: 2, name: "CSCI 202" },
+    { id: 3, name: "CSCI 318" },
   ];
 
   return (
     <div>
-      <h2>Edit Partners</h2>
-      <ScrollBar previousPartners={previousPartners} />
-      <button type="button">Add</button>
-      <button type="button">Cancel</button>
-      <button type="button">Save</button>
+        <h2>Edit Classes</h2>
+        <ClassesScrollBar classesTaken={classesTaken} />
+        <button type="button">Add</button>
+        <button type="button">Cancel</button>
+        <button type="button" onClick={handleSave} disabled={!title}>Save</button>
     </div>
+    
   );
 }
