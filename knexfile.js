@@ -17,9 +17,25 @@ const defaultSettings = {
 module.exports = {
   test: {
     ...defaultSettings,
-    client: "sqlite3",
-    connection: ":memory:",
-    useNullAsDefault: true,
+    client: "pg",
+    connection: async () => {
+      // Only import testcontainers when running in a test environment
+      const { PostgreSqlContainer } = await import(
+        "@testcontainers/postgresql"
+      );
+
+      // Create a new container for each connection, i.e., for each test file
+      // being run in parallel. These containers are automatically cleaned up
+      // by test containers via its ryuk resource reaper.
+      const container = await new PostgreSqlContainer("postgres:16").start();
+      return {
+        host: container.getHost(),
+        port: container.getPort(),
+        database: container.getDatabase(),
+        user: container.getUsername(),
+        password: container.getPassword(),
+      };
+    },
     seeds: {
       directory: "./knex/seeds/test",
     },
@@ -27,9 +43,9 @@ module.exports = {
 
   development: {
     ...defaultSettings,
-    client: "sqlite3",
+    client: "pg",
     connection: {
-      filename: "./co-labHistory.db",
+      connectionString: DATABASE_URL,
     },
     useNullAsDefault: true,
   },
