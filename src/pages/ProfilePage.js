@@ -1,7 +1,7 @@
 import styles from "../styles/ProfilePage.module.css";
 import ProfileComponent from "../../components/ProfileComponent";
 
-export default function MainApp() {
+export default function ProfilePage() {
   return (
     <>
       <ProfileComponent size="large" />
