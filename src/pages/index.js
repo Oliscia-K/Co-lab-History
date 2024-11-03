@@ -1,8 +1,10 @@
 import { useState } from "react";
+import { useRouter } from "next/router";
 import Image from "next/image";
 import styles from "../styles/MainApp.module.css";
 
 export default function MainApp() {
+  const router = useRouter();
   const [profileImage, setProfileImage] = useState(null);
 
   const handleImageUpload = (e) => {
@@ -10,6 +12,12 @@ export default function MainApp() {
     if (file) {
       const imageUrl = URL.createObjectURL(file);
       setProfileImage(imageUrl);
+    }
+  };
+
+  const handleClick = (action) => {
+    if (action === "edit") {
+      router.push(`/editProfile/main`);
     }
   };
 
@@ -41,7 +49,11 @@ export default function MainApp() {
           <strong>First Last</strong>{" "}
           <span className={styles.pronouns}>(pronouns)</span>
           <div className={styles.smallText}>Major, School Year</div>
-          <button type="button" className={styles.editButton}>
+          <button
+            type="button"
+            className={styles.editButton}
+            onClick={() => handleClick("edit")}
+          >
             Edit Basics
           </button>
         </div>
@@ -52,7 +64,11 @@ export default function MainApp() {
         <div className={styles.bio}>
           <div className={styles.sectionHeader}>
             <h3>Bio:</h3>
-            <button type="button" className={styles.editButton}>
+            <button
+              type="button"
+              className={styles.editButton}
+              onClick={() => handleClick("edit")}
+            >
               Edit
             </button>
           </div>
@@ -61,7 +77,11 @@ export default function MainApp() {
         <div className={styles.projectInterests}>
           <div className={styles.sectionHeader}>
             <h3>Project Interests:</h3>
-            <button type="button" className={styles.editButton}>
+            <button
+              type="button"
+              className={styles.editButton}
+              onClick={() => handleClick("edit")}
+            >
               Edit
             </button>
           </div>
