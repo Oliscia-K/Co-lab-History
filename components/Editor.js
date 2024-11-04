@@ -6,7 +6,8 @@ const UserShape = {
   id: PropTypes.number.isRequired,
   userName: PropTypes.string,
   userPronoun: PropTypes.string,
-  userBasics: PropTypes.string,
+  userMajor: PropTypes.string,
+  userGradYear: PropTypes.string,
   userBio: PropTypes.string,
   userProjectInterests: PropTypes.string,
 };
@@ -66,14 +67,14 @@ export default function Editor({ currentUser, complete }) {
           />
         </div>
         <label className={styles.pronouns}>
-          Pronoun:
+          Pronouns:
           <input
             type="text"
             value={pronouns}
             onChange={(e) => setPronouns(e.target.value)}
           />
         </label>
-        <label>
+        <label className={styles.major}>
           Major:
           <select value={major} onChange={(e) => setMajor(e.target.value)}>
             <option value="">Select your major</option>
@@ -100,17 +101,21 @@ export default function Editor({ currentUser, complete }) {
         </label>
       </div>
       <div className={styles.middleSection}>
-        <label className={styles.bio}>
-          Bio:
-          <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
-        </label>
-        <label className={styles.projectInterests}>
-          Project Interests:
-          <textarea
-            value={projectInterests}
-            onChange={(e) => setProjectInterests(e.target.value)}
-          />
-        </label>
+        <div className={styles.sectionHeader}>
+          <label className={styles.bio}>
+            <h3>Bio:</h3>
+            <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
+          </label>
+        </div>
+        <div className={styles.sectionHeader}>
+          <label className={styles.projectInterests}>
+            <h3>Project Interests:</h3>
+            <textarea
+              value={projectInterests}
+              onChange={(e) => setProjectInterests(e.target.value)}
+            />
+          </label>
+        </div>
       </div>
       <div>
         <button
