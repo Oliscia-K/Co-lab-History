@@ -1,0 +1,243 @@
+[
+  {
+    "number": 145,
+    "name": "Introduction to Computing",
+    "description": "In this course we will provide a broad introductory overview of the discipline of computer science, with no prerequisites or assumed prior knowledge of computers or programming. A significant component of the course is an introduction to algorithmic concepts and to programming using Python; programming assignments will explore algorithmic strategies such as selection, iteration, divide-and-conquer, and recursion, as well as introducing the Python programming language. Additional topics will include: the structure and organization of computers, the Internet and World Wide Web, abstraction as a means of managing complexity, social and ethical computing issues, and the question \"What is computation?\""
+  },
+  {
+    "number": 146,
+    "name": "Intensive Intro to Computing",
+    "description": "In this course we will provide an introduction to the field of computer science, geared towards students with some prior computer science or programming experience, or a background in quantitative problem-solving (e.g., advanced math coursework). Students will learn a variety of algorithmic strategies, including iterative and recursive approaches, and how to implement those strategies as Python programs. We will study computational techniques utilized in the natural sciences, social sciences and other disciplines. Additional topics will include large-scale data analysis and the ethical issues introduced by computing technologies."
+  },
+  {
+    "number": 200,
+    "name": "Mathematical Foundations of Computing",
+    "description": "In this course we will provide an introduction to the mathematical foundations of computer science, with an emphasis on formal reasoning. Topics will include propositional and predicate logic, sets, functions, and relations; basic number theory; mathematical induction and other proof methods; combinatorics, probability, and recurrence relations; graph theory; and models of computation.",
+    "prerequisites": [{ "or": [145, 146] }]
+  },
+  {
+    "number": 201,
+    "name": "Data Structures",
+    "description": "In this course we will study the ideas and structures helpful in designing algorithms and writing programs for solving large, complex problems. The Java programming language and object-oriented paradigm are introduced in the context of important abstract data types (ADTs) such as stacks, queues, trees, and graphs. We will study efficient implementations of these ADTs, and learn classic algorithms to manipulate these structures for tasks such as sorting and searching. Prior programming experience is expected, but prior familiarity with the Java programming language is not assumed. ",
+    "prerequisites": [{ "or": [145, 146] }]
+  },
+  {
+    "number": 202,
+    "name": "Computer Architecture",
+    "description": "A detailed study of the hardware and software that make up a computer system. Topics include assembly language programming, digital logic design, microarchitecture, pipelines, caches, and RISC vs. CISC. The goal of the course is teach students how computers are built, how they work at the lowest level, and how this knowledge can be used to write better programs. ",
+    "prerequisites": [201]
+  },
+  {
+    "number": 301,
+    "name": "Theory of Computation",
+    "description": "This course explores the nature of computation and what it means to compute. We study important models of computation (finite automata, push-down automata, and Turing machines) and investigate their fundamental computational power. We examine various problems and try to determine the computational power needed to solve them. Topics include deterministic versus non-deterministic computation, and a theoretical basis for the study of NP-completeness.",
+    "prerequisites": [200, 201]
+  },
+  {
+    "number": 302,
+    "name": "Algorithms and Complexity",
+    "description": "This course focuses on the development of correct and efficient algorithmic solutions to computational problems, and on the underlying data structures to support these algorithms. Topics include computational complexity, analysis of algorithms, proof of algorithm correctness, advanced data structures such as balanced search trees, and also important algorithmic techniques including greedy and dynamic programming. The course complements the treatment of NP-completeness in CSCI 0301.",
+    "prerequisites": [200, 201]
+  },
+  {
+    "number": 311,
+    "name": "Artificial Intelligence",
+    "description": "Artificial Intelligence (AI) is the study of computational systems that exhibit rational behavior. Applications include strategic game playing, medical diagnosis, speech and handwriting recognition, Internet search, and robotics. Course topics include intelligent agent architectures, search, knowledge representation, logical reasoning, planning, reasoning under uncertainty, machine learning, and perception and action.",
+    "prerequisites": [200, 201]
+  },
+  {
+    "number": 312,
+    "name": "Software Development",
+    "description": "This course examines the process of developing larger-scale software systems. Laboratory assignments emphasize sound programming practices, tools that facilitate the development process, and teamwork.",
+    "prerequisites": [200, 201]
+  },
+  {
+    "number": 313,
+    "name": "Programming Languages",
+    "description": "A systematic approach to concepts and features of programming languages. The course focuses on four major programming paradigms: procedural, object-oriented, functional, and logic programming languages. Students will program in several languages representing the different paradigms. Topics include grammars, data types, control structures, run-time organization, procedure activation, parameter passing, higher-order functions, lambda expressions, and unification.",
+    "prerequisites": [200, 202]
+  },
+  {
+    "number": 315,
+    "name": "Systems Programming",
+    "description": "Students will become intimately acquainted with the low-level software services that applications often take for granted. Through a broad, project-based survey of core system libraries and UNIX system calls, students will explore process management, memory management, linking and loading, threading, synchronization, filesystem operations, and inter-process communication (networking). In each area, students will build software using these building blocks, gaining an understanding of the behavior and efficiency of the tools at their disposal. Students will also gain experience building larger, more complex systems upon which applications can be built. This course is ideal for students who wish to understand and construct the software infrastructure upon which user-level software depends.",
+    "prerequisites": [202]
+  },
+  {
+    "number": 318,
+    "name": "Object-Oriented Programming and GUI Application Development",
+    "description": "In this coding-intensive course students will deepen their understanding of data structures, algorithms, and object-oriented programming concepts through development of GUI (Graphical User Interface) applications. After a brief introduction to C++ and our development environment, Qt, we will immerse ourselves in them through work on an array of application development projects. Along the way, we will be introduced to a number of software development principles and build an understanding of fundamental object-oriented concepts in C++, including classes and inheritance, templates, pointers, constructors/destructors, and ownership.",
+    "prerequisites": [202]
+  },
+  {
+    "number": 321,
+    "name": "Bioinformatics Algorithms",
+    "description": "In this course we will explore and implement algorithmic solutions to modern biology questions. Students will be introduced to motivating biological questions—such as, “How do we compare DNA sequences?”—and then implement solutions to those problems using dynamic programming, graph, randomized, combinatorial and/or other algorithmic approaches. At the completion of the course students will be able to precisely define computational biology problems, design an algorithmic solution and implement that solution in software. No biology background is assumed, but students are expected to be able to implement sophisticated algorithms in Python or another language of their choice. ",
+    "prerequisites": [201]
+  },
+  {
+    "number": 333,
+    "name": "Quantum Computing",
+    "description": "In this course we will explore how quantum mechanics can be applied to problems in communications, algorithms, detection, and cryptography. We will learn how features such as entanglement, superposition, and no-cloning can sometimes give quantum systems an advantage over standard “classical” computers. We will also discuss the current situation and challenges facing experimental quantum computers, as well as the limits of quantum computing. No previous experience with quantum mechanics is required. ",
+    "prerequisites": [200]
+  },
+  {
+    "number": 390,
+    "name": "Spatial Agent-Based Modeling",
+    "description": "In this course students will learn efficient data structures and design techniques for spatially-explicit agent-based modeling using the NetLogo programming language. Agent-based modeling techniques will be applied to problems in the social and natural sciences (such as graph pandemic modeling and population dynamics), mathematics and computational sciences (such as graph algorithms), and agent-based games. We will also explore some advanced programming features of NetLogo. Students will design and implement a significant term software project.",
+    "prerequisites": [201]
+  },
+  {
+    "number": 401,
+    "name": "Computational Complexity",
+    "description": "We will study models of computation and investigate whether a model of computation can solve a given problem efficiently or not. We will consider models that involve all-knowing provers, constrained space, communication limitations, randomness, and quantum resources, among others. While not all of these models are realistic, by studying them, we will gain insight into why certain classes of problems are easy or difficult to solve. Students enrolled in the College Writing (CW) section of the course will explore these ideas through writing, in particular, in three contexts that are critical for theoretical computer science: the proof (expert audience), a review paper (non-expert computer science audience), and a popular science article (educated public audience). ",
+    "prerequisites": [301, 302]
+  },
+  {
+    "number": 414,
+    "name": "Advanced Operating Systems",
+    "description": "An operating system manages the complex resources of modern computers and provides an interface between the user and the hardware. In this course, we will explore the key concepts of operating systems, including process, memory, and storage management; synchronization and deadlock; protection and security; and distributed systems.",
+    "prerequisites": [315]
+  },
+  {
+    "number": 416,
+    "name": "Parallel Computing",
+    "description": "Most modern computer architectures are parallel at multiple scales. In this course students will learn to develop programs that can efficiently use those parallel resources to improve performance and solve ever larger problems. Through a project-based survey students will be introduced to parallel hardware (multicore processors, clusters, GPUs), memory models (shared vs. non-shared), locality, synchronization, and different parallel programming models (threads, MapReduce, message-passing, SIMT, and more). Programming assignments will be implemented in multiple languages.",
+    "prerequisites": [202]
+  },
+  {
+    "number": 431,
+    "name": "Computer Networks",
+    "description": "Computer networks have had a profound impact on modern society. This course will investigate how computer networks are designed and how they work. Examples from the Internet as well as our own campus network will be discussed.",
+    "prerequisites": [200, 315]
+  },
+  {
+    "number": 433,
+    "name": "Compiler Design",
+    "description": "An introduction to the design and construction of compilers and translators. Topics include context-free grammars, lexical analysis, symbol tables, top-down and bottom-up parsing, parser generators, error recovery, run-time organization, declaration processing, type checking, code generation, and optimization. Through the course of the semester students will implement a complete compiler for a simple programming language.",
+    "prerequisites": [202, 301]
+  },
+  {
+    "number": 435,
+    "name": "Embedded Systems",
+    "description": "In this course we will learn about microcontrollers (compact single-chip integrated circuits at the core of embedded systems), including their architecture and how they interface with the outside world. In laboratory assignments, we will experiment with different families of microcontrollers, analyze various types of interfaces, and learn how to connect with external sensors and devices. While gaining hands-on familiarity with the different aspects of embedded systems, teams of students will engage in a semester-long project to design and build their own embedded system. ",
+    "prerequisites": [202]
+  },
+  {
+    "number": 442,
+    "name": "Network Science",
+    "description": "Many social, ecological, and technological systems are networked – their structure arises from connections between many individual components. Network science is the scientific study of connected systems using tools from mathematics, computer science, physics, and beyond. In this course, we will study measurements of centrality, hierarchy, and segregation in networks; random graph models; algorithms for network data mining; models of agents interacting on networks; and network data visualization. Students will write mathematical arguments; perform simulation experiments; implement analysis techniques; read contemporary research papers; navigate existing software packages for network analysis; and complete a substantial group project.",
+    "prerequisites": [302, "MATH 200"]
+  },
+  {
+    "number": 450,
+    "name": "Fourier Signal Processing",
+    "description": "A wide range of computational applications involve oscillating signals in one or more dimensions. Fourier analysis techniques make it possible to analyze these signals in terms of the frequency components that make them up, forming the basis for technologies ranging from audio and video compression to sound and image processing to automatic speech and image recognition. In this course we will introduce the mathematics of Fourier series and transforms, their discretization through the Fast Fourier Transform, and associated topics such as convolutions, filters, and uncertainty relations. We will then apply these techniques to a variety of examples, including music, speech, and images.",
+    "prerequisites": [201, "Math 122", "MATH 200"]
+  },
+  {
+    "number": 451,
+    "name": "Machine Learning",
+    "description": "Machine Learning is the study and design of computational systems that automatically improve their performance through experience. This course introduces the theory and practice of machine learning and its application to tasks such as database mining, pattern recognition, and strategic game-playing. Possible topics include decision-tree methods, neural networks, Bayesian and statistical methods, genetic algorithms, and reinforcement learning.",
+    "prerequisites": [200, 201, "MATH 200"]
+  },
+  {
+    "number": 452,
+    "name": "Image Processing",
+    "description": "In this course students will learn basic image processing concepts and explore practical cross-disciplinary case studies in teams. They will use open-source tools to tackle real-world image and video analysis problems ranging from enhancing and denoising to tracking and extracting information from images and videos. Collaboratively, students will get to apply these tools to a problem of their choice in a semester-long project. ",
+    "prerequisites": [200, 201]
+  },
+  {
+    "number": 453,
+    "name": "Computer Vision",
+    "description": "The goal of computer vision is to extract information from digital images and movies. Topics covered in this course include algorithms for edge and motion detection, stereo vision, object recognition, and recovering structure from motion. A range of mathematical techniques will be used to model problems and algorithms. Students will implement, test, and evaluate several computer vision techniques, and will gain experience with analyzing real, noise-contaminated image data.",
+    "prerequisites": [200, "MATH 200"]
+  },
+  {
+    "number": 454,
+    "name": "Biometrics",
+    "description": "Biometric recognition, or simply biometrics, is the science of establishing the identity of a person based on physical or behavioral attributes. In this course we will cover the three primary modalities of biometric recognition, namely fingerprint, face, and iris. We will also introduce other emerging technologies such as recognition of gait, hand geometry, and ear. Other topics will include the security of biometrics, statistics for biometric evaluation, spoofing, ethical issues related to biometric technology, the relation to forensic science, and the impact biometric recognition has had on the judicial system.",
+    "prerequisites": [200, 201]
+  },
+  {
+    "number": 455,
+    "name": "Drone Robotics",
+    "description": "In this course we will introduce the fundamental concepts of robotics, specifically focusing on drones using current research and applications. Topics will include drone control, flight planning, obstacle avoidance, and sensing. We will utilize tools from computer vision, image processing, and artificial intelligence, and we will complete experiments using small drones in compliance with college policy.",
+    "prerequisites": [200, 201]
+  },
+  {
+    "number": 457,
+    "name": "Natural Language Processing",
+    "description": "In this course we will explore computational models for processing natural (human) language. We will introduce statistical and algorithmic techniques for processing language at the word, syntactic, and semantic levels in the context of a number of application areas including language translation, parsing, summarization, information extraction, and language modeling. Assignments will involve constructing and modifying systems and will incorporate a variety of large corpora.",
+    "prerequisites": [200, 201]
+  },
+  {
+    "number": 461,
+    "name": "Computer Graphics",
+    "description": "Computer graphics is the study of how computers represent, manipulate, and ultimately display visual information. In this course we will focus primarily on three-dimensional graphics, touching on topics such as modeling (meshes, hierarchical models, and transformations), rendering (lighting, texturing, rasterization, and clipping), animation, and GPU programming. We will look at the mathematical foundations of these techniques as well as implementation techniques using WebGL.",
+    "prerequisites": [201, "MATH 200"]
+  },
+  {
+    "number": 465,
+    "name": "Information Visualization",
+    "description": "Information visualization is used to reveal patterns, trends, and outliers within abstract data. In this course we will cover topics such as the transformation of data to visual representations, common approaches to dealing with different types of data, perceptual issues that govern how visualizations are interpreted, and the development of interactive visualization tools. This course will culminate in a significant final visualization project.",
+    "prerequisites": [201]
+  },
+  {
+    "number": 466,
+    "name": "Usable Mobile Interfaces",
+    "description": "In this course we will explore the fundamental concepts of human-computer interaction and interface design. We will focus on applying an iterative, human-centric design process to mobile development. Topics will include user interface design, user experience, usability, prototyping, user testing, and mobile development. A significant portion of the class will be spent developing a mobile app, walking it through the various prototyping and testing stages.",
+    "prerequisites": [312]
+  },
+  {
+    "number": 467,
+    "name": "Generative Art",
+    "description": "In this course we will explore the field of generative art – the artistic practice based on the creation of processes that yield art and design as an output. Through projects, we will find new applications for computing techniques such as visualization, physical simulation, stochastic processes, agent-based modeling, iterated function systems, fractals, genetic algorithms and machine learning. A portion of the class will also be devoted to reading research literature and discussing the nature of computation creativity. A background in art is not required. ",
+    "prerequisites": [201]
+  },
+  {
+    "number": 500,
+    "name": "Advanced Study",
+    "description": "Individual study for qualified students in more advanced topics in computer science theory, systems, or application areas. Particularly suited for students who enter with advanced standing."
+  },
+  {
+    "number": 701,
+    "name": "Senior Seminar",
+    "description": "This senior seminar provides a capstone experience for computer science majors at Middlebury College. Through lectures, readings, and a series of two to three week individual and group assignments, we will introduce important concepts in research and experimental methods in computation. Examples will include: reading research papers; identifying research problems; dealing with big data; experimental design, testing and analysis; and technical writing in computer science."
+  },
+  {
+    "number": 702,
+    "name": "Senior Thesis",
+    "description": "The senior thesis is required for all CSCI majors who wish to be considered for high and highest departmental honors, and is recommended for students interested in pursuing graduate study in computer science. Students will spend the semester researching and writing, and developing and experimenting as appropriate for their topic. All students will be expected to report on their work in the form of a written thesis, a poster, and an oral presentation at the end of the semester. In addition, throughout the semester, students will meet as a group to discuss research and writing, and will be expected to attend talks in the Computer Science lecture series. Before approval to join the class is granted, students are expected to have chosen a thesis adviser from the CSCI faculty, and determined a thesis topic with the guidance and approval of that adviser."
+  },
+  {
+    "number": 1005,
+    "name": "Crash Course in Systems Security",
+    "description": "In this course students will learn the theory and practice of computer systems security. Morning lectures will be complemented by afternoon lab-sessions in which, under the close guidance of the instructor, students will complete both individual and group projects that will deepen their understanding of how (in)secure systems are implemented. Students will learn to use industry-standard tools for performing analysis of system vulnerabilities; be introduced to the systems security research landscape; and gain an understanding of ethical, political, and financial issues surrounding systems security research.",
+    "prerequisites": [202]
+  },
+  {
+    "number": 1012,
+    "name": "Bias, Belonging, and Power in Technology",
+    "description": "Algorithms and big data are informing increasingly important decisions, from hiring to setting bail. While we like to think that computers act objectively, in this class we will examine how technology reflects and often reinforces the biases and power structures of the culture that creates it. Since technology is a reflection of the society that creates it, we will also learn about who has been historically welcomed to or excluded from the spaces where computing technology is made. The course will involve reading, discussion, written reflections, an oral presentation, as well as a coding project that creatively engages with the course topics.",
+    "prerequisites": [{ "or": [145, 146] }]
+  },
+  {
+    "number": 1015,
+    "name": "Introduction to Rocket Propulsion",
+    "description": "In this course we will investigate the following questions: What is rocket propulsion? How do we send humans and robots to space? How do chemical and electrical rockets work and what applications are they suitable for? How do spacecraft travel to other planets? How can we use computers to design rockets and their trajectories? We will dive into topics including chemical combustion, energy conversion, ionized gases, launch vehicle design and trajectories, Kepler’s Laws, orbit transfers, and much more. We will also read Hidden Figures and have weekly discussions about the text. Assignments will consist of readings, handwritten problem sets, programming assignments, and a short reflection paper on Hidden Figures.",
+    "prerequisites": [{ "or": [145, 146] }, "PHYS 109", "MATH 121"]
+  },
+  {
+    "number": 1051,
+    "name": "Deep Learning",
+    "description": "As data becomes ubiquitous and computing resources cheaper, many disciplines have turned to deep learning to solve complicated problems. While it has achieved remarkable success in a variety of 'human' tasks, deep learning is often treated as a black-box. In this course, we will study deep learning from its foundations and build an intuitive understanding for why it works. Pairing lectures with labs, we will develop cutting-edge deep learning solutions to a variety of real-world problems. We will cover neural networks, convolutional networks designed for object detection, and recurrent networks used for natural language processing. We may also explore other topics including transformers, reinforcement learning, and generative adversarial networks subject to time and interest.(Not open to students who have already taken CSCI 0451.)",
+    "prerequisites": [200, 201, "MATH 200"]
+  },
+  {
+    "number": 1052,
+    "name": "Randomized Algorithms for Data Science",
+    "description": "In this class, we will discover how data science techniques are deployed at scale. The questions we investigate will include: How do services such as Shazam recognize song clips in seconds? In settings with hundreds of features, how do we find patterns? Given a social network, how can we detect groups? And how can we use vibrations to 'see' into the earth? We'll answer these questions and more by exploring how randomization lets us get away with far fewer resources than we'd otherwise need. Topics include random variables, concentration inequalities, dimensionality reduction, singular value decomposition, spectral graph theory, and approximate linear regression.",
+    "prerequisites": []
+  }
+]
