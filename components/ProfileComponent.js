@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "../src/styles/ProfileComponent.module.css";
