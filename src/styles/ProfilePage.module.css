@@ -1,0 +1,88 @@
+/* Container for the entire profile */
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border: 3px solid #00296f;
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 10px auto;
+}
+
+/* Profile sections for larger and smaller sizes */
+.large {
+  width: 100%;
+}
+
+.small {
+  width: 300px;
+  font-size: 0.9em;
+  padding: 10px;
+}
+
+/* Bio and Project Interests side-by-side with equal dimensions */
+.middleSection {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.bio,
+.projectInterests {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  min-width: 0;
+  height: 150px; /* Ensures consistent height for these sections */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Classes and Past Partners side-by-side with equal dimensions below */
+.bottomSection {
+  display: flex;
+  gap: 20px;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.classes,
+.pastPartners {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background-color: #f9f9f9;
+  min-width: 0;
+  height: 150px; /* Ensures consistent height for these sections */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Section header with edit button alignment */
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Edit button styling */
+.editButton {
+  background: none;
+  border: none;
+  color: #00296f;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.editButton:hover {
+  text-decoration: underline;
+}

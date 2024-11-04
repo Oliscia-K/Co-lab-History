@@ -1,5 +1,7 @@
+
 import Head from "next/head";
 import NavigationBarButton from "../../components/NavigationBarButton";
+
 
 export default function MainApp() {
   return (
