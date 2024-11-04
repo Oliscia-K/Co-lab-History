@@ -1,7 +1,26 @@
+import { useState, useEffect } from "react";
 import styles from "../styles/ProfilePage.module.css";
 import ProfileComponent from "../../components/ProfileComponent";
 
 export default function ProfilePage() {
+  const [profileData, setProfileData] = useState(null);
+  const userId = 1;
+
+  useEffect(() => {
+    // Fetch user data
+    fetch(`/api/user/${userId}/userProfile`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setProfileData(data); // Set fetched data to profileData state
+      })
+      .catch((error) => console.log("Error fetching user profile:", error));
+  }, [userId]);
+
   return (
     <>
       <ProfileComponent size="large" />
@@ -15,7 +34,8 @@ export default function ProfilePage() {
                 Edit
               </button>
             </div>
-            <p>Short bio goes here...</p>
+            <p>{profileData ? profileData.bio : "Loading bio..."}</p>{" "}
+            {/* Display bio from profileData */}
           </div>
           <div className={styles.projectInterests}>
             <div className={styles.sectionHeader}>
@@ -24,7 +44,12 @@ export default function ProfilePage() {
                 Edit
               </button>
             </div>
-            <p>Interests go here...</p>
+            <p>
+              {profileData
+                ? profileData.projectInterests
+                : "Loading interests..."}
+            </p>{" "}
+            {/* Display projectInterests */}
           </div>
         </div>
 
@@ -38,8 +63,13 @@ export default function ProfilePage() {
               </button>
             </div>
             <ul>
-              <li>Class 1</li>
-              <li>Class 2</li>
+              {profileData ? (
+                profileData.classes.map((classItem) => (
+                  <li key={classItem.id}>{classItem.name}</li> // Changed `key` from `index` to `classItem.id`
+                ))
+              ) : (
+                <li>Loading classes...</li>
+              )}
             </ul>
           </div>
           <div className={styles.pastPartners}>
@@ -50,8 +80,13 @@ export default function ProfilePage() {
               </button>
             </div>
             <ul>
-              <li>Partner 1</li>
-              <li>Partner 2</li>
+              {profileData ? (
+                profileData.pastPartners.map((partner) => (
+                  <li key={partner.id}>{partner.name}</li> // Changed `key` from `index` to `partner.id`
+                ))
+              ) : (
+                <li>Loading partners...</li>
+              )}
             </ul>
           </div>
         </div>
