@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from "next/image";
 import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "../src/styles/ProfileComponent.module.css";
@@ -31,7 +31,7 @@ function ProfileComponent({ size = "large" }) {
     if (isLarge) {
       if (profilePicture) {
         return (
-          <img
+          <Image
             src={profilePicture}
             alt="Profile"
             className={styles.profilePicture} // large profile picture
@@ -44,7 +44,7 @@ function ProfileComponent({ size = "large" }) {
     }
     if (profilePicture) {
       return (
-        <img
+        <Image
           src={profilePicture}
           alt="Profile"
           className={`${styles.smallPicture} ${styles.small}`} // small profile picture
