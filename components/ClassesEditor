@@ -1,0 +1,55 @@
+import PropTypes from "prop-types";
+import React, { useState, useEffect } from "react";
+import styles from "src/styles/Editor.module.css";
+
+export default function ClassesEditor({ currentUser, complete }) {
+  const [classes, setClasses] = useState("");
+
+  useEffect(() => {
+    setClasses(currentUser?.classes || "");
+  }, [currentUser]);
+
+  const handleSave = () => {
+    const newUser = {
+      id: currentUser?.id,
+      classes, 
+    };
+    complete(newUser);
+  };
+
+  return (
+    <div className={styles.container}>
+      <div className={styles.topSection}>
+        <div className={styles.nameSection}>
+          Classes:
+          <input
+            type="text"
+            value={classes}
+            onChange={(e) => setClasses(e.target.value)}
+          />
+        </div>
+      </div>
+      <div>
+        <button
+          type="button"
+          onClick={handleSave}
+          disabled={!classes}
+        >
+          Save
+        </button>
+        <button type="button" onClick={() => complete()}>
+          Cancel
+        </button>
+      </div>
+      {!classes && <p style={{ color: "red" }}>Class is required.</p>}
+    </div>
+  );
+}
+
+ClassesEditor.propTypes = {
+  currentUser: PropTypes.shape({
+    id: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+    classes: PropTypes.string,
+  }),
+  complete: PropTypes.func.isRequired,
+};

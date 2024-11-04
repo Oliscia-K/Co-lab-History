@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import React, { useState, useEffect } from "react";
-import styles from "../src/styles/Editor.module.css";
+import styles from "src/styles/Editor.module.css";
 
 const UserShape = {
   id: PropTypes.number.isRequired,

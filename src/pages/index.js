@@ -2,30 +2,8 @@
 import Head from "next/head";
 import NavigationBarButton from "../../components/NavigationBarButton";
 
-import { useState } from "react";
-import { useRouter } from "next/router";
-import Image from "next/image";
-import styles from "../styles/MainApp.module.css";
-import ClassesScrollBar from "../components/ClassesScrollBar";
 
 export default function MainApp() {
-  const router = useRouter();
-  const [profileImage, setProfileImage] = useState(null);
-
-  const handleImageUpload = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      const imageUrl = URL.createObjectURL(file);
-      setProfileImage(imageUrl);
-    }
-  };
-
-  const handleClick = (action) => {
-    if (action === "edit") {
-      router.push(`/editProfile/main`);
-    }
-  };
-
   return (
     <>
       <Head>
@@ -42,44 +20,7 @@ export default function MainApp() {
             <p>This should be replaced by authenticator when available</p>
           </div>
         </div>
-        <div className={styles.projectInterests}>
-          <div className={styles.sectionHeader}>
-            <h3>Project Interests:</h3>
-            <button type="button" className={styles.editButton}>
-              Edit
-            </button>
-          </div>
-          <p>Interests go here...</p>
-        </div>
-      </div>
-
-      {/* Bottom Section: Classes and Past Partners with Edit Buttons */}
-      <div className={styles.bottomSection}>
-        <div className={styles.classes}>
-          <div className={styles.sectionHeader}>
-            <h3>Classes:</h3>
-            <button type="button" className={styles.editButton}>
-              Edit
-            </button>
-          </div>
-          <ul>
-            <li>Class 1</li>
-            <li>Class 2</li>
-          </ul>
-        </div>
-        <div className={styles.pastPartners}>
-          <div className={styles.sectionHeader}>
-            <h3>Past Partners:</h3>
-            <button type="button" className={styles.editButton}>
-              Edit
-            </button>
-          </div>
-          <ul>
-            <li>Partner 1</li>
-            <li>Partner 2</li>
-          </ul>
-        </div>
-      </div>
-    </div>
+      </main>
+    </>
   );
 }
