@@ -3,10 +3,6 @@ import styles from "../src/styles/Partners.module.css";
 import PartnerShape from "./PartnerShape";
 
 export default function ScrollBar({ previousPartners }) {
-  previousPartners.forEach((element) => {
-    console.log(element.name);
-  });
-
   if (previousPartners.length > 0) {
     return (
       <div className={styles.partnersContainer}>
