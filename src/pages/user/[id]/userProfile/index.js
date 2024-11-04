@@ -20,7 +20,6 @@ export default function UserProfile() {
       })
       .catch((error) => console.log("Error fetching user profile:", error));
   }, [userId]);
-
   return (
     <>
       <ProfileComponent size="large" />
@@ -75,9 +74,9 @@ export default function UserProfile() {
           <div className={styles.pastPartners}>
             <div className={styles.sectionHeader}>
               <h3>Past Partners:</h3>
-              <button type="button" className={styles.editButton}>
+              <a href="/editProfile/partners" target="_blank">
                 Edit
-              </button>
+              </a>
             </div>
             <ul>
               {profileData ? (
