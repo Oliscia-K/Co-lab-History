@@ -1,0 +1,81 @@
+.navwrapper {
+  display: flex;
+}
+
+.sidebar {
+  height: 100vh;
+  width: 250px;
+  top: 0;
+  left: 0;
+  margin-right: 20px;
+  background-color: rgb(222, 222, 222);
+  overflow-x: hidden;
+  position: relative;
+  margin-left: -260px;
+  transition: margin 0.3s ease-out;
+}
+
+.sidebar.open {
+  margin-left: 0px;
+}
+
+.sidebarelements {
+  list-style-type: none;
+  padding-left: 0px;
+  margin: 0px;
+}
+
+.sidebarelements .sidebaritem {
+  padding-left: 10px;
+  border-bottom: 1px solid #bdb8d7;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+  transition: background-color 0.2s ease;
+}
+
+.sidebaritem:hover {
+  background-color: rgb(185, 185, 185);
+}
+
+.navbutton {
+  position: relative;
+  display: inline-flex;
+  margin: 10px;
+  background-color: #00000000;
+  color: white;
+  border: none;
+  cursor: pointer;
+  border-radius: 4px;
+  transition: box-shadow 0.4s ease;
+  height: 50px;
+}
+
+.navbutton:hover {
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+}
+
+.button {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  width: 100%;
+  background-color: #00000000;
+  color: black;
+  border: none;
+  cursor: pointer;
+  transition: box-shadow 0.3s ease;
+}
+
+.button .text {
+  font-size: 20px;
+}
+
+.homeicon,
+.profileicon {
+  width: 50px;
+  height: 50px;
+  transition: box-shadow 0.3s ease;
+  border: none;
+  background: none;
+  padding: 0;
+}

@@ -22,7 +22,6 @@ export default function UserProfile() {
       })
       .catch((error) => console.log("Error fetching user profile:", error));
   }, [userId]);
-
   return (
     <>
       <ProfileComponent size="large" />

@@ -1,25 +1,19 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
 import ScrollBar from "../../../../components/ScrollBar";
-// import { useRouter } from "next/router";
 
-export default function EditPartners() {
-  // const router = useRouter();
-
+export default function ProfileAddPartners() {
   const previousPartners = [
     { id: 1, name: "Previous Partner 1" },
     { id: 2, name: "Previous Partner 2" },
     { id: 3, name: "Previous Partner 3" },
   ];
 
-  // add complete function that works with data base
-
   return (
     <div>
-      <h2>Edit Partners</h2>
+      <h2>Add Partners</h2>
       <ScrollBar previousPartners={previousPartners} />
-      <a href="/editProfile/partners/add">
-        <button type="button">Add</button>
-      </a>
+      <input placeholder="Full Name" />
+      <input placeholder="email@middlebury.edu" />
       <a href="/">
         <button type="button">Cancel</button>
       </a>
