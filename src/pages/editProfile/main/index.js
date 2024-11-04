@@ -1,9 +1,9 @@
 import PropTypes from "prop-types";
-import { useRouter } from "next/router";
+// import { useRouter } from "next/router";
 import Editor from "../../../../components/Editor";
 
 export default function EditMain({ currentUser }) {
-  const router = useRouter();
+  // const router = useRouter();
 
   const handleComplete = async (newUser) => {
     if (newUser) {
@@ -51,12 +51,12 @@ export default function EditMain({ currentUser }) {
 
         // setCurrentUser(updatedUser);
 
-        router.push(`/user/${currentUser.id}/userProfile`);
+        // router.push(`/user/${currentUser.id}/userProfile`);
       } catch (error) {
         console.error("Error updating article:", error);
       }
     } else {
-      router.back();
+      // router.back();
     }
   };
 
