@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-html-link-for-pages */
 import styles from "../styles/ProfilePage.module.css";
 import ProfileComponent from "../../components/ProfileComponent";
 
@@ -45,9 +46,11 @@ export default function MainApp() {
           <div className={styles.pastPartners}>
             <div className={styles.sectionHeader}>
               <h3>Past Partners:</h3>
-              <button type="button" className={styles.editButton}>
-                Edit
-              </button>
+              <a href="/editProfile/partners">
+                <button type="button" className={styles.editButton}>
+                  Edit
+                </button>
+              </a>
             </div>
             <ul>
               <li>Partner 1</li>
