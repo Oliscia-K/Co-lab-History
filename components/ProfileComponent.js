@@ -9,7 +9,7 @@ function ProfileComponent({ size = "large" }) {
   // State for user profile data
   const [profileData, setProfileData] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
-  const userId = 1;
+  const userId = 28;
 
   useEffect(() => {
     fetch(`/api/user/${userId}/userProfile`)

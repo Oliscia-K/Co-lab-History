@@ -24,7 +24,7 @@ export default function EditPartners() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: 1, // Replace with actual user ID
+        id: 28, // Replace with actual user ID
         partners: previousPartners, // Send the updated partners list
       }),
     })
