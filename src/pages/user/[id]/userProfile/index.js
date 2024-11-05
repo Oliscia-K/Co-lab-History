@@ -101,7 +101,7 @@ export default function UserProfile() {
             </div>
             <ul>
               {profileData ? (
-                profileData.partner.map((partner) => (
+                profileData.partners.map((partner) => (
                   <li key={partner.id}>{partner.name}</li>
                 ))
               ) : (
