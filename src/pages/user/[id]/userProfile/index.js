@@ -5,7 +5,7 @@ import ProfileComponent from "../../../../../components/ProfileComponent";
 
 export default function UserProfile() {
   const [profileData, setProfileData] = useState(null);
-  const userId = 1;
+  const userId = 2;
 
   useEffect(() => {
     // Fetch user data
@@ -69,10 +69,7 @@ export default function UserProfile() {
               {/* <button type="button" className={styles.editButton}>
                 Edit
               </button> */}
-              <Link
-                href="/editProfile/classes/"
-                className={styles.editButton}
-              >
+              <Link href="/editProfile/classes/" className={styles.editButton}>
                 Edit
               </Link>
             </div>
@@ -92,16 +89,13 @@ export default function UserProfile() {
               {/* <button type="button" className={styles.editButton}>
                 Edit
               </button> */}
-              <Link
-                href="/editProfile/partners/"
-                className={styles.editButton}
-              >
+              <Link href="/editProfile/partners/" className={styles.editButton}>
                 Edit
               </Link>
             </div>
             <ul>
               {profileData ? (
-                profileData.partner.map((partner) => (
+                profileData.partners.map((partner) => (
                   <li key={partner.id}>{partner.name}</li>
                 ))
               ) : (
