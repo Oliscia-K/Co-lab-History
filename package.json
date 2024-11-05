@@ -34,14 +34,14 @@
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sqlite3": "^5.1.7"
+    "sqlite3": "^5.1.7",
+    "@testcontainers/postgresql": "^10.13.2"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
     "*.{js,css,md,json,jsx}": "prettier --write"
   },
   "devDependencies": {
-    "@testcontainers/postgresql": "^10.13.2",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "cross-env": "^7.0.3",

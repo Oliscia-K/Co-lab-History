@@ -15,7 +15,7 @@ const defaultSettings = {
 };
 
 module.exports = {
-  /* test: {
+  test: {
     ...defaultSettings,
     client: "pg",
     connection: async () => {
@@ -39,7 +39,7 @@ module.exports = {
     seeds: {
       directory: "./knex/seeds/test",
     },
-  }, */
+  },
 
   development: {
     ...defaultSettings,
