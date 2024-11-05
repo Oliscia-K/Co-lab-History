@@ -91,6 +91,6 @@ EditMain.propTypes = {
 
 EditMain.defaultProps = {
   currentUser: {
-    id: 2,
+    id: 1,
   },
 };
