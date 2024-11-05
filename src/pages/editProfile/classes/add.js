@@ -32,17 +32,22 @@ export default function ProfileAddPartners() {
       })
       .then((data) => {
         setUserData(data);
+        setClassesTaken(data.classes);
       })
       .catch((error) => console.log(error));
   }, []);
 
   // Handle adding a new class
   const handleAddClass = () => {
-    if (newClass && !classesTaken.some((cls) => cls.name === newClass)) {
+    if (newClass && progress && !classesTaken.some((cls) => cls.name === newClass)) {
       const selectedClass = allClasses.find((cls) => cls.name === newClass);
       if (selectedClass) {
-        setClassesTaken([...classesTaken, selectedClass]);
+        setClassesTaken([
+          ...classesTaken,
+          { ...selectedClass, progress: progress === "In Progress" }
+        ]);
         setNewClass("");
+        setProgress("");
       }
     }
   };
@@ -98,16 +103,19 @@ export default function ProfileAddPartners() {
             </option>
           ))}
         </select>
+        <label htmlFor="progressDropdown">Progress Status: </label>
         <select
           id="progressDropdown"
-          onChange={(e) => setNewClass(e.target.value)}
-          value={newClass}
+          onChange={(e) => setProgress(e.target.value)}
+          value={progress}
         >
           <option value="" disabled>
             In Progress?
           </option>
-
+          <option value="In Progress">In Progress</option>
+          <option value="Completed">Completed</option>
         </select>
+
         <button type="button" onClick={handleAddClass}>
           Add
         </button>
