@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import styles from "../../../../styles/ProfileComponent.module.css";
 import ProfileComponent from "../../../../../components/ProfileComponent";
 
@@ -17,6 +18,7 @@ export default function UserProfile() {
       })
       .then((data) => {
         setProfileData(data); // Set fetched data to profileData state
+        console.log(data);
       })
       .catch((error) => console.log("Error fetching user profile:", error));
   }, [userId]);
@@ -29,9 +31,13 @@ export default function UserProfile() {
           <div className={styles.bio}>
             <div className={styles.sectionHeader}>
               <h3>Bio:</h3>
-              <button type="button" className={styles.editButton}>
+              {/* <button type="button" className={styles.editButton}>
                 Edit
-              </button>
+              </button> */}
+
+              <Link href="/editProfile/main/" className={styles.editButton}>
+                Edit
+              </Link>
             </div>
             <p>{profileData ? profileData.bio : "Loading bio..."}</p>{" "}
             {/* Display bio from profileData */}
@@ -39,9 +45,12 @@ export default function UserProfile() {
           <div className={styles.projectInterests}>
             <div className={styles.sectionHeader}>
               <h3>Project Interests:</h3>
-              <button type="button" className={styles.editButton}>
+              {/* <button type="button" className={styles.editButton}>
                 Edit
-              </button>
+              </button> */}
+              <Link href="/editProfile/main/" className={styles.editButton}>
+                Edit
+              </Link>
             </div>
             <p>
               {profileData
@@ -57,31 +66,43 @@ export default function UserProfile() {
           <div className={styles.classes}>
             <div className={styles.sectionHeader}>
               <h3>Classes:</h3>
-              <button type="button" className={styles.editButton}>
+              {/* <button type="button" className={styles.editButton}>
                 Edit
-              </button>
+              </button> */}
+              <Link
+                href="/editProfile/classes/"
+                className={styles.editButton}
+              >
+                Edit
+              </Link>
             </div>
             <ul>
               {profileData ? (
                 profileData.classes.map((classItem) => (
-                  <li key={classItem.id}>{classItem.name}</li> // Changed `key` from `index` to `classItem.id`
+                  <li key={classItem.id}>{classItem.name}</li>
                 ))
               ) : (
                 <li>Loading classes...</li>
               )}
             </ul>
           </div>
-          <div className={styles.pastPartners}>
+          <div className={styles.partner}>
             <div className={styles.sectionHeader}>
               <h3>Past Partners:</h3>
-              <a href="/editProfile/partners" target="_blank">
+              {/* <button type="button" className={styles.editButton}>
                 Edit
-              </a>
+              </button> */}
+              <Link
+                href="/editProfile/partners/"
+                className={styles.editButton}
+              >
+                Edit
+              </Link>
             </div>
             <ul>
               {profileData ? (
-                profileData.pastPartners.map((partner) => (
-                  <li key={partner.id}>{partner.name}</li> // Changed `key` from `index` to `partner.id`
+                profileData.partner.map((partner) => (
+                  <li key={partner.id}>{partner.name}</li>
                 ))
               ) : (
                 <li>Loading partners...</li>
