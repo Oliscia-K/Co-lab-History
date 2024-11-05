@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import styles from "../../../../styles/ProfileComponent.module.css";
+import styles from "../../../../styles/ProfilePage.module.css";
 import ProfileComponent from "../../../../../components/ProfileComponent";
 
 export default function UserProfile() {
@@ -53,9 +53,7 @@ export default function UserProfile() {
               </Link>
             </div>
             <p>
-              {profileData
-                ? profileData.projectInterests
-                : "Loading interests..."}
+              {profileData ? profileData.interests : "Loading interests..."}
             </p>{" "}
             {/* Display projectInterests */}
           </div>
