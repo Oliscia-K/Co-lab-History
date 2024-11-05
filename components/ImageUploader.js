@@ -13,9 +13,14 @@ function ImageUploader({ onImageUpload }) {
   };
 
   /*
+<<<<<<< HEAD
   const uploadBlob = async (blob, filename) =>{
     
   }
+=======
+
+  const uploadArray = async () =>{
+>>>>>>> 1c12e5d5e0ecb1d8a3fd8c0a6f0b4e416e90ddc4
   */
 
   return (

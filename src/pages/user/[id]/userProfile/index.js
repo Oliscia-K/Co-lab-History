@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import Link from "next/link";
-import styles from "../../../../styles/ProfileComponent.module.css";
+import styles from "../../../../styles/ProfilePage.module.css";
 import ProfileComponent from "../../../../../components/ProfileComponent";
 
 export default function UserProfile() {
@@ -53,9 +53,7 @@ export default function UserProfile() {
               </Link>
             </div>
             <p>
-              {profileData
-                ? profileData.projectInterests
-                : "Loading interests..."}
+              {profileData ? profileData.interests : "Loading interests..."}
             </p>{" "}
             {/* Display projectInterests */}
           </div>
@@ -69,10 +67,7 @@ export default function UserProfile() {
               {/* <button type="button" className={styles.editButton}>
                 Edit
               </button> */}
-              <Link
-                href="/editProfile/classes/"
-                className={styles.editButton}
-              >
+              <Link href="/editProfile/classes/" className={styles.editButton}>
                 Edit
               </Link>
             </div>
@@ -92,10 +87,7 @@ export default function UserProfile() {
               {/* <button type="button" className={styles.editButton}>
                 Edit
               </button> */}
-              <Link
-                href="/editProfile/partners/"
-                className={styles.editButton}
-              >
+              <Link href="/editProfile/partners/" className={styles.editButton}>
                 Edit
               </Link>
             </div>
