@@ -4,10 +4,7 @@ import ClassShape from "./ClassShape";
 import { useState } from "react";
 import { useRouter } from "next/router";
 
-export default function ClassesScrollBar(initialClassesTaken) {
-  const [classesTaken, setClassesTaken] = useState(initialClassesTaken);
-  const [newClass, setNewClass] = useState("");
-  const router = useRouter();
+export default function ClassesScrollBar(classesTaken) {
 
   classesTaken.forEach((element) => {
     console.log(element.name);
