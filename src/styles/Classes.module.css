@@ -1,0 +1,9 @@
+.classesContainer {
+  height: 20vh; /*Set height to 20% of the viewport height*/
+  overflow-y: auto; /*Adds vertical scrollbar when needed*/
+  width: 50%; /*Adjust this to control the width as necessary*/
+  gap: 10px; /*Adds space between grid items*/
+  padding: 10px; /*Padding inside the container*/
+  border: 1px solid #ccc; /*Optional border for the container*/
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /*Optional shadow for aesthetics*/
+}
