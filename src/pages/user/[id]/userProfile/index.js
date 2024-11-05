@@ -53,9 +53,7 @@ export default function UserProfile() {
               </Link>
             </div>
             <p>
-              {profileData
-                ? profileData.projectInterests
-                : "Loading interests..."}
+              {profileData ? profileData.interests : "Loading interests..."}
             </p>{" "}
             {/* Display projectInterests */}
           </div>

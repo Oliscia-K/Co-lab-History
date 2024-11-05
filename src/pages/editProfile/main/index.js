@@ -15,7 +15,7 @@ export default function EditMain({ currentUser }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: 1, // currentUser.id,
+            id: 2, // currentUser.id,
             name: newUser.name,
             email: "test@middlebury.edu",
             pronouns: newUser.pronouns,
@@ -51,7 +51,7 @@ export default function EditMain({ currentUser }) {
 
         // setCurrentUser(updatedUser);
 
-        router.push(`/api/user/${currentUser.id}/userProfile`);
+        router.push(`/user/${currentUser.id}/userProfile`);
       } catch (error) {
         console.error("Error updating article:", error);
       }
@@ -91,6 +91,6 @@ EditMain.propTypes = {
 
 EditMain.defaultProps = {
   currentUser: {
-    id: 1,
+    id: 2,
   },
 };

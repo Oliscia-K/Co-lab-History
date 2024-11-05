@@ -11,6 +11,9 @@ const UserShape = {
   userProjectInterests: PropTypes.string,
 };
 
+const majors = ["Undeclared", "Computer Science"];
+const gradYears = ["2025", "2026", "2027", "2028"];
+
 export default function Editor({ currentUser, complete }) {
   const [name, setName] = useState("");
   const [pronouns, setPronouns] = useState("");
@@ -72,19 +75,28 @@ export default function Editor({ currentUser, complete }) {
         </label>
         <label>
           Major:
-          <input
-            type="text"
-            value={major}
-            onChange={(e) => setMajor(e.target.value)}
-          />
+          <select value={major} onChange={(e) => setMajor(e.target.value)}>
+            <option value="">Select your major</option>
+            {majors.map((m) => (
+              <option key={m} value={m}>
+                {m}
+              </option>
+            ))}
+          </select>
         </label>
         <label>
           Graduation Year:
-          <input
-            type="text"
+          <select
             value={gradYear}
             onChange={(e) => setGradYear(e.target.value)}
-          />
+          >
+            <option value="">Select your graduation year</option>
+            {gradYears.map((year) => (
+              <option key={year} value={year}>
+                {year}
+              </option>
+            ))}
+          </select>
         </label>
       </div>
       <div className={styles.middleSection}>
