@@ -1,5 +1,6 @@
 import Image from "next/image";
 import PropTypes from "prop-types";
+import Link from "next/link";
 import homeIcon from "../public/home_image.svg";
 import profileIcon from "../public/profile_image.svg";
 import styles from "../src/styles/Navigation.module.css";
@@ -20,11 +21,10 @@ export default function NavigationBar({ isActive }) {
           </a>
         </li>
         <li className={styles.sidebaritem}>
-          <a
+          <Link
             className={styles.button}
             // onClick={() => handleNav("/")}
             href="/user/1/userProfile"
-            target="_blank"
           >
             <Image
               className={styles.profileicon}
@@ -32,7 +32,7 @@ export default function NavigationBar({ isActive }) {
               alt="Profile Icon"
             />
             <div className={styles.text}>Profile</div>
-          </a>
+          </Link>
         </li>
       </ul>
     </div>
