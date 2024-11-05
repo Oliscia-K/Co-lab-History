@@ -5,7 +5,7 @@ import ProfileComponent from "../../../../../components/ProfileComponent";
 
 export default function UserProfile() {
   const [profileData, setProfileData] = useState(null);
-  const userId = 2;
+  const userId = 1;
 
   useEffect(() => {
     // Fetch user data
