@@ -13,7 +13,7 @@ export default class User extends BaseModel {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["name"],
+      required: ["email"],
 
       properties: {
         id: { type: "integer" },
@@ -21,11 +21,11 @@ export default class User extends BaseModel {
         email: { type: "string" },
         pronouns: { type: "string" },
         major: { type: "string" },
-        "grad-year": { type: "array" },
-        "profile-pic": { type: "array" },
+        "grad-year": { type: "string" },
+        "profile-pic": { type: "string" },
         bio: { type: "string" },
         interests: { type: "string" },
-        classes: { type: "array" },
+        classes: { type: "string" },
         partners: { type: "array" },
       },
     };

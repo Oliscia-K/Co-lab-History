@@ -1,0 +1,14 @@
+0 verbose cli /usr/local/bin/node /usr/local/bin/npm
+1 info using npm@10.7.0
+2 info using node@v20.15.0
+3 silly config:load:file:/usr/local/lib/node_modules/npm/npmrc
+4 silly config:load:file:/Users/olisciathornton/project-cutts/.npmrc
+5 silly config:load:file:/Users/olisciathornton/.npmrc
+6 silly config:load:file:/Users/olisciathornton/.npm-global/etc/npmrc
+7 verbose title npm esline
+8 verbose argv "esline" "--cache" "--fix"
+9 verbose logfile logs-max:10 dir:/Users/olisciathornton/project-cutts/--fix/_logs/2024-11-08T00_37_32_052Z-
+10 verbose logfile /Users/olisciathornton/project-cutts/--fix/_logs/2024-11-08T00_37_32_052Z-debug-0.log
+11 silly logfile done cleaning log files
+12 verbose exit 1
+13 verbose code 1
