@@ -61,11 +61,19 @@ export default function EditPartners() {
       <ScrollBar previousPartners={previousPartners} />
 
       {/* Button to navigate to the Add Partners page */}
+
       <button
         type="button"
         onClick={() => router.push("/editProfile/partners/add")}
       >
         Add
+      </button>
+
+      <button
+        type="button"
+        onClick={() => router.push("/editProfile/partners/delete")}
+      >
+        Delete
       </button>
 
       {/* Cancel button */}
