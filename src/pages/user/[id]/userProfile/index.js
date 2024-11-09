@@ -4,8 +4,10 @@ import PropTypes from "prop-types";
 import { useSession } from "next-auth/react";
 import styles from "../../../../styles/ProfilePage.module.css";
 import ProfileComponent from "../../../../../components/ProfileComponent";
+import LoginWidget from "../../../../components/LoginWidget";
 
 export default function UserProfile({ currentUser, setCurrentUser }) {
+  console.log(currentUser);
   const { data: session } = useSession({ required: true });
 
   if (session && currentUser === undefined) {
@@ -23,7 +25,8 @@ export default function UserProfile({ currentUser, setCurrentUser }) {
   }
   return (
     <>
-      <ProfileComponent size="large" />
+      <LoginWidget />
+      <ProfileComponent size="large" user={currentUser} />
       <div className={styles.container}>
         {/* Middle Section: Bio and Project Interests with Edit Buttons */}
         <div className={styles.middleSection}>

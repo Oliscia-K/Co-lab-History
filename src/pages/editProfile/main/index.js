@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Editor from "../../../../components/Editor";
 
-export default function EditMain({ currentUser }) {
+export default function EditMain({ currentUser, setCurrentUser }) {
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -58,6 +58,7 @@ export default function EditMain({ currentUser }) {
         // const updatedUser = await response.json();
 
         // setCurrentUser(updatedUser);
+        setCurrentUser(newUser);
 
         router.push(`/user/${currentUser.id}/userProfile`);
       } catch (error) {
@@ -107,4 +108,5 @@ EditMain.propTypes = {
       }),
     ),
   }).isRequired,
+  setCurrentUser: PropTypes.func.isRequired,
 };

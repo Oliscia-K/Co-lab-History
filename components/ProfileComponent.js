@@ -1,34 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import PropTypes from "prop-types";
 import styles from "../src/styles/ProfileComponent.module.css";
 import ImageUploader from "./ImageUploader";
 
-function ProfileComponent({ size = "large" }) {
+function ProfileComponent({ size = "large", user }) {
   const isLarge = size === "large";
 
   // State for user profile data
-  const [profileData, setProfileData] = useState(null);
   const [profilePicture, setProfilePicture] = useState(null);
-  const userId = 1;
-
-  useEffect(() => {
-    fetch(`/api/user/${userId}/userProfile`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setProfileData(data); // Set fetched data to profileData state
-        if (data["profile-pic"].length > 0) {
-          const imageBlob = new Blob([new Uint8Array(data["profile-pic"])]); // Convert byte array to blob
-          const imageURL = URL.createObjectURL(imageBlob);
-          setProfilePicture(imageURL);
-        }
-      })
-      .catch((error) => console.log("Error fetching user profile:", error));
-  }, [userId]);
 
   const handleImageUpload = (binaryData) => {
     // FOR TESTING PURPOSES: log the binary data to check what is being passed
@@ -45,17 +24,17 @@ function ProfileComponent({ size = "large" }) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: userId,
-        name: profileData?.name, // include other user info to update as necessary
-        email: profileData?.email,
-        pronouns: profileData?.pronouns,
-        major: profileData?.major,
-        "grad-year": profileData?.["grad-year"],
+        id: user?.id,
+        name: user?.name, // include other user info to update as necessary
+        email: user?.email,
+        pronouns: user?.pronouns,
+        major: user?.major,
+        "grad-year": user?.["grad-year"],
         "profile-pic": Array.from(binaryData), // convert the binary data to a plain array
-        bio: profileData?.bio,
-        interests: profileData?.interests,
-        classes: profileData?.classes,
-        partners: profileData?.partners,
+        bio: user?.bio,
+        interests: user?.interests,
+        classes: user?.classes,
+        partners: user?.partners,
       }),
     })
       .then((response) => {
@@ -91,7 +70,7 @@ function ProfileComponent({ size = "large" }) {
       }
       return (
         <div className={styles.initialsCircle}>
-          {getInitials(profileData?.name || "Your Name")}
+          {getInitials(user?.name || "Your Name")}
         </div>
       );
     }
@@ -106,7 +85,7 @@ function ProfileComponent({ size = "large" }) {
     }
     return (
       <div className={styles.initialsCircle}>
-        {getInitials(profileData?.name || "Your Name")}
+        {getInitials(user?.name || "Your Name")}
       </div>
     );
   };
@@ -123,17 +102,15 @@ function ProfileComponent({ size = "large" }) {
       <div className={styles.profileBasics}>
         <div className={styles.profileHeader}>
           <h2 className={isLarge ? styles.largeName : styles.smallName}>
-            {profileData?.name || "Your Name"}
+            {user?.name || "Your Name"}
           </h2>
           <span className={styles.pronouns}>
-            {profileData?.pronouns || "(they/them)"}
+            {user?.pronouns || "(they/them)"}
           </span>
         </div>
+        <p className={styles.basics}>Major: {user?.major || "Your Major"}</p>
         <p className={styles.basics}>
-          Major: {profileData?.major || "Your Major"}
-        </p>
-        <p className={styles.basics}>
-          Year: {profileData?.["grad-year"] || "Your Year"}
+          Year: {user?.["grad-year"] || "Your Year"}
         </p>
         <ImageUploader onImageUpload={handleImageUpload} />
       </div>
@@ -143,6 +120,29 @@ function ProfileComponent({ size = "large" }) {
 
 ProfileComponent.propTypes = {
   size: PropTypes.oneOf(["large", "small"]),
+  user: PropTypes.shape({
+    id: PropTypes.number,
+    name: PropTypes.string,
+    pronouns: PropTypes.string,
+    email: PropTypes.string,
+    major: PropTypes.string,
+    "grad-year": PropTypes.string,
+    "profile-pic": PropTypes.arrayOf(PropTypes.number),
+    bio: PropTypes.string,
+    interests: PropTypes.string,
+    classes: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        status: PropTypes.string,
+      }),
+    ),
+    partners: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        email: PropTypes.string,
+      }),
+    ),
+  }),
 };
 
 export default ProfileComponent;

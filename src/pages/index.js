@@ -1,29 +1,12 @@
 /* eslint-disable no-console */
 import Head from "next/head";
-import { useSession } from "next-auth/react";
-import PropTypes from "prop-types";
-import { useRouter } from "next/router";
+// import { useSession } from "next-auth/react";
+// import PropTypes from "prop-types";
+// import { useRouter } from "next/router";
 import NavigationBarButton from "../../components/NavigationBarButton";
 import LoginWidget from "../components/LoginWidget";
 
-export default function MainApp({ setCurrentUser }) {
-  const { data: session } = useSession();
-  const router = useRouter();
-
-  if (session) {
-    fetch(`/api/login?email=${session.user.email}`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((result) => {
-        setCurrentUser(result[0]);
-        router.push(`/user/${result[0].id}/userProfile`);
-      })
-      .catch((error) => console.log(error));
-  }
+export default function MainApp() {
   return (
     <>
       <Head>
@@ -46,6 +29,14 @@ export default function MainApp({ setCurrentUser }) {
   );
 }
 
-MainApp.propTypes = {
+/* MainApp.propTypes = {
   setCurrentUser: PropTypes.func.isRequired,
-};
+  session: PropTypes.shape({
+    expires: PropTypes.string,
+    user: PropTypes.shape({
+      email: PropTypes.string,
+      image: PropTypes.string,
+      name: PropTypes.string,
+    }),
+  })
+}; */
