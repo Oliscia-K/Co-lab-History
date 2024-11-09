@@ -26,9 +26,9 @@ router
       year = "Not specified",
       bio = "",
       interests = "",
-      classes = JSON.stringify([]),
-      partners = JSON.stringify([]),
-      pic = JSON.stringify([]),
+      classes = [],
+      partners = [],
+      pic = [],
     } = req.body;
     const newUser = {
       name,
@@ -42,6 +42,7 @@ router
       partners,
       "profile-pic": pic,
     };
+    console.log(newUser);
 
     const user = await User.query().insertAndFetch(newUser);
     console.log(user);

@@ -4,6 +4,7 @@ import { wrapError, DBError } from "db-errors";
 // not want to send information about the inner workings of your
 // application or database to the client.
 export default function onError(error, response, next) {
+  console.log(error);
   if (response.headersSent) {
     next(error);
   }

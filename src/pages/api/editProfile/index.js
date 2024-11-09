@@ -17,17 +17,15 @@ router.put(async (req, res) => {
   // Ensure JSON serialization
   const serializedData = {
     ...userData,
-    classes: JSON.stringify(classes),
-    partners: JSON.stringify(partners),
-    "profile-pic": JSON.stringify(profilePic),
+    classes,
+    partners,
+    "profile-pic": profilePic,
   };
   try {
-    const user = await User.query()
-      .findById({ id })
-      .updateAndFetchById(serializedData);
+    const user = await User.query().updateAndFetchById(id, serializedData);
 
-    if (user.length > 0) {
-      res.status(200).json(user[0]);
+    if (user) {
+      res.status(200).json(user);
     } else {
       res.status(404).json({ message: "User not found" });
     }

@@ -22,10 +22,10 @@ export default class User extends BaseModel {
         pronouns: { type: "string" },
         major: { type: "string" },
         "grad-year": { type: "string" },
-        "profile-pic": { type: "string" },
+        "profile-pic": { type: "array" },
         bio: { type: "string" },
         interests: { type: "string" },
-        classes: { type: "string" },
+        classes: { type: "array" },
         partners: { type: "array" },
       },
     };
