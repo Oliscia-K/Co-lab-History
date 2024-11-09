@@ -17,7 +17,6 @@ router
     }
   })
   .post(async (req, res) => {
-    console.log("starting post");
     const {
       name,
       email,
@@ -42,10 +41,8 @@ router
       partners,
       "profile-pic": pic,
     };
-    console.log(newUser);
 
     const user = await User.query().insertAndFetch(newUser);
-    console.log(user);
     res.status(201).json(user);
   });
 

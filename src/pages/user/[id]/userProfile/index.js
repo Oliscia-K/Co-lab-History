@@ -1,27 +1,26 @@
-import { useState, useEffect } from "react";
+/* eslint-disable no-console */
 import Link from "next/link";
+import PropTypes from "prop-types";
+import { useSession } from "next-auth/react";
 import styles from "../../../../styles/ProfilePage.module.css";
 import ProfileComponent from "../../../../../components/ProfileComponent";
 
-export default function UserProfile() {
-  const [profileData, setProfileData] = useState(null);
-  const userId = 1;
+export default function UserProfile({ currentUser, setCurrentUser }) {
+  const { data: session } = useSession({ required: true });
 
-  useEffect(() => {
-    // Fetch user data
-    fetch(`/api/user/${userId}/userProfile`)
+  if (session && currentUser === undefined) {
+    fetch(`/api/login?email=${session.user.email}`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
       })
-      .then((data) => {
-        setProfileData(data); // Set fetched data to profileData state
-        console.log(data);
+      .then((result) => {
+        setCurrentUser(result[0]);
       })
-      .catch((error) => console.log("Error fetching user profile:", error));
-  }, [userId]);
+      .catch((error) => console.log(error));
+  }
   return (
     <>
       <ProfileComponent size="large" />
@@ -39,8 +38,8 @@ export default function UserProfile() {
                 Edit
               </Link>
             </div>
-            <p>{profileData ? profileData.bio : "Loading bio..."}</p>{" "}
-            {/* Display bio from profileData */}
+            <p>{currentUser ? currentUser.bio : "Loading bio..."}</p>{" "}
+            {/* Display bio from currentUser */}
           </div>
           <div className={styles.projectInterests}>
             <div className={styles.sectionHeader}>
@@ -53,7 +52,7 @@ export default function UserProfile() {
               </Link>
             </div>
             <p>
-              {profileData ? profileData.interests : "Loading interests..."}
+              {currentUser ? currentUser.interests : "Loading interests..."}
             </p>{" "}
             {/* Display projectInterests */}
           </div>
@@ -72,8 +71,8 @@ export default function UserProfile() {
               </Link>
             </div>
             <ul>
-              {profileData ? (
-                profileData.classes.map((classItem) => (
+              {currentUser ? (
+                currentUser.classes.map((classItem) => (
                   <li key={classItem.id}>{classItem.name}</li>
                 ))
               ) : (
@@ -92,8 +91,8 @@ export default function UserProfile() {
               </Link>
             </div>
             <ul>
-              {profileData ? (
-                profileData.partners.map((partner) => (
+              {currentUser ? (
+                currentUser.partners.map((partner) => (
                   <li key={partner.id}>
                     <a href={`mailto:${partner.email}`}>{partner.name}</a>
                   </li>
@@ -108,3 +107,28 @@ export default function UserProfile() {
     </>
   );
 }
+
+UserProfile.propTypes = {
+  currentUser: PropTypes.shape({
+    name: PropTypes.string,
+    pronouns: PropTypes.string,
+    major: PropTypes.string,
+    "grad-year": PropTypes.string,
+    "profile-pic": PropTypes.arrayOf(PropTypes.number),
+    bio: PropTypes.string,
+    interests: PropTypes.string,
+    classes: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        status: PropTypes.string,
+      }),
+    ),
+    partners: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        email: PropTypes.string,
+      }),
+    ),
+  }).isRequired,
+  setCurrentUser: PropTypes.func.isRequired,
+};

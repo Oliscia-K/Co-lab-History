@@ -1,9 +1,17 @@
+/* eslint-disable no-console */
 import PropTypes from "prop-types";
 import { useRouter } from "next/router";
+import { useSession } from "next-auth/react";
 import Editor from "../../../../components/Editor";
 
 export default function EditMain({ currentUser }) {
   const router = useRouter();
+  const { data: session } = useSession();
+
+  if (!currentUser && session) {
+    router.push("/");
+    return <div>Redirecting...</div>;
+  }
 
   const handleComplete = async (newUser) => {
     if (newUser) {
@@ -64,13 +72,13 @@ export default function EditMain({ currentUser }) {
     <Editor
       complete={handleComplete}
       currentUser={{
-        id: currentUser.id,
-        name: currentUser.name,
-        pronouns: currentUser.pronouns,
-        major: currentUser.major,
-        gradYear: currentUser.gradYear,
-        bio: currentUser.bio,
-        projectInterests: currentUser.projectInterests,
+        id: currentUser?.id,
+        name: currentUser?.name,
+        pronouns: currentUser?.pronouns,
+        major: currentUser?.major,
+        gradYear: currentUser?.["grad-year"],
+        bio: currentUser?.bio,
+        projectInterests: currentUser?.interests,
       }}
     />
   );
@@ -82,15 +90,21 @@ EditMain.propTypes = {
     name: PropTypes.string,
     pronouns: PropTypes.string,
     major: PropTypes.string,
-    gradYear: PropTypes.string,
+    "grad-year": PropTypes.string,
+    "profile-pic": PropTypes.arrayOf(PropTypes.number),
     bio: PropTypes.string,
-    projectInterests: PropTypes.string,
-  }),
-  // setCurrentUser: PropTypes.func,
-};
-
-EditMain.defaultProps = {
-  currentUser: {
-    id: 1,
-  },
+    interests: PropTypes.string,
+    classes: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        status: PropTypes.string,
+      }),
+    ),
+    partners: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        email: PropTypes.string,
+      }),
+    ),
+  }).isRequired,
 };

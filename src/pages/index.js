@@ -1,7 +1,29 @@
+/* eslint-disable no-console */
 import Head from "next/head";
+import { useSession } from "next-auth/react";
+import PropTypes from "prop-types";
+import { useRouter } from "next/router";
 import NavigationBarButton from "../../components/NavigationBarButton";
+import LoginWidget from "../components/LoginWidget";
 
-export default function MainApp() {
+export default function MainApp({ setCurrentUser }) {
+  const { data: session } = useSession();
+  const router = useRouter();
+
+  if (session) {
+    fetch(`/api/login?email=${session.user.email}`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((result) => {
+        setCurrentUser(result[0]);
+        router.push(`/user/${result[0].id}/userProfile`);
+      })
+      .catch((error) => console.log(error));
+  }
   return (
     <>
       <Head>
@@ -15,6 +37,7 @@ export default function MainApp() {
           <NavigationBarButton />
           <div style={{ textAlign: "center", justifyContent: "center" }}>
             <h1>Co-Lab History</h1>
+            <LoginWidget />
             <p>This should be replaced by authenticator when available</p>
           </div>
         </div>
@@ -22,3 +45,7 @@ export default function MainApp() {
     </>
   );
 }
+
+MainApp.propTypes = {
+  setCurrentUser: PropTypes.func.isRequired,
+};
