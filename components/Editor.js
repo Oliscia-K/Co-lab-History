@@ -121,9 +121,7 @@ export default function Editor({ currentUser, complete }) {
         <button
           type="button"
           onClick={handleSave}
-          disabled={
-            !name || !pronouns || !major || !gradYear || !bio || !interests
-          }
+          disabled={!name || !major || !gradYear}
         >
           Save
         </button>
@@ -132,14 +130,9 @@ export default function Editor({ currentUser, complete }) {
         </button>
       </div>
       {!name && <p style={{ color: "red" }}>Name is required.</p>}{" "}
-      {!pronouns && <p style={{ color: "red" }}>Pronoun is required.</p>}{" "}
       {!major && <p style={{ color: "red" }}>Major is required.</p>}{" "}
       {!gradYear && (
         <p style={{ color: "red" }}>Graduation Year is required.</p>
-      )}{" "}
-      {!bio && <p style={{ color: "red" }}>Bio is required.</p>}{" "}
-      {!interests && (
-        <p style={{ color: "red" }}>Project Interests is required.</p>
       )}{" "}
     </div>
   );
