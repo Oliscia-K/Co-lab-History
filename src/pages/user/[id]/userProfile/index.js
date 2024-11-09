@@ -24,7 +24,7 @@ export default function UserProfile() {
   }, [userId]);
   return (
     <>
-      <ProfileComponent size="large" />
+      <ProfileComponent size="large" user={profileData} />
       <div className={styles.container}>
         {/* Middle Section: Bio and Project Interests with Edit Buttons */}
         <div className={styles.middleSection}>
