@@ -6,25 +6,35 @@ export default function EditPartners() {
   const [previousPartners, setPreviousPartners] = useState([]);
   const router = useRouter();
 
-  // Fetch the partners from localStorage when the component mounts
+  const userId = 3;
+
   useEffect(() => {
-    const storedPartners = localStorage.getItem("partners");
+    // Fetch user data from the API
+    fetch(`/api/user/${userId}/userProfile`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        // Set fetched partners data into the state
+        setPreviousPartners(data.partners || []); // Assuming the API returns a 'partners' field
+        console.log("Fetched partners:", data);
+      })
+      .catch((error) => console.log("Error fetching user profile:", error));
+  }, [userId]);
 
-    if (storedPartners) {
-      setPreviousPartners(JSON.parse(storedPartners)); // Set the partners list from localStorage
-    }
-  }, []);
-
-  // Function to handle save action and redirect to user profile
+  // Function to handle the save action and update the user profile
   const handleSave = () => {
-    // You may want to update the partners list in the backend here
+    // Send the updated partners list to the backend
     fetch("/api/editProfile", {
       method: "PUT",
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: 28, // Replace with actual user ID
+        id: userId, // Use the actual user ID
         partners: previousPartners, // Send the updated partners list
       }),
     })
@@ -36,9 +46,8 @@ export default function EditPartners() {
       })
       .then((data) => {
         console.log("Partners updated successfully:", data);
-
         // After saving the partners, redirect the user to their profile page
-        router.push("/user/2/userProfile/"); // Replace with the correct path for the user profile page
+        router.push(`/user/${userId}/userProfile/`);
       })
       .catch((error) => {
         console.error("Error saving partners:", error);
@@ -64,7 +73,7 @@ export default function EditPartners() {
         Cancel
       </button>
 
-      {/* Save button to save the changes and redirect */}
+      {/* Save button */}
       <button type="button" onClick={handleSave}>
         Save
       </button>
