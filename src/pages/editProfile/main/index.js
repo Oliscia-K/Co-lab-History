@@ -16,14 +16,13 @@ export default function EditMain({ currentUser, setCurrentUser }) {
   const handleComplete = async (newUser) => {
     if (newUser) {
       try {
-        // const response = await fetch(`/api/user/${currentUser.id}/userProfile`, {
         const response = await fetch(`/api/editProfile`, {
           method: "PUT",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: 1, // currentUser.id,
+            id: currentUser.id,
             name: newUser.name,
             email: "test@middlebury.edu",
             pronouns: newUser.pronouns,
@@ -55,7 +54,7 @@ export default function EditMain({ currentUser, setCurrentUser }) {
           throw new Error("Network response was not ok");
         }
 
-        // const updatedUser = await response.json();
+        const updatedUser = await response.json();
 
         // setCurrentUser(updatedUser);
         setCurrentUser(newUser);

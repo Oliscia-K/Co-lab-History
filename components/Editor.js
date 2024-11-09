@@ -16,28 +16,28 @@ const majors = ["Undeclared", "Computer Science"];
 const gradYears = ["2025", "2026", "2027", "2028"];
 
 export default function Editor({ currentUser, complete }) {
-  const [name, setName] = useState("");
-  const [pronouns, setPronouns] = useState("");
-  const [major, setMajor] = useState("");
-  const [gradYear, setGradYear] = useState("");
-  const [bio, setBio] = useState("");
-  const [projectInterests, setProjectInterests] = useState("");
+  const [name, setName] = useState(currentUser?.name || "");
+  const [pronouns, setPronouns] = useState(currentUser?.pronouns || "");
+  const [major, setMajor] = useState(currentUser?.major || "");
+  const [gradYear, setGradYear] = useState(currentUser?.gradYear || "");
+  const [bio, setBio] = useState(currentUser?.bio || "");
+  const [interests, setInterests] = useState(currentUser?.interests || "");
 
   useEffect(() => {
     if (currentUser) {
-      setName(currentUser.name || "");
-      setPronouns(currentUser.pronouns || "");
-      setMajor(currentUser.major || "");
-      setGradYear(currentUser.gradYear || "");
-      setBio(currentUser.bio || "");
-      setProjectInterests(currentUser.projectInterests || "");
+      setName(currentUser?.name);
+      setPronouns(currentUser?.pronouns);
+      setMajor(currentUser?.major);
+      setGradYear(currentUser?.gradYear);
+      setBio(currentUser?.bio);
+      setInterests(currentUser?.interests);
     } else {
       setName("");
       setPronouns("");
       setMajor("");
       setGradYear("");
       setBio("");
-      setProjectInterests("");
+      setInterests("");
     }
   }, [currentUser]);
 
@@ -50,7 +50,7 @@ export default function Editor({ currentUser, complete }) {
       major,
       gradYear,
       bio,
-      projectInterests,
+      interests,
     };
     complete(newUser);
   };
@@ -111,8 +111,8 @@ export default function Editor({ currentUser, complete }) {
           <label className={styles.projectInterests}>
             <h3>Project Interests:</h3>
             <textarea
-              value={projectInterests}
-              onChange={(e) => setProjectInterests(e.target.value)}
+              value={interests}
+              onChange={(e) => setInterests(e.target.value)}
             />
           </label>
         </div>
@@ -122,13 +122,7 @@ export default function Editor({ currentUser, complete }) {
           type="button"
           onClick={handleSave}
           disabled={
-            !name || !pronouns
-            /*
-            !major ||
-            !gradYear ||
-            !bio ||
-            !projectInterests
-            */
+            !name || !pronouns || !major || !gradYear || !bio || !interests
           }
         >
           Save
@@ -144,7 +138,7 @@ export default function Editor({ currentUser, complete }) {
         <p style={{ color: "red" }}>Graduation Year is required.</p>
       )}{" "}
       {!bio && <p style={{ color: "red" }}>Bio is required.</p>}{" "}
-      {!projectInterests && (
+      {!interests && (
         <p style={{ color: "red" }}>Project Interests is required.</p>
       )}{" "}
     </div>
