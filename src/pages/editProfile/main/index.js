@@ -4,7 +4,7 @@ import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
 import Editor from "../../../../components/Editor";
 
-export default function EditMain({ currentUser /* setCurrentUser */ }) {
+export default function EditMain({ currentUser, setCurrentUser }) {
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -21,17 +21,39 @@ export default function EditMain({ currentUser /* setCurrentUser */ }) {
           headers: {
             "Content-Type": "application/json",
           },
-          body: JSON.stringify({ ...newUser }),
+          body: JSON.stringify({
+            id: 1, // currentUser.id,
+            name: newUser.name,
+            email: "test@middlebury.edu",
+            pronouns: newUser.pronouns,
+            major: "Computer Science",
+            "grad-year": newUser.gradYear,
+            "profile-pic": [],
+            bio: newUser.bio,
+            interests: newUser.projectInterests,
+            classes: [
+              {
+                name: "CSCI 318",
+                status: "in progress",
+              },
+            ],
+            partners: [
+              {
+                name: "Oliscia Thornton",
+                email: "okthornton@middlebury.edu",
+              },
+              {
+                name: "Seunghwan Oh",
+                email: "seunghwano@middlebury.edu",
+              },
+            ],
+          }),
         });
 
         if (!response.ok) {
           throw new Error("Network response was not ok");
         }
 
-        /*
-        const updatedUser = await response.json();
-
-        // setCurrentUser(updatedUser);
         setCurrentUser(newUser);
 
         router.push(`/user/${currentUser.id}/userProfile`);
