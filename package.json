@@ -23,11 +23,13 @@
     "prepare": "node .husky/install.mjs"
   },
   "dependencies": {
+    "@testcontainers/postgresql": "^10.13.2",
     "ajv-formats": "^3.0.1",
     "connect": "^3.7.0",
     "db-errors": "^0.2.3",
     "knex": "^3.1.0",
     "next": "^13.5.6",
+    "next-auth": "^4.24.10",
     "next-connect": "^1.0.0",
     "objection": "^3.1.5",
     "pg": "^8.13.1",
@@ -41,7 +43,6 @@
     "*.{js,css,md,json,jsx}": "prettier --write"
   },
   "devDependencies": {
-    "@testcontainers/postgresql": "^10.13.2",
     "@testing-library/jest-dom": "^6.4.2",
     "@testing-library/react": "^14.2.1",
     "cross-env": "^7.0.3",

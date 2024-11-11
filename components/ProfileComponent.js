@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "../src/styles/ProfileComponent.module.css";
 import ImageUploader from "./ImageUploader";
 
 function ProfileComponent({ size = "large", user }) {
   const isLarge = size === "large";
+  console.log(user);
 
-  // state for user profile picture
+  // State for user profile data
   const [profilePicture, setProfilePicture] = useState(null);
+
+  useEffect(() => {
+    if (user?.["profile-pic"]) {
+      // if profile-pic is available in the user data (byte array), convert it to an image URL
+      const imageURL = URL.createObjectURL(
+        new Blob([new Uint8Array(user["profile-pic"])]),
+      );
+      setProfilePicture(imageURL);
+    }
+  }, [user]);
 
   const handleImageUpload = (binaryData) => {
     // FOR TESTING PURPOSES: log the binary data to check what is being passed
@@ -119,15 +130,15 @@ function ProfileComponent({ size = "large", user }) {
 }
 
 ProfileComponent.propTypes = {
-  size: PropTypes.oneOf(["large", "small"]), // Size can only be "large" or "small"
+  size: PropTypes.oneOf(["large", "small"]),
   user: PropTypes.shape({
-    id: PropTypes.number.isRequired, // Assuming the ID is a required field
-    name: PropTypes.string.isRequired, // Assuming name is required
+    id: PropTypes.number,
+    name: PropTypes.string,
     pronouns: PropTypes.string,
-    email: PropTypes.string.isRequired, // Email is required for profile updates
+    email: PropTypes.string,
     major: PropTypes.string,
     "grad-year": PropTypes.string,
-    "profile-pic": PropTypes.arrayOf(PropTypes.number), // Assuming it's an array of numbers (binary data)
+    "profile-pic": PropTypes.arrayOf(PropTypes.number),
     bio: PropTypes.string,
     interests: PropTypes.string,
     classes: PropTypes.arrayOf(
@@ -142,7 +153,7 @@ ProfileComponent.propTypes = {
         email: PropTypes.string,
       }),
     ),
-  }).isRequired, // The user object itself is required
+  }),
 };
 
 export default ProfileComponent;
