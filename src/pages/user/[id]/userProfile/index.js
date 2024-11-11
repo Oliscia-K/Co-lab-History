@@ -7,7 +7,6 @@ import ProfileComponent from "../../../../../components/ProfileComponent";
 import LoginWidget from "../../../../components/LoginWidget";
 
 export default function UserProfile({ currentUser, setCurrentUser }) {
-  console.log(currentUser);
   const { data: session } = useSession({ required: true });
 
   if (session && currentUser === undefined) {
