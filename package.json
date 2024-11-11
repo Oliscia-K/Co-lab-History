@@ -23,6 +23,11 @@
     "prepare": "node .husky/install.mjs"
   },
   "dependencies": {
+    "@emotion/react": "^11.13.3",
+    "@emotion/styled": "^11.13.0",
+    "@fontsource/roboto": "^5.1.0",
+    "@mui/material": "^6.1.6",
+    "@testcontainers/postgresql": "^10.13.2",
     "ajv-formats": "^3.0.1",
     "connect": "^3.7.0",
     "db-errors": "^0.2.3",
@@ -34,8 +39,7 @@
     "prop-types": "^15.8.1",
     "react": "18.2.0",
     "react-dom": "18.2.0",
-    "sqlite3": "^5.1.7",
-    "@testcontainers/postgresql": "^10.13.2"
+    "sqlite3": "^5.1.7"
   },
   "lint-staged": {
     "*.js": "eslint --cache --fix",
