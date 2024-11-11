@@ -29,7 +29,12 @@ export default function MainApp({ setCurrentUser }) {
   }, [session]);
 
   if (session) {
-    return <Homepage />;
+    return (
+      <div style={{ display: "flex" }}>
+        <NavigationBarButton />
+        <Homepage />
+      </div>
+    );
   }
   return (
     <>
