@@ -1,10 +1,17 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+import { useSession } from "next-auth/react";
 import ScrollBar from "../../../../components/ScrollBar";
 
-export default function EditPartners() {
-  const [previousPartners, setPreviousPartners] = useState([]);
+export default function EditPartners({ currentUser }) {
   const router = useRouter();
+  const { data: session } = useSession();
+  if (!currentUser && session) {
+    router.push("/");
+  }
+  const [previousPartners, setPreviousPartners] = useState([]);
 
   const userId = 3;
 
@@ -34,7 +41,7 @@ export default function EditPartners() {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: userId, // Use the actual user ID
+        id: 1, // Replace with actual user ID
         partners: previousPartners, // Send the updated partners list
       }),
     })
@@ -80,3 +87,27 @@ export default function EditPartners() {
     </div>
   );
 }
+
+EditPartners.propTypes = {
+  currentUser: PropTypes.shape({
+    name: PropTypes.string,
+    pronouns: PropTypes.string,
+    major: PropTypes.string,
+    "grad-year": PropTypes.string,
+    "profile-pic": PropTypes.arrayOf(PropTypes.number),
+    bio: PropTypes.string,
+    interests: PropTypes.string,
+    classes: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        status: PropTypes.string,
+      }),
+    ),
+    partners: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        email: PropTypes.string,
+      }),
+    ),
+  }).isRequired,
+};

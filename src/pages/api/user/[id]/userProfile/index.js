@@ -1,23 +1,17 @@
 import { createRouter } from "next-connect";
-import knex from "../../../../../../knex/knex";
+// import knex from "../../../../../../knex/knex";
 import onError from "../../../../../lib/middleware";
-// import User from "../../../../../../models/User";
+import User from "../../../../../../models/User";
 
 const router = createRouter();
 
 router.get(async (req, res) => {
-  const user = await knex("User").where({ id: req.query.id }).first();
+  const user = await User.query().findById(req.query.id).throwIfNotFound();
   if (user) {
     res.status(200).json(user);
   } else {
     res.status(404).end(`user with id ${req.query.id} not found`);
   }
-  /* Might come back to implement Objection ORM
- 
- const user = await User.query()
-    .findById(req.query.id)
-    .throwIfNotFound();
-  res.statusCode(200).json(user); */
 });
 
 export default router.handler({ onError });
