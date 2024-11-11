@@ -132,6 +132,6 @@ UserProfile.propTypes = {
         email: PropTypes.string,
       }),
     ),
-  }).isRequired,
-  setCurrentUser: PropTypes.func.isRequired,
+  }),
+  setCurrentUser: PropTypes.func,
 };
