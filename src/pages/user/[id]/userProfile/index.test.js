@@ -3,6 +3,18 @@ import PropTypes from "prop-types";
 import { act } from "react-dom/test-utils";
 import UserProfile from "./index";
 
+jest.mock("next-auth/react", () => ({
+  useSession: () => ({
+    data: {
+      user: {
+        email: "test@test.com",
+        name: "Test User",
+      },
+    },
+    status: "authenticated",
+  }),
+}));
+
 // Mock the next/link component
 jest.mock("next/link", () => {
   function NextLink({ children, href }) {
@@ -66,11 +78,9 @@ afterEach(() => {
 });
 
 describe("UserProfile Component", () => {
-  // Test for initial render and structure
   test("renders component structure correctly", () => {
     render(<UserProfile />);
 
-    // Check for main sections
     expect(screen.getByTestId("profile-component")).toHaveAttribute(
       "data-size",
       "large",
@@ -81,7 +91,6 @@ describe("UserProfile Component", () => {
     expect(screen.getByText("Past Partners:")).toBeInTheDocument();
   });
 
-  // Test loading states
   test("renders loading state initially", () => {
     render(<UserProfile />);
 
@@ -91,7 +100,6 @@ describe("UserProfile Component", () => {
     expect(screen.getByText("Loading partners...")).toBeInTheDocument();
   });
 
-  // Test API call
   test("makes API call with correct userId", async () => {
     await act(async () => {
       render(<UserProfile />);
@@ -100,30 +108,21 @@ describe("UserProfile Component", () => {
     expect(global.fetch).toHaveBeenCalledWith("/api/user/3/userProfile");
   });
 
-  // Test successful data rendering
   test("renders profile data after successful fetch", async () => {
     await act(async () => {
       render(<UserProfile />);
     });
 
     await waitFor(() => {
-      // Bio section
       expect(screen.getByText("Test bio content")).toBeInTheDocument();
-
-      // Project Interests section
       expect(screen.getByText("Test project interests")).toBeInTheDocument();
-
-      // Classes section
       expect(screen.getByText("Class 1")).toBeInTheDocument();
       expect(screen.getByText("Class 2")).toBeInTheDocument();
-
-      // Partners section
       expect(screen.getByText("Partner 1")).toBeInTheDocument();
       expect(screen.getByText("Partner 2")).toBeInTheDocument();
     });
   });
 
-  // Test CSS classes
   test("renders with correct CSS classes", async () => {
     const { container } = render(<UserProfile />);
 
@@ -136,7 +135,6 @@ describe("UserProfile Component", () => {
     expect(container.querySelector(".partner")).toBeInTheDocument();
   });
 
-  // Test edit buttons
   test("renders edit buttons with correct links", async () => {
     await act(async () => {
       render(<UserProfile />);
@@ -145,7 +143,6 @@ describe("UserProfile Component", () => {
     const editButtons = screen.getAllByText("Edit");
     expect(editButtons).toHaveLength(4);
 
-    // Check each edit button's link
     const [bioEdit, interestsEdit, classesEdit, partnersEdit] = editButtons;
 
     expect(bioEdit.closest("a")).toHaveAttribute("href", "/editProfile/main/");
@@ -163,7 +160,6 @@ describe("UserProfile Component", () => {
     );
   });
 
-  // Test error handling
   test("handles fetch error gracefully", async () => {
     const consoleLogSpy = jest
       .spyOn(console, "log")
@@ -190,7 +186,6 @@ describe("UserProfile Component", () => {
     consoleLogSpy.mockRestore();
   });
 
-  // Test email links
   test("renders partner email links correctly", async () => {
     await act(async () => {
       render(<UserProfile />);
