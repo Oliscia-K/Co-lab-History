@@ -22,31 +22,17 @@ export default function EditMain({ currentUser, setCurrentUser }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: 1, // currentUser.id,
+            id: currentUser.id,
             name: newUser.name,
-            email: "test@middlebury.edu",
+            email: newUser.email,
             pronouns: newUser.pronouns,
-            major: "Computer Science",
-            "grad-year": newUser.gradYear,
-            "profile-pic": [],
+            major: newUser.major,
+            "grad-year": newUser["grad-year"],
+            "profile-pic": newUser["profile-pic"],
             bio: newUser.bio,
-            interests: newUser.projectInterests,
-            classes: [
-              {
-                name: "CSCI 318",
-                status: "in progress",
-              },
-            ],
-            partners: [
-              {
-                name: "Oliscia Thornton",
-                email: "okthornton@middlebury.edu",
-              },
-              {
-                name: "Seunghwan Oh",
-                email: "seunghwano@middlebury.edu",
-              },
-            ],
+            interests: newUser.interests,
+            classes: newUser.classes,
+            partners: newUser.partners,
           }),
         });
 
@@ -65,20 +51,7 @@ export default function EditMain({ currentUser, setCurrentUser }) {
     }
   };
 
-  return (
-    <Editor
-      complete={handleComplete}
-      currentUser={{
-        id: currentUser?.id,
-        name: currentUser?.name,
-        pronouns: currentUser?.pronouns,
-        major: currentUser?.major,
-        gradYear: currentUser?.["grad-year"],
-        bio: currentUser?.bio,
-        projectInterests: currentUser?.interests,
-      }}
-    />
-  );
+  return <Editor complete={handleComplete} currentUser={currentUser} />;
 }
 
 EditMain.propTypes = {
