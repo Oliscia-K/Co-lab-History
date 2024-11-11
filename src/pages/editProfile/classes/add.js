@@ -1,5 +1,5 @@
-import Link from "next/link";
 import { useState, useEffect } from "react";
+import Link from "next/link";
 import ClassesScrollBar from "../../../../components/ClassesScrollBar";
 
 export default function ProfileAddPartners() {
@@ -24,7 +24,7 @@ export default function ProfileAddPartners() {
       })
       .catch((error) => console.log(error));
 
-    fetch("/api/user/1/userProfile")
+    fetch("/api/user/28/userProfile")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");

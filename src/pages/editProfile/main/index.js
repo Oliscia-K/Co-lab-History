@@ -15,7 +15,7 @@ export default function EditMain({ currentUser }) {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({
-            id: 2, // currentUser.id,
+            id: 28, // currentUser.id,
             name: newUser.name,
             email: "test@middlebury.edu",
             pronouns: newUser.pronouns,
@@ -91,6 +91,6 @@ EditMain.propTypes = {
 
 EditMain.defaultProps = {
   currentUser: {
-    id: 1,
+    id: 28,
   },
 };

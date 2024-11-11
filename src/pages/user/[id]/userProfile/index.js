@@ -5,7 +5,7 @@ import ProfileComponent from "../../../../../components/ProfileComponent";
 
 export default function UserProfile() {
   const [profileData, setProfileData] = useState(null);
-  const userId = 1;
+  const userId = 3;
 
   useEffect(() => {
     // Fetch user data
@@ -94,7 +94,9 @@ export default function UserProfile() {
             <ul>
               {profileData ? (
                 profileData.partners.map((partner) => (
-                  <li key={partner.id}>{partner.name}</li>
+                  <li key={partner.id}>
+                    <a href={`mailto:${partner.email}`}>{partner.name}</a>
+                  </li>
                 ))
               ) : (
                 <li>Loading partners...</li>

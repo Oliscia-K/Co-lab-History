@@ -1,9 +1,8 @@
 import PropTypes from "prop-types";
 import styles from "../src/styles/Classes.module.css";
-import ClassShape from "./ClassShape";
+import ClassShape from "./ClassesShape";
 
-export default function ClassesScrollBar( {classesTaken} ) {
-
+export default function ClassesScrollBar({ classesTaken }) {
   classesTaken.forEach((element) => {
     console.log(element.name);
   });
@@ -20,11 +19,9 @@ export default function ClassesScrollBar( {classesTaken} ) {
     );
   }
 
-  return (
-  <div className={styles.classesContainer}> </div>
-  )
+  return <div className={styles.classesContainer}> </div>;
 }
-  
+
 ClassesScrollBar.propTypes = {
   classesTaken: PropTypes.arrayOf(ClassShape).isRequired,
 };
