@@ -118,11 +118,7 @@ export default function Editor({ currentUser, complete }) {
         </div>
       </div>
       <div>
-        <button
-          type="button"
-          onClick={handleSave}
-          disabled={!name || !major || !gradYear}
-        >
+        <button type="button" onClick={handleSave} disabled={!name}>
           Save
         </button>
         <button type="button" onClick={() => complete()}>
@@ -130,10 +126,6 @@ export default function Editor({ currentUser, complete }) {
         </button>
       </div>
       {!name && <p style={{ color: "red" }}>Name is required.</p>}{" "}
-      {!major && <p style={{ color: "red" }}>Major is required.</p>}{" "}
-      {!gradYear && (
-        <p style={{ color: "red" }}>Graduation Year is required.</p>
-      )}{" "}
     </div>
   );
 }
