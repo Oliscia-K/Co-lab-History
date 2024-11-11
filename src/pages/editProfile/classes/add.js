@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { useState, useEffect } from "react";
 import ClassesScrollBar from "../../../../components/ClassesScrollBar";
 
@@ -10,9 +11,9 @@ export default function ProfileAddPartners() {
 
   // Fetch classes from the cs-courses.json file
   useEffect(() => {
-    fetch('/api/classes')
-      .then ((response) => {
-        if (!response.ok){
+    fetch("/api/classes")
+      .then((response) => {
+        if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
@@ -23,9 +24,9 @@ export default function ProfileAddPartners() {
       })
       .catch((error) => console.log(error));
 
-      fetch('/api/user/1/userProfile')
-      .then ((response) => {
-        if (!response.ok){
+    fetch("/api/user/1/userProfile")
+      .then((response) => {
+        if (!response.ok) {
           throw new Error("Network response was not ok");
         }
         return response.json();
@@ -39,12 +40,16 @@ export default function ProfileAddPartners() {
 
   // Handle adding a new class
   const handleAddClass = () => {
-    if (newClass && progress && !classesTaken.some((cls) => cls.name === newClass)) {
+    if (
+      newClass &&
+      progress &&
+      !classesTaken.some((cls) => cls.name === newClass)
+    ) {
       const selectedClass = allClasses.find((cls) => cls.name === newClass);
       if (selectedClass) {
         setClassesTaken([
           ...classesTaken,
-          { ...selectedClass, progress: progress === "In Progress" }
+          { ...selectedClass, progress: progress === "In Progress" },
         ]);
         setNewClass("");
         setProgress("");
@@ -53,33 +58,33 @@ export default function ProfileAddPartners() {
   };
 
   function fileUpdate() {
-    fetch('/api/editProfile', {
-    method: 'PUT',
-    headers: {
-      'Content-Type': 'application/json'
-    },
-    body: JSON.stringify({
-      id: user?.id,
-      name: user?.name,
-      email: user?.email,
-      pronouns: user?.pronouns,
-      major: user?.major,
-      "grad-year": user?.["grad-year"],
-      "profile-pic": user?.["profile-pic"],
-      bio: user?.bio,
-      interests: user?.interests,
-      classes: classesTaken,
-      partners: user?.partners,
+    fetch("/api/editProfile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: user?.id,
+        name: user?.name,
+        email: user?.email,
+        pronouns: user?.pronouns,
+        major: user?.major,
+        "grad-year": user?.["grad-year"],
+        "profile-pic": user?.["profile-pic"],
+        bio: user?.bio,
+        interests: user?.interests,
+        classes: classesTaken,
+        partners: user?.partners,
+      }),
     })
-  })
-    .then(response => {
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-      return response.json();
-    })
-    .then(data => console.log(data))
-    .catch(error => console.error('Fetch error:', error));
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
+      })
+      .then((data) => console.log(data))
+      .catch((error) => console.error("Fetch error:", error));
   }
 
   return (
@@ -120,11 +125,12 @@ export default function ProfileAddPartners() {
           Add
         </button>
       </div>
-      <a href="/editProfile/classes">
+      <Link href="/editProfile/classes">
         <button type="button">Cancel</button>
-      </a>
-      <button onClick = {fileUpdate()} type="button">Save</button>
+      </Link>
+      <button onClick={fileUpdate()} type="button">
+        Save
+      </button>
     </div>
-    
   );
 }

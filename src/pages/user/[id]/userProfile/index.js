@@ -18,8 +18,8 @@ export default function UserProfile() {
       })
       .then((data) => {
         setProfileData(data); // Set fetched data to profileData state
-        console.log(data);
       })
+
       .catch((error) => console.log("Error fetching user profile:", error));
   }, [userId]);
   return (

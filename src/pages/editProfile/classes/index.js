@@ -1,8 +1,9 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
+import Link from "next/link";
 import ClassesScrollBar from "../../../../components/ClassesScrollBar";
 // import { useRouter } from "next/router";
 
-export default function EditPartners() {
+export default function EditClasses() {
   // const router = useRouter();
 
   const classesTaken = [
@@ -15,17 +16,17 @@ export default function EditPartners() {
 
   return (
     <div>
-      <h2>Edit Partners</h2>
+      <h2>Edit Classes</h2>
       <ClassesScrollBar classesTaken={classesTaken} />
-      <a href="/editProfile/classes/add">
+      <Link href="/editProfile/classes/add">
         <button type="button">Add</button>
-      </a>
-      <a href="/">
+      </Link>
+      <Link href="/">
         <button type="button">Cancel</button>
-      </a>
-      <a href="/">
+      </Link>
+      <Link href="/">
         <button type="button">Save</button>
-      </a>
+      </Link>
     </div>
   );
 }

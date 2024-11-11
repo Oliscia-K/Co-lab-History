@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import styles from "src/styles/Partners.module.css";
+import styles from "../src/styles/Partners.module.css";
 import PartnerShape from "./PartnerShape";
 
 export default function ScrollBar({ previousPartners }) {
