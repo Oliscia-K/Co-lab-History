@@ -1,6 +1,7 @@
 import { createRouter } from "next-connect";
-import knex from "../../../../knex/knex";
+// import knex from "../../../../knex/knex";
 import onError from "../../../lib/middleware";
+import User from "../../../../models/User";
 
 const router = createRouter();
 
@@ -16,18 +17,15 @@ router.put(async (req, res) => {
   // Ensure JSON serialization
   const serializedData = {
     ...userData,
-    classes: JSON.stringify(classes),
-    partners: JSON.stringify(partners),
-    "profile-pic": JSON.stringify(profilePic),
+    classes,
+    partners,
+    "profile-pic": profilePic,
   };
   try {
-    const user = await knex("User")
-      .where({ id })
-      .update(serializedData)
-      .returning("*");
+    const user = await User.query().updateAndFetchById(id, serializedData);
 
-    if (user.length > 0) {
-      res.status(200).json(user[0]);
+    if (user) {
+      res.status(200).json(user);
     } else {
       res.status(404).json({ message: "User not found" });
     }

@@ -13,20 +13,20 @@ export default class User extends BaseModel {
   static get jsonSchema() {
     return {
       type: "object",
-      required: ["name"],
+      required: ["email"],
 
       properties: {
         id: { type: "integer" },
         name: { type: "string" },
         email: { type: "string" },
-        pronouns: { type: "string" },
-        major: { type: "string" },
-        "grad-year": { type: "array" },
-        "profile-pic": { type: "array" },
-        bio: { type: "string" },
-        interests: { type: "string" },
-        classes: { type: "array" },
-        partners: { type: "array" },
+        pronouns: { type: "string", default: "Not specified" },
+        major: { type: "string", default: "Undeclared" },
+        "grad-year": { type: "string", default: "" },
+        "profile-pic": { type: "array", default: [] },
+        bio: { type: "string", default: "" },
+        interests: { type: "string", default: "" },
+        classes: { type: "array", default: [] },
+        partners: { type: "array", default: [] },
       },
     };
   }
