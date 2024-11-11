@@ -12,7 +12,6 @@ export default function App({
   const [currentUser, setCurrentUser] = useState();
   const props = {
     ...pageProps,
-    session,
     currentUser,
     setCurrentUser,
   };
@@ -25,5 +24,4 @@ export default function App({
 
 App.propTypes = {
   Component: PropTypes.elementType.isRequired,
-  pageProps: PropTypes.shape({}),
 };
