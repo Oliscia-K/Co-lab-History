@@ -1,10 +1,18 @@
 /* eslint-disable @next/next/no-html-link-for-pages */
-import Link from "next/link";
+import { useRouter } from "next/router";
+import PropTypes from "prop-types";
+import { useSession } from "next-auth/react";
 import ClassesScrollBar from "../../../../components/ClassesScrollBar";
-// import { useRouter } from "next/router";
+import Link from "next/link";
 
-export default function EditClasses() {
-  // const router = useRouter();
+export default function EditClasses({ currentUser }) {
+  const router = useRouter();
+  const { data: session } = useSession();
+
+  if (!currentUser && session) {
+    router.push("/");
+    return <div>Redirecting...</div>;
+  }
 
   const classesTaken = [
     { id: 1, name: "CS201" },
@@ -30,3 +38,27 @@ export default function EditClasses() {
     </div>
   );
 }
+
+EditClasses.propTypes = {
+  currentUser: PropTypes.shape({
+    name: PropTypes.string,
+    pronouns: PropTypes.string,
+    major: PropTypes.string,
+    "grad-year": PropTypes.string,
+    "profile-pic": PropTypes.arrayOf(PropTypes.number),
+    bio: PropTypes.string,
+    interests: PropTypes.string,
+    classes: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        status: PropTypes.string,
+      }),
+    ),
+    partners: PropTypes.arrayOf(
+      PropTypes.shape({
+        name: PropTypes.string,
+        email: PropTypes.string,
+      }),
+    ),
+  }).isRequired,
+};

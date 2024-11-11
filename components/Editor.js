@@ -45,7 +45,7 @@ export default function Editor({ currentUser, complete }) {
     const newUser = {
       id: currentUser?.id,
       name,
-      email: "",
+      email: currentUser?.email,
       pronouns,
       major,
       gradYear,

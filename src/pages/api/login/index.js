@@ -1,17 +1,19 @@
 import { createRouter } from "next-connect";
-import knex from "../../../../knex/knex";
+// import knex from "../../../../knex/knex";
 import onError from "../../../lib/middleware";
-// import User from "../../../../../../models/User";
+import User from "../../../../models/User";
 
 const router = createRouter();
 
 router
   .get(async (req, res) => {
-    const user = await knex("User").where({ email: req.query.email }).first();
+    const user = await User.query()
+      .where({ email: req.query.email })
+      .throwIfNotFound();
     if (user) {
       res.status(200).json(user);
     } else {
-      res.status(404).end(`user with id ${req.query.id} not found`);
+      res.status(404).end(`user with id ${req.query.email} not found`);
     }
   })
   .post(async (req, res) => {
@@ -40,7 +42,7 @@ router
       "profile-pic": pic,
     };
 
-    const user = await knex("User").insert(newUser).returning("*");
+    const user = await User.query().insertAndFetch(newUser);
     res.status(201).json(user);
   });
 

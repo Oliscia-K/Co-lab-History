@@ -1,12 +1,12 @@
 import { createRouter } from "next-connect";
-import knex from "../../../../knex/knex";
+// import knex from "../../../../knex/knex";
 import onError from "../../../lib/middleware";
-// import User from "../../../../../../models/User";
+import Class from "../../../../models/Class";
 
 const router = createRouter();
 
 router.get(async (req, res) => {
-  const classes = await knex("Class");
+  const classes = await Class.query();
   if (classes) {
     res.status(200).json(classes);
   } else {
