@@ -13,7 +13,16 @@ const UserShape = {
 };
 
 const majors = ["Undeclared", "Computer Science"];
-const gradYears = ["2025", "2026", "2027", "2028"];
+const gradYears = [
+  "2025",
+  "2025.5",
+  "2026",
+  "2026.5",
+  "2027",
+  "2027.5",
+  "2028",
+  "2028.5",
+];
 
 export default function Editor({ currentUser, complete }) {
   const [name, setName] = useState(currentUser?.name || "");
