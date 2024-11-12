@@ -74,7 +74,7 @@ export default function UserProfile({ currentUser, setCurrentUser }) {
             </div>
             <ul>
               {currentUser ? (
-                currentUser.classes.map((classItem) => (
+                currentUser.classes?.map((classItem) => (
                   <li key={classItem.id}>{classItem.name}</li>
                 ))
               ) : (
@@ -94,7 +94,7 @@ export default function UserProfile({ currentUser, setCurrentUser }) {
             </div>
             <ul>
               {currentUser ? (
-                currentUser.partners.map((partner) => (
+                currentUser.partners?.map((partner) => (
                   <li key={partner.id}>
                     <a href={`mailto:${partner.email}`}>{partner.name}</a>
                   </li>
