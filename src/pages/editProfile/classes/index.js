@@ -2,10 +2,12 @@
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useSession } from "next-auth/react";
+import { useState, useEffect } from "react";
 import ClassesScrollBar from "../../../../components/ClassesScrollBar";
 import Link from "next/link";
 
 export default function EditClasses({ currentUser }) {
+  const [classesTaken, setClassesTaken] = useState([{}]);
   const router = useRouter();
   const { data: session } = useSession();
 
@@ -14,11 +16,19 @@ export default function EditClasses({ currentUser }) {
     return <div>Redirecting...</div>;
   }
 
-  const classesTaken = [
-    { id: 1, name: "CS201" },
-    { id: 2, name: "CS202" },
-    { id: 3, name: "CS318" },
-  ];
+  useEffect(() => {
+    fetch("/api/user/1/userProfile")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setClassesTaken(data.classes);
+      })
+      .catch((error) => console.log(error));
+  }, []);
 
   // add complete function that works with data base
 
@@ -29,10 +39,10 @@ export default function EditClasses({ currentUser }) {
       <Link href="/editProfile/classes/add">
         <button type="button">Add</button>
       </Link>
-      <Link href="/">
+      <Link href={`/`}>
         <button type="button">Cancel</button>
       </Link>
-      <Link href="/">
+      <Link href={`/`}>
         <button type="button">Save</button>
       </Link>
     </div>

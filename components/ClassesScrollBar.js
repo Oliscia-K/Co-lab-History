@@ -4,15 +4,19 @@ import ClassShape from "./ClassesShape";
 
 export default function ClassesScrollBar({ classesTaken }) {
   classesTaken.forEach((element) => {
-    console.log(element.name);
+    console.log(`${element.name}: ${element.progress ? "completed" : "in progress"}`);
+    console.log(element.progress);
   });
+  console.log("classesTaken:", classesTaken.length);
 
   if (classesTaken.length > 0) {
     return (
       <div className={styles.classesContainer}>
         <ul>
-          {classesTaken.map((classes) => (
-            <li key={classes.id}>{classes.name}</li>
+          { classesTaken.map((classItem) => (
+            <li key={classItem.name}>
+              {classItem.name} - {classItem.progress ? "completed" : "in progress"}
+            </li>
           ))}
         </ul>
       </div>

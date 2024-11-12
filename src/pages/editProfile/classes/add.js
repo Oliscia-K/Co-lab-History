@@ -33,7 +33,7 @@ export default function ProfileAddPartners() {
       })
       .then((data) => {
         setUserData(data);
-        setClassesTaken(data.classes);
+        setClassesTaken(data.classes || []);
       })
       .catch((error) => console.log(error));
   }, []);
@@ -49,13 +49,23 @@ export default function ProfileAddPartners() {
       if (selectedClass) {
         setClassesTaken([
           ...classesTaken,
-          { ...selectedClass, progress: progress === "In Progress" },
+          { ...selectedClass, progress: progress === "Completed" },
         ]);
         setNewClass("");
         setProgress("");
       }
     }
   };
+
+    // Update status for an existing class
+    const handleStatusChange = (className, newStatus) => {
+      setClassesTaken((prevClasses) =>
+        prevClasses.map((cls) =>
+          cls.name === className ? { ...cls, status: newStatus } : cls
+        )
+      );
+    };
+  
 
   function fileUpdate() {
     fetch("/api/editProfile", {
@@ -90,7 +100,21 @@ export default function ProfileAddPartners() {
   return (
     <div>
       <h2>Add Classes</h2>
-      <ClassesScrollBar classesTaken={classesTaken} />
+      <ClassesScrollBar classesTaken={classesTaken} >
+      {classesTaken.map((cls) => (
+          <div key={cls.name} style={{ display: "flex", alignItems: "center" }}>
+            <span>{cls.name}</span>
+            <select
+              value={cls.status}
+              onChange={(e) => handleStatusChange(cls.name, e.target.value)}
+              style={{ marginLeft: "10px" }}
+            >
+              <option value="In Progress">In Progress</option>
+              <option value="Completed">Completed</option>
+            </select>
+          </div>
+        ))}
+      </ClassesScrollBar>
 
       <div>
         <label htmlFor="classDropdown">Choose a class: </label>
@@ -127,10 +151,8 @@ export default function ProfileAddPartners() {
       </div>
       <Link href="/editProfile/classes">
         <button type="button">Cancel</button>
+        <button onClick={fileUpdate()} type="button">Save</button>
       </Link>
-      <button onClick={fileUpdate()} type="button">
-        Save
-      </button>
     </div>
   );
 }
