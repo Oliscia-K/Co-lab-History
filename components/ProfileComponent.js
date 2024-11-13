@@ -1,13 +1,24 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import styles from "../src/styles/ProfileComponent.module.css";
 import ImageUploader from "./ImageUploader";
 
 function ProfileComponent({ size = "large", user }) {
   const isLarge = size === "large";
+  console.log(user);
 
   // State for user profile data
   const [profilePicture, setProfilePicture] = useState(null);
+
+  useEffect(() => {
+    if (user?.["profile-pic"].length > 0) {
+      // if profile-pic is available in the user data (byte array), convert it to an image URL
+      const imageURL = URL.createObjectURL(
+        new Blob([new Uint8Array(user["profile-pic"])]),
+      );
+      setProfilePicture(imageURL);
+    }
+  }, [user]);
 
   const handleImageUpload = (binaryData) => {
     // FOR TESTING PURPOSES: log the binary data to check what is being passed

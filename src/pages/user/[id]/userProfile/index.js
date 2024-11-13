@@ -1,3 +1,4 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-console */
 import Link from "next/link";
 import PropTypes from "prop-types";
