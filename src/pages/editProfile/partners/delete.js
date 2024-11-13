@@ -1,64 +1,51 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import ScrollBar from "../../../../components/ScrollBar"; // Assuming ScrollBar is used for displaying partners
+import ScrollBar from "../../../../components/ScrollBar";
 
 export default function DeletePartners() {
-  const [previousPartners, setPreviousPartners] = useState([]); // Local state to hold the list of partners
-  const [partnerToDelete, setPartnerToDelete] = useState(null); // To track the partner being deleted
+  const [previousPartners, setPreviousPartners] = useState([]); // local state to hold the list of partners
+  const [partnerToDelete, setPartnerToDelete] = useState(null); // local state for deleting partners
   const router = useRouter();
-  const { data: session, status } = useSession(); // Get session data for user info
-  const userId = session?.user?.id; // Get userId from session
+  const { data: session } = useSession(); // obtain session data
 
-  // Ensure user is authenticated and fetch their partners data
+  const userId = session?.user?.id;
+
   useEffect(() => {
-    if (status === "unauthenticated") {
-      router.push("/"); // Redirect to home if not authenticated
-    } else if (userId) {
-      // Only fetch user profile data if userId is available
-      fetch(`/api/user/${userId}/userProfile`)
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error("Network response was not ok");
-          }
-          return response.json();
-        })
-        .then((data) => {
-          setPreviousPartners(data.partners || []); // Set the partners data
-        })
-        .catch((error) => console.error("Error fetching user profile:", error));
-    } else {
-      // If no userId, redirect to the homepage
-      router.push("/");
-    }
-  }, [userId, status, router]); // Added dependencies to rerun if session data changes
+    // Fetch user profile data if userId is available
+    fetch(`/api/user/${userId}/userProfile`)
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error("Network response was not ok");
+        }
+        return response.json();
+      })
+      .then((data) => {
+        setPreviousPartners(data.partners || []); // set the partners data
+      })
+      .catch((error) => console.error("Error fetching user profile:", error));
+  }, [userId, router]);
 
-  // Function to handle deletion of a partner (sets the partner to be deleted)
+  // sets the partner to be deleted
   const handleDelete = (partnerEmail) => {
-    // Find the partner by email
     const partner = previousPartners.find((p) => p.email === partnerEmail);
     if (partner) {
-      setPartnerToDelete(partner); // Store the partner to delete
+      setPartnerToDelete(partner); // store the partner to delete
     }
   };
 
-  // Confirm deletion and send the DELETE request to the server
+  // confirm the delete and send the DELETE request to the server
   const confirmDelete = () => {
     if (!partnerToDelete) return;
 
-    // Remove the partner locally first to reflect the change immediately
-    setPreviousPartners((prevPartners) =>
-      prevPartners.filter((partner) => partner.email !== partnerToDelete.email),
-    );
-
-    // Make the DELETE request to the API to remove the partner
+    // send the DELETE request to the API to remove the partner
     fetch("/api/editProfile", {
       method: "DELETE", // Use DELETE method to remove the partner
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        id: userId, // The user ID
+        id: userId,
         email: partnerToDelete.email, // The partner's email
       }),
     })
@@ -71,25 +58,25 @@ export default function DeletePartners() {
       .then((data) => {
         console.log("Partner deleted successfully:", data);
 
-        // After deletion, reset partnerToDelete
+        // remove the partner from the local state
+        setPreviousPartners((prevPartners) =>
+          prevPartners.filter(
+            (partner) => partner.email !== partnerToDelete.email,
+          ),
+        );
+
+        // clear the partner to delete state
         setPartnerToDelete(null);
       })
       .catch((error) => {
         console.error("Error deleting partner:", error);
-
-        // If error occurs, restore the partner list
-        setPreviousPartners((prevPartners) => [
-          ...prevPartners,
-          partnerToDelete,
-        ]);
       });
   };
 
-  // Cancel the deletion (reset state and return to edit partners page)
+  // cancel the deletion (reset state)
   const cancelDelete = () => {
-    setPartnerToDelete(null); // Clear the partnerToDelete state
+    setPartnerToDelete(null);
   };
-
   return (
     <div>
       <h2>Delete Partner</h2>
@@ -105,6 +92,7 @@ export default function DeletePartners() {
             <button
               type="button"
               onClick={() => handleDelete(partner.email)} // Trigger handleDelete to select a partner
+              style={{ margin: "10px" }} // Add margin to the button for spacing
             >
               Delete
             </button>
@@ -119,16 +107,12 @@ export default function DeletePartners() {
           <button
             type="button"
             onClick={confirmDelete}
-            style={{ marginRight: "10px" }} // Added margin to space out buttons
+            style={{ marginRight: "10px" }} // margin to space out buttons
           >
             Confirm Delete
           </button>{" "}
           {/* Confirm will delete */}
-          <button
-            type="button"
-            onClick={cancelDelete}
-            style={{ marginLeft: "10px" }} // Added margin to space out buttons
-          >
+          <button type="button" onClick={cancelDelete}>
             Cancel
           </button>{" "}
           {/* Cancel will reset the state */}
@@ -139,9 +123,9 @@ export default function DeletePartners() {
       <button
         type="button"
         onClick={() => router.push("/editProfile/partners")}
-        style={{ marginTop: "20px" }} // Added margin to space out the back button
+        style={{ marginTop: "20px" }} // margin to space out the back button
       >
-        Back to Edit Partners
+        Back
       </button>
     </div>
   );

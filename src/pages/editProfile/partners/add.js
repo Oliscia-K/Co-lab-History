@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import ScrollBar from "../../../../components/ScrollBar"; // Assuming ScrollBar is used for displaying partners
+import ScrollBar from "../../../../components/ScrollBar";
 
 export default function AddPartners() {
   const [partnerName, setPartnerName] = useState("");
@@ -13,7 +13,7 @@ export default function AddPartners() {
 
   const userId = session?.user?.id;
 
-  // Fetch user profile data after authentication
+  // Fetch user profile data
   useEffect(() => {
     if (userId) {
       fetch(`/api/user/${userId}/userProfile`)
@@ -24,8 +24,8 @@ export default function AddPartners() {
           return response.json();
         })
         .then((data) => {
-          setUserProfile(data); // Set the profile data in the state
-          setPreviousPartners(data.partners || []); // Set the previous partners from the profile data
+          setUserProfile(data); // set the profile data in the state
+          setPreviousPartners(data.partners || []); // set the previous partners from the profile data
         })
         .catch((error) => console.log("Error fetching user profile:", error));
     }
@@ -34,27 +34,22 @@ export default function AddPartners() {
   // Handle adding a new partner
   const handleAdd = () => {
     if (!partnerName || !partnerEmail) {
-      alert("Please enter both a name and email.");
+      alert("Please enter both a name and email."); // could potentially add a filter for a valid email address later
       return;
     }
 
     const newPartner = { name: partnerName, email: partnerEmail };
 
-    // Update the state with the new partner
+    // update the state with the new partner, using spread object
     setPreviousPartners((prevPartners) => [...prevPartners, newPartner]);
 
-    // Clear the input fields
+    // clear the input fields
     setPartnerName("");
     setPartnerEmail("");
   };
 
-  // Handle saving the updated partner list
+  // handle saving the updated partner list
   const handleSave = () => {
-    if (!userProfile) {
-      console.log("User profile data is not available.");
-      return;
-    }
-
     if (previousPartners.length === 0) {
       alert("No partners to save.");
       return;
@@ -77,7 +72,7 @@ export default function AddPartners() {
       })), // Ensure partners is sent as an array of objects
     };
 
-    console.log("Sending request body:", requestBody);
+    console.log("Sending request body:", requestBody); // TESTING purposes
 
     // Send PUT request to update the profile and partner list
     fetch("/api/editProfile", {
@@ -96,7 +91,7 @@ export default function AddPartners() {
       })
       .then((data) => {
         console.log("Partners updated successfully:", data);
-        router.push("/editProfile/partners"); // Redirect to partners page after successful update
+        router.push("/editProfile/partners"); // redirect to partners page after successful update
       })
       .catch((error) => {
         console.error("Error saving partners:", error);
@@ -114,7 +109,7 @@ export default function AddPartners() {
       <input
         value={partnerName}
         onChange={(e) => setPartnerName(e.target.value)}
-        placeholder="Full Name"
+        placeholder="Partner Name"
       />
       <input
         value={partnerEmail}
