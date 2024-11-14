@@ -13,10 +13,10 @@ export default function EditPartners({ currentUser }) {
   }
   const [previousPartners, setPreviousPartners] = useState([]);
 
-  const userId = 3;
+  const userId = session?.user?.id;
 
   useEffect(() => {
-    // Fetch user data from the API
+    // fetch user data from the API, with useEffect to make sure the data is correctly displayed
     fetch(`/api/user/${userId}/userProfile`)
       .then((response) => {
         if (!response.ok) {
@@ -25,41 +25,11 @@ export default function EditPartners({ currentUser }) {
         return response.json();
       })
       .then((data) => {
-        // Set fetched partners data into the state
-        setPreviousPartners(data.partners || []); // Assuming the API returns a 'partners' field
+        setPreviousPartners(data.partners || []);
         console.log("Fetched partners:", data);
       })
       .catch((error) => console.log("Error fetching user profile:", error));
   }, [userId]);
-
-  // Function to handle the save action and update the user profile
-  const handleSave = () => {
-    // Send the updated partners list to the backend
-    fetch("/api/editProfile", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: 1, // Replace with actual user ID
-        partners: previousPartners, // Send the updated partners list
-      }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Failed to update partners");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        console.log("Partners updated successfully:", data);
-        // After saving the partners, redirect the user to their profile page
-        router.push(`/user/${userId}/userProfile/`);
-      })
-      .catch((error) => {
-        console.error("Error saving partners:", error);
-      });
-  };
 
   return (
     <div>
@@ -75,14 +45,16 @@ export default function EditPartners({ currentUser }) {
         Add
       </button>
 
-      {/* Cancel button */}
-      <button type="button" onClick={() => router.push("/")}>
-        Cancel
+      <button
+        type="button"
+        onClick={() => router.push("/editProfile/partners/delete")}
+      >
+        Delete
       </button>
 
-      {/* Save button */}
-      <button type="button" onClick={handleSave}>
-        Save
+      {/* Cancel button */}
+      <button type="button" onClick={() => router.push("/")}>
+        Back
       </button>
     </div>
   );

@@ -3,7 +3,6 @@ import { TextField, Button, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import Select from "@mui/material/Select";
 import DisplaySearchResults from "../../../components/DisplaySearchResults";
-import NavigationBarButton from "../../../components/NavigationBarButton";
 import ClassesCheckBox from "../../../components/ClassesCheckBox";
 
 export default function Homepage() {
@@ -42,7 +41,6 @@ export default function Homepage() {
   return (
     <div>
       <div style={{ display: "flex", height: "100vh" }}>
-        <NavigationBarButton />
         <div
           style={{
             flexGrow: 1, // Takes up all available space
