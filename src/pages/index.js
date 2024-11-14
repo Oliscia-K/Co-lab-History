@@ -2,7 +2,6 @@
 import Head from "next/head";
 import { useSession } from "next-auth/react";
 import PropTypes from "prop-types";
-// import { useRouter } from "next/router";
 import { useEffect } from "react";
 import NavigationBarButton from "../../components/NavigationBarButton";
 import LoginWidget from "../components/LoginWidget";
@@ -45,12 +44,22 @@ export default function MainApp({ setCurrentUser }) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main>
-        <div style={{ display: "flex" }}>
-          <NavigationBarButton />
-          <div style={{ textAlign: "center", justifyContent: "center" }}>
+        <div
+          style={{
+            display: "flex",
+            height: "100vh",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+        >
+          <div style={{ display: "grid", textAlign: "center" }}>
             <h1>Co-Lab History</h1>
             <LoginWidget />
-            <p>This should be replaced by authenticator when available</p>
+            <h2>
+              Welcome to our site! Please sign in to your Middlebury email to be
+              one step closer to finding your next partner!
+            </h2>
+            <h3>No, not that kind ;)</h3>
           </div>
         </div>
       </main>
