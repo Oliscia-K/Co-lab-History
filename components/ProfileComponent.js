@@ -11,7 +11,7 @@ function ProfileComponent({ size = "large", user }) {
   const [profilePicture, setProfilePicture] = useState(null);
 
   useEffect(() => {
-    if (user?.["profile-pic"].length > 0) {
+    if (user?.["profile-pic"]?.length > 0) {
       // if profile-pic is available in the user data (byte array), convert it to an image URL
       const imageURL = URL.createObjectURL(
         new Blob([new Uint8Array(user["profile-pic"])]),
