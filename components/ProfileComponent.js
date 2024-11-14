@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { useSession } from "next-auth/react";
 import styles from "../src/styles/ProfileComponent.module.css";
 import ImageUploader from "./ImageUploader";
 
 function ProfileComponent({ size = "large", user }) {
   const isLarge = size === "large";
-  console.log(user);
+  const { data: session } = useSession();
 
   // State for user profile data
   const [profilePicture, setProfilePicture] = useState(null);
@@ -123,7 +124,9 @@ function ProfileComponent({ size = "large", user }) {
         <p className={styles.basics}>
           Year: {user?.["grad-year"] || "Your Year"}
         </p>
-        <ImageUploader onImageUpload={handleImageUpload} />
+        {session?.user?.id === user?.id && (
+          <ImageUploader onImageUpload={handleImageUpload} />
+        )}
       </div>
     </div>
   );
