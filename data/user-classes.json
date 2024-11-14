@@ -1,0 +1,17 @@
+[
+  {
+    "classNumber": 201,
+    "userEmail": "okthornton@middlebury.edu",
+    "completionStatus": "completed"
+  },
+  {
+    "classNumber": 202,
+    "userEmail": "okthornton@middlebury.edu",
+    "completionStatus": "completed"
+  },
+  {
+    "classNumber": 318,
+    "userEmail": "okthornton@middlebury.edu",
+    "completionStatus": "in progress"
+  }
+]
