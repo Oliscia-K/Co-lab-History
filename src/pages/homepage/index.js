@@ -29,7 +29,7 @@ export default function Homepage() {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`/api/homepage?name=${name}`);
+      const response = await fetch(`/api/searchByName?name=${name}`);
       const data = await response.json();
       setProfiles(data);
     } catch (error) {
