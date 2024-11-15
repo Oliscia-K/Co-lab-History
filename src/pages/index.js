@@ -6,7 +6,7 @@ import PropTypes from "prop-types";
 import { useEffect } from "react";
 import NavigationBarButton from "../../components/NavigationBarButton";
 import LoginWidget from "../components/LoginWidget";
-import Homepage from "./homepage";
+import HomepageComponent from "../../components/HomepageComponent";
 
 export default function MainApp({ setCurrentUser }) {
   const { data: session } = useSession();
@@ -21,7 +21,7 @@ export default function MainApp({ setCurrentUser }) {
         })
         .then((result) => {
           setCurrentUser(result[0]);
-          console.log(session.user);
+          // console.log(session.user);
         })
         .catch((error) => console.log(error));
     }
@@ -32,7 +32,7 @@ export default function MainApp({ setCurrentUser }) {
     return (
       <div style={{ display: "flex" }}>
         <NavigationBarButton />
-        <Homepage />
+        <HomepageComponent />
       </div>
     );
   }
