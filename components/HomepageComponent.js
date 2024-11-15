@@ -1,16 +1,15 @@
 /* eslint-disable no-console */
 import { TextField, Button, Box } from "@mui/material";
 import { useEffect, useState } from "react";
-import Select from "@mui/material/Select";
-import DisplaySearchResults from "../../../components/DisplaySearchResults";
-import ClassesCheckBox from "../../../components/ClassesCheckBox";
+import DisplaySearchResults from "./DisplaySearchResults";
+import ClassesCheckBox from "./ClassesCheckBox";
 
-export default function Homepage() {
+export default function HomepageComponent() {
   const [name, setName] = useState("");
   const [profiles, setProfiles] = useState([]);
   const [classes, setClasses] = useState([]);
-  const list = ["hi", "bye"];
-  console.log(list.includes("hi"));
+  // create the props for checks
+  const [filters, setFilters] = useState([]);
 
   useEffect(() => {
     async function getClasses() {
@@ -27,11 +26,12 @@ export default function Homepage() {
     if (!classes.length) {
       getClasses();
     }
-  }, [classes]);
+  });
 
+  // handle lowercase and uppercase search
   const handleSearch = async () => {
     try {
-      const response = await fetch(`/api/searchByName?name=${name}`);
+      const response = await fetch(`/api/homepage?name=${name}`);
       const data = await response.json();
       setProfiles(data);
     } catch (error) {
@@ -39,6 +39,8 @@ export default function Homepage() {
       setProfiles(null);
     }
   };
+
+  // console.log(checked);
 
   return (
     <div>
@@ -59,10 +61,13 @@ export default function Homepage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
             />
-            <Select label="Filters">
-              <ClassesCheckBox classes={classes} />
-            </Select>
           </Box>
+
+          <ClassesCheckBox
+            classes={classes}
+            filters={filters}
+            setFilters={setFilters}
+          />
 
           <Button onClick={handleSearch} variant="contained">
             Search

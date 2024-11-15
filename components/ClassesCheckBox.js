@@ -1,21 +1,41 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { FormControlLabel, Checkbox, FormGroup, Box } from "@mui/material";
+import {
+  FormControl,
+  InputLabel,
+  Select,
+  MenuItem,
+  ListItemText,
+  Checkbox,
+  Box,
+} from "@mui/material";
 import ClassShape from "./ClassesShape";
 
-export default function ClassesCheckBox({ classes }) {
+export default function ClassesCheckBox({ classes, filters, setFilters }) {
+  const handleChange = (event) => {
+    const {
+      target: { value },
+    } = event;
+    setFilters(
+      // On autofill we get a stringified value.
+      typeof value === "string" ? value.split(",") : value,
+    );
+  };
+
   if (classes.length > 0) {
     return (
-      <Box sx={{ minWidth: 120 }}>
-        <FormGroup>
-          {classes.map((cls) => (
-            <FormControlLabel
-              key={cls.id} // Assuming each class has a unique 'id' property
-              control={<Checkbox />}
-              label={`CSCI ${cls.number}: ${cls.name}`}
-            />
-          ))}
-        </FormGroup>
+      <Box>
+        <FormControl>
+          <InputLabel>Filters</InputLabel>
+          <Select onChange={handleChange} value={filters} multiple>
+            {classes.map((cls) => (
+              <MenuItem key={`${cls.id}`} value={`${cls.name}`}>
+                <Checkbox checked={filters.includes(`${cls.name}`)} />
+                <ListItemText primary={`CSCI ${cls.number}: ${cls.name}`} />
+              </MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </Box>
     );
   }
@@ -29,4 +49,6 @@ export default function ClassesCheckBox({ classes }) {
 
 ClassesCheckBox.propTypes = {
   classes: PropTypes.arrayOf(ClassShape),
+  filters: PropTypes.arrayOf(String),
+  setFilters: PropTypes.func,
 };
