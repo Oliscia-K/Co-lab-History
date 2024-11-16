@@ -1,10 +1,11 @@
+/* eslint-disable no-console */
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useSession } from "next-auth/react";
 import { useState, useEffect } from "react";
-import ClassesScrollBar from "../../../../components/ClassesScrollBar";
 import Link from "next/link";
+import ClassesScrollBar from "../../../../components/ClassesScrollBar";
 
 export default function EditClasses({ currentUser }) {
   const [classesTaken, setClassesTaken] = useState([{}]);
@@ -14,7 +15,6 @@ export default function EditClasses({ currentUser }) {
 
   if (!currentUser && session) {
     router.push("/");
-    return <div>Redirecting...</div>;
   }
 
   useEffect(() => {
@@ -29,7 +29,7 @@ export default function EditClasses({ currentUser }) {
         setClassesTaken(data.classes);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [userId]);
 
   return (
     <div>

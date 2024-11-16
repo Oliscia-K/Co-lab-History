@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -40,7 +41,7 @@ export default function ProfileAddPartners() {
         setClassesTaken(data.classes || []);
       })
       .catch((error) => console.log(error));
-  }, []);
+  }, [userId]);
 
   // Handle adding a new class
   const handleAddClass = () => {
@@ -61,71 +62,70 @@ export default function ProfileAddPartners() {
     }
   };
 
-    // Update status for an existing class
-    const handleStatusChange = (className, newProgress) => {
-      setClassesTaken((prevClasses) =>
-        prevClasses.map((cls) =>
-          cls.name === className ? { ...cls, progress: newProgress } : cls
-        )
-      );
-    };
-  
+  // Update status for an existing class
+  const handleStatusChange = (className, newProgress) => {
+    setClassesTaken((prevClasses) =>
+      prevClasses.map((cls) =>
+        cls.name === className ? { ...cls, progress: newProgress } : cls,
+      ),
+    );
+  };
 
-    const fileUpdate = () => {
-      fetch("/api/editProfile", {
-        method: "PUT",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          id: user?.id,
-          name: user?.name,
-          email: user?.email,
-          pronouns: user?.pronouns,
-          major: user?.major,
-          "grad-year": user?.["grad-year"],
-          "profile-pic": user?.["profile-pic"],
-          bio: user?.bio,
-          interests: user?.interests,
-          classes: classesTaken,
-          partners: user?.partners,
-        }),
+  const fileUpdate = () => {
+    fetch("/api/editProfile", {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        id: user?.id,
+        name: user?.name,
+        email: user?.email,
+        pronouns: user?.pronouns,
+        major: user?.major,
+        "grad-year": user?.["grad-year"],
+        "profile-pic": user?.["profile-pic"],
+        bio: user?.bio,
+        interests: user?.interests,
+        classes: classesTaken,
+        partners: user?.partners,
+      }),
+    })
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        return response.json();
       })
-        .then((response) => {
-          if (!response.ok) {
-            throw new Error(`HTTP error! status: ${response.status}`);
-          }
-          return response.json();
-        })
-        .then((data) => {
-          console.log(data);
-          setShowSavedPopup(true); // Show the popup
-          setTimeout(() => setShowSavedPopup(false), 3000); // Hide after 3 seconds
-        })
-        .catch((error) => console.error("Fetch error:", error));
-    };
-  
-    return (
-      <div>
-        <h2>Add Classes</h2>
-        {showSavedPopup && (
-          <div
-            style={{
-              position: "fixed",
-              top: "10px",
-              right: "10px",
-              backgroundColor: "lightgreen",
-              padding: "10px",
-              borderRadius: "5px",
-              color: "green",
-              fontWeight: "bold",
-            }}
-          >
-            Saved!
-          </div>
-        )}
-      <ClassesScrollBar classesTaken={classesTaken} >
-      {classesTaken.map((cls) => (
+      .then((data) => {
+        console.log(data);
+        setShowSavedPopup(true); // Show the popup
+        setTimeout(() => setShowSavedPopup(false), 3000); // Hide after 3 seconds
+      })
+      .catch((error) => console.error("Fetch error:", error));
+  };
+
+  return (
+    <div>
+      <h2>Add Classes</h2>
+      {showSavedPopup && (
+        <div
+          style={{
+            position: "fixed",
+            top: "10px",
+            right: "10px",
+            backgroundColor: "lightgreen",
+            padding: "10px",
+            borderRadius: "5px",
+            color: "green",
+            fontWeight: "bold",
+          }}
+        >
+          Saved!
+        </div>
+      )}
+      <ClassesScrollBar classesTaken={classesTaken}>
+        {classesTaken.map((cls) => (
           <div key={cls.name} style={{ display: "flex", alignItems: "center" }}>
             <span>{cls.name}</span>
             <select
@@ -176,16 +176,18 @@ export default function ProfileAddPartners() {
       <Link href="/editProfile/classes">
         <button type="button">Cancel</button>
       </Link>
-      <button 
-        onClick={fileUpdate} 
-        type="button" 
-        disabled={!newClass || !progress} 
+      <button
+        onClick={fileUpdate}
+        type="button"
+        disabled={!newClass || !progress}
         style={{
           backgroundColor: !newClass || !progress ? "grey" : "blue",
           cursor: !newClass || !progress ? "not-allowed" : "pointer",
           color: "white",
         }}
-        >Save</button>
+      >
+        Save
+      </button>
     </div>
   );
 }

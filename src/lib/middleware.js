@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { wrapError, DBError } from "db-errors";
 import { getServerSession } from "next-auth/next";
 import { authOptions } from "../pages/api/auth/[...nextauth]";

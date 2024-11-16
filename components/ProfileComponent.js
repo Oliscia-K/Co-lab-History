@@ -1,3 +1,5 @@
+/* eslint-disable no-console */
+/* eslint-disable @next/next/no-img-element */
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSession } from "next-auth/react";

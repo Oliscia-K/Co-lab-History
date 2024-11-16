@@ -1,10 +1,13 @@
+/* eslint-disable no-console */
 import PropTypes from "prop-types";
 import styles from "../src/styles/Classes.module.css";
 import ClassShape from "./ClassesShape";
 
 export default function ClassesScrollBar({ classesTaken }) {
   classesTaken.forEach((element) => {
-    console.log(`${element.name}: ${element.progress ? "completed" : "in progress"}`);
+    console.log(
+      `${element.name}: ${element.progress ? "completed" : "in progress"}`,
+    );
     console.log(element.progress);
   });
   console.log("classesTaken:", classesTaken.length);
@@ -13,9 +16,10 @@ export default function ClassesScrollBar({ classesTaken }) {
     return (
       <div className={styles.classesContainer}>
         <ul>
-          { classesTaken.map((classItem) => (
+          {classesTaken.map((classItem) => (
             <li key={classItem.name}>
-              {classItem.name} - {classItem.progress ? "completed" : "in progress"}
+              {classItem.name} -{" "}
+              {classItem.progress ? "completed" : "in progress"}
             </li>
           ))}
         </ul>
