@@ -10,6 +10,7 @@ export default function EditClasses({ currentUser }) {
   const [classesTaken, setClassesTaken] = useState([{}]);
   const router = useRouter();
   const { data: session } = useSession();
+  const userId = session?.user?.id;
 
   if (!currentUser && session) {
     router.push("/");
@@ -17,7 +18,7 @@ export default function EditClasses({ currentUser }) {
   }
 
   useEffect(() => {
-    fetch("/api/user/6/userProfile")
+    fetch(`/api/user/${userId}/userProfile`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -30,8 +31,6 @@ export default function EditClasses({ currentUser }) {
       .catch((error) => console.log(error));
   }, []);
 
-  // add complete function that works with data base
-
   return (
     <div>
       <h2>Edit Classes</h2>
@@ -39,11 +38,8 @@ export default function EditClasses({ currentUser }) {
       <Link href="/editProfile/classes/add">
         <button type="button">Add</button>
       </Link>
-      <Link href={`/`}>
-        <button type="button">Cancel</button>
-      </Link>
-      <Link href={`/`}>
-        <button type="button">Save</button>
+      <Link href={`/user/${userId}/userProfile`}>
+        <button type="button">Back</button>
       </Link>
     </div>
   );

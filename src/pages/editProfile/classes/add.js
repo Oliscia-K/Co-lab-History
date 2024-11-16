@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useSession } from "next-auth/react";
 import Link from "next/link";
 import ClassesScrollBar from "../../../../components/ClassesScrollBar";
 
@@ -9,6 +10,8 @@ export default function ProfileAddPartners() {
   const [allClasses, setAllClasses] = useState([{}]);
   const [progress, setProgress] = useState({});
   const [showSavedPopup, setShowSavedPopup] = useState(false);
+  const { data: session } = useSession();
+  const userId = session?.user?.id;
 
   // Fetch classes from the cs-courses.json file
   useEffect(() => {
@@ -25,7 +28,7 @@ export default function ProfileAddPartners() {
       })
       .catch((error) => console.log(error));
 
-    fetch("/api/user/6/userProfile")
+    fetch(`/api/user/${userId}/userProfile`)
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -171,9 +174,18 @@ export default function ProfileAddPartners() {
         </button>
       </div>
       <Link href="/editProfile/classes">
-        <button type="button">Back</button>
+        <button type="button">Cancel</button>
       </Link>
-      <button onClick={fileUpdate} type="button">Save</button>
+      <button 
+        onClick={fileUpdate} 
+        type="button" 
+        disabled={!newClass || !progress} 
+        style={{
+          backgroundColor: !newClass || !progress ? "grey" : "blue",
+          cursor: !newClass || !progress ? "not-allowed" : "pointer",
+          color: "white",
+        }}
+        >Save</button>
     </div>
   );
 }
