@@ -23,10 +23,13 @@
     "prepare": "node .husky/install.mjs"
   },
   "dependencies": {
+    "@emotion/cache": "^11.13.1",
     "@emotion/react": "^11.13.3",
+    "@emotion/server": "^11.11.0",
     "@emotion/styled": "^11.13.0",
     "@fontsource/roboto": "^5.1.0",
-    "@mui/material": "^6.1.6",
+    "@mui/material": "^6.1.7",
+    "@mui/material-nextjs": "^6.1.7",
     "@testcontainers/postgresql": "^10.13.2",
     "ajv-formats": "^3.0.1",
     "connect": "^3.7.0",
