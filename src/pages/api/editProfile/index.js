@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import { createRouter } from "next-connect";
 import knex from "../../../../knex/knex";
 import onError from "../../../lib/middleware";

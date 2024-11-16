@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
@@ -21,7 +22,7 @@ export default function DeletePartners() {
         return response.json();
       })
       .then((data) => {
-        setPreviousPartners(data.partners || []); // set the partners data
+        setPreviousPartners(data.partners || []);
       })
       .catch((error) => console.error("Error fetching user profile:", error));
   }, [userId, router]);
