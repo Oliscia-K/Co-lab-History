@@ -24,7 +24,7 @@ export default function ProfileAddPartners() {
       })
       .catch((error) => console.log(error));
 
-    fetch("/api/user/1/userProfile")
+    fetch("/api/user/6/userProfile")
       .then((response) => {
         if (!response.ok) {
           throw new Error("Network response was not ok");
@@ -58,10 +58,10 @@ export default function ProfileAddPartners() {
   };
 
     // Update status for an existing class
-    const handleStatusChange = (className, newStatus) => {
+    const handleStatusChange = (className, newProgress) => {
       setClassesTaken((prevClasses) =>
         prevClasses.map((cls) =>
-          cls.name === className ? { ...cls, status: newStatus } : cls
+          cls.name === className ? { ...cls, progress: newProgress } : cls
         )
       );
     };
@@ -151,7 +151,7 @@ export default function ProfileAddPartners() {
       </div>
       <Link href="/editProfile/classes">
         <button type="button">Cancel</button>
-        <button onClick={fileUpdate()} type="button">Save</button>
+        <button onClick={fileUpdate} type="button">Save</button>
       </Link>
     </div>
   );
