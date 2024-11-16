@@ -1,19 +1,7 @@
 import { render, screen, waitFor } from "@testing-library/react";
 import PropTypes from "prop-types";
 import { act } from "react-dom/test-utils";
-import UserProfile from "./index";
-
-jest.mock("next-auth/react", () => ({
-  useSession: () => ({
-    data: {
-      user: {
-        email: "test@test.com",
-        name: "Test User",
-      },
-    },
-    status: "authenticated",
-  }),
-}));
+import UserProfile from "../src/pages/user/[id]/userProfile/index";
 
 // Mock the next/link component
 jest.mock("next/link", () => {
@@ -31,8 +19,8 @@ jest.mock("next/link", () => {
   return NextLink;
 });
 
-// Mock the ProfileComponent
-jest.mock("../../../../../components/ProfileComponent", () => {
+// Mock the ProfileComponent - Updated path
+jest.mock("./ProfileComponent", () => {
   function MockProfileComponent({ size }) {
     return (
       <div data-testid="profile-component" data-size={size}>
