@@ -1,14 +1,14 @@
 import PropTypes from "prop-types";
-import styles from "../src/styles/Partners.module.css";
+import ProfileComponent from "./ProfileComponent";
 
 export default function DisplaySearchResults({ profiles }) {
   if (profiles.length > 0) {
     return (
-      <div className={styles.partnersContainer}>
+      <div>
         <ul>
           {profiles.map((profile) => (
             <li key={profile.id} data-testid="profile">
-              {profile.name}
+              <ProfileComponent size="small" user={profile} />
             </li>
           ))}
         </ul>

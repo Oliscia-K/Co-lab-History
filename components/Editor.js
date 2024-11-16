@@ -57,7 +57,7 @@ export default function Editor({ currentUser, complete }) {
       email: currentUser?.email,
       pronouns,
       major,
-      gradYear,
+      "grad-year": gradYear,
       bio,
       interests,
     };

@@ -9,6 +9,8 @@ export default function Homepage() {
   const [name, setName] = useState("");
   const [profiles, setProfiles] = useState([]);
   const [classes, setClasses] = useState([]);
+  const list = ["hi", "bye"];
+  console.log(list.includes("hi"));
 
   useEffect(() => {
     async function getClasses() {

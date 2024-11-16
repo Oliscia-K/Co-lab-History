@@ -126,7 +126,7 @@ function ProfileComponent({ size = "large", user }) {
         <p className={styles.basics}>
           Year: {user?.["grad-year"] || "Your Year"}
         </p>
-        {session?.user?.id === user?.id && (
+        {session?.user?.id === user?.id && size === "large" && (
           <ImageUploader onImageUpload={handleImageUpload} />
         )}
       </div>
