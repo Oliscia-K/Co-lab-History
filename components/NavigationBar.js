@@ -21,7 +21,7 @@ export default function NavigationBar({ isActive }) {
         return response.json();
       })
       .then((result) => {
-        console.log(result);
+        // console.log(result);
         setId(result[0].id);
       })
       .catch((error) => console.log(error));
