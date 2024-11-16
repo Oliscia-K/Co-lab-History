@@ -13,19 +13,22 @@ router.post(async (req, res) => {
     classes.map((classNumber) => UserClasses.query().where({ classNumber })),
   );
   const uniqueEmails = new Set();
-  if (usersEmails) {
-    // eslint-disable-next-line no-plusplus
-    for (let i = 0; i < usersEmails.length; i++) {
-      uniqueEmails.add(usersEmails[i][0].userEmail);
+  for (let i = 0; i < usersEmails.length; i += 1) {
+    if (usersEmails[i].length > 0) {
+      // eslint-disable-next-line no-plusplus
+      for (let j = 0; j < usersEmails[i].length; j += 1) {
+        uniqueEmails.add(usersEmails[i][j].userEmail);
+      }
+      // eslint-disable-next-line no-await-in-loop
+      users = await Promise.all(
+        Array.from(uniqueEmails).map((email) => User.query().where({ email })),
+      );
     }
-    users = await Promise.all(
-      Array.from(uniqueEmails).map((email) => User.query().where({ email })),
-    );
   }
   if (users) {
     res.status(200).json(users);
   } else {
-    res.status(404).end(`users with the mentioned classes not found`);
+    res.status(200).json([]);
   }
 });
 

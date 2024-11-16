@@ -11,26 +11,34 @@ import {
 } from "@mui/material";
 import ClassShape from "./ClassesShape";
 
-export default function ClassesCheckBox({ classes, filters, setFilters }) {
+export default function ClassesCheckBox({
+  classes,
+  filters,
+  setFilters,
+  visibility,
+}) {
   const handleChange = (event) => {
     const {
       target: { value },
     } = event;
+
     setFilters(
       // On autofill we get a stringified value.
-      typeof value === "string" ? value.split(",") : value,
+      // typeof value === "string" ? value.split(",") : value,
+      value,
     );
   };
 
+  // This has to be refactored
   if (classes.length > 0) {
     return (
-      <Box>
+      <Box sx={{ visibility: { visibility } }}>
         <FormControl>
           <InputLabel>Filters</InputLabel>
           <Select onChange={handleChange} value={filters} multiple>
             {classes.map((cls) => (
-              <MenuItem key={`${cls.id}`} value={`${cls.name}`}>
-                <Checkbox checked={filters.includes(`${cls.name}`)} />
+              <MenuItem key={`${cls.id}`} value={cls.number}>
+                <Checkbox checked={filters.includes(cls.number)} />
                 <ListItemText primary={`CSCI ${cls.number}: ${cls.name}`} />
               </MenuItem>
             ))}
@@ -51,4 +59,5 @@ ClassesCheckBox.propTypes = {
   classes: PropTypes.arrayOf(ClassShape),
   filters: PropTypes.arrayOf(String),
   setFilters: PropTypes.func,
+  visibility: PropTypes.string,
 };

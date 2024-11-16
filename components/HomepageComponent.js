@@ -8,8 +8,8 @@ export default function HomepageComponent() {
   const [name, setName] = useState("");
   const [profiles, setProfiles] = useState([]);
   const [classes, setClasses] = useState([]);
-  // create the props for checks
   const [filters, setFilters] = useState([]);
+  const [visibility, setVisibility] = useState("hidden");
 
   useEffect(() => {
     async function getClasses() {
@@ -28,10 +28,44 @@ export default function HomepageComponent() {
     }
   });
 
-  // handle lowercase and uppercase search
-  const handleSearch = async () => {
+  // If visible, search by classes. Otherwise search by name
+  const handleSearchClass = async () => {
     try {
-      const response = await fetch(`/api/homepage?name=${name}`);
+      const response = await fetch("/api/searchByClass", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({ classes: filters }),
+      });
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      setProfiles(data[0]);
+    } catch (error) {
+      console.error("Fetch error:", error);
+    }
+  };
+
+  const handleVisibility = () => {
+    if (visibility === "visible") {
+      setVisibility("hidden");
+    } else {
+      setVisibility("visible");
+    }
+  };
+
+  // Search with name
+  const handleSearchName = async () => {
+    try {
+      let response;
+      // if empty, searches all names in database.
+      if (name !== "") {
+        response = await fetch(`/api/homepage?name=${name}`);
+      } else {
+        response = await fetch("/api/homepage");
+      }
       const data = await response.json();
       setProfiles(data);
     } catch (error) {
@@ -39,8 +73,6 @@ export default function HomepageComponent() {
       setProfiles(null);
     }
   };
-
-  // console.log(checked);
 
   return (
     <div>
@@ -54,6 +86,7 @@ export default function HomepageComponent() {
           }}
         >
           <h1>Homepage</h1>
+
           <Box>
             <TextField
               label="Search by Name"
@@ -63,13 +96,25 @@ export default function HomepageComponent() {
             />
           </Box>
 
-          <ClassesCheckBox
-            classes={classes}
-            filters={filters}
-            setFilters={setFilters}
-          />
+          <Button onClick={handleVisibility} variant="contained">
+            Toggle Search By Class
+          </Button>
 
-          <Button onClick={handleSearch} variant="contained">
+          {visibility === "visible" && (
+            <ClassesCheckBox
+              classes={classes}
+              filters={filters}
+              setFilters={setFilters}
+              visibility={visibility}
+            />
+          )}
+
+          <Button
+            onClick={
+              visibility === "visible" ? handleSearchClass : handleSearchName
+            }
+            variant="contained"
+          >
             Search
           </Button>
           {profiles && <DisplaySearchResults profiles={profiles} />}
