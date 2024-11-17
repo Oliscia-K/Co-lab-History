@@ -36,10 +36,10 @@ export default function EditClasses({ currentUser }) {
       <h2>Edit Classes</h2>
       <ClassesScrollBar classesTaken={classesTaken} />
       <Link href="/editProfile/classes/add">
-        <button type="button">Add</button>
+        <button data-testid="add" type="button">Add</button>
       </Link>
       <Link href={`/user/${userId}/userProfile`}>
-        <button type="button">Back</button>
+        <button data-testid="back" type="button">Back</button>
       </Link>
     </div>
   );
