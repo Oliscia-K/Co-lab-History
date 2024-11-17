@@ -3,13 +3,14 @@ import { TextField, Button, Box } from "@mui/material";
 import { useEffect, useState } from "react";
 import Select from "@mui/material/Select";
 import DisplaySearchResults from "../../../components/DisplaySearchResults";
-import NavigationBarButton from "../../../components/NavigationBarButton";
 import ClassesCheckBox from "../../../components/ClassesCheckBox";
 
 export default function Homepage() {
   const [name, setName] = useState("");
   const [profiles, setProfiles] = useState([]);
   const [classes, setClasses] = useState([]);
+  const list = ["hi", "bye"];
+  console.log(list.includes("hi"));
 
   useEffect(() => {
     async function getClasses() {
@@ -30,7 +31,7 @@ export default function Homepage() {
 
   const handleSearch = async () => {
     try {
-      const response = await fetch(`/api/homepage?name=${name}`);
+      const response = await fetch(`/api/searchByName?name=${name}`);
       const data = await response.json();
       setProfiles(data);
     } catch (error) {
@@ -42,7 +43,6 @@ export default function Homepage() {
   return (
     <div>
       <div style={{ display: "flex", height: "100vh" }}>
-        <NavigationBarButton />
         <div
           style={{
             flexGrow: 1, // Takes up all available space

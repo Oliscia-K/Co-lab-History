@@ -39,6 +39,8 @@ router.get(async (req, res) => {
     users = await knex("User").where({ "grad-year": req.query.year });
   } else if (req.query.name) {
     users = await knex("User").where("name", "like", `%${req.query.name}%`);
+  } else {
+    users = await knex("User");
   }
   if (users) {
     res.status(200).json(users);

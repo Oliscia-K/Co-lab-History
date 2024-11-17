@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* eslint-disable @next/next/no-html-link-for-pages */
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
@@ -28,9 +29,7 @@ export default function EditClasses({ currentUser }) {
         setClassesTaken(data.classes);
       })
       .catch((error) => console.log(error));
-  }, []);
-
-  // add complete function that works with data base
+  }, [userId]);
 
   return (
     <div>
@@ -42,11 +41,8 @@ export default function EditClasses({ currentUser }) {
       <Link href="/editProfile/classes/delete">
         <button type="button">Delete</button>
       </Link>
-      <Link href="/">
-        <button type="button">Cancel</button>
-      </Link>
-      <Link href="/">
-        <button type="button">Save</button>
+      <Link href={`/user/${userId}/userProfile`}>
+        <button type="button">Back</button>
       </Link>
     </div>
   );
