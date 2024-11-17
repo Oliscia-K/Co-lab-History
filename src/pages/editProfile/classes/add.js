@@ -59,6 +59,7 @@ export default function ProfileAddPartners() {
       }
     }
   };
+  console.log(classesTaken);
 
   // Update status for an existing class
   const handleStatusChange = (className, newProgress) => {

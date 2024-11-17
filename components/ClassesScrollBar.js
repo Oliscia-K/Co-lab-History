@@ -3,14 +3,6 @@ import styles from "../src/styles/Classes.module.css";
 import ClassShape from "./ClassesShape";
 
 export default function ClassesScrollBar({ classesTaken }) {
-  classesTaken.forEach((element) => {
-    console.log(
-      `${element.name}: ${element.progress ? "completed" : "in progress"}`,
-    );
-    console.log(element.progress);
-  });
-  console.log("classesTaken:", classesTaken.length);
-
   if (classesTaken.length > 0) {
     return (
       <div className={styles.classesContainer}>

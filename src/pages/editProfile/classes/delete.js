@@ -33,13 +33,15 @@ export default function ProfileDeleteClasses() {
     if (classToBeDeleted) {
       setClassToDelete(classToBeDeleted); // Store the class to delete
     }
+    console.log(classToBeDeleted);
   };
 
   // Confirm delete and send DELETE request to backend
   const confirmDelete = () => {
     if (!classToDelete) return;
+    console.log(classToDelete);
 
-    // Send DELETE request to API to remove the class
+    // Send DELETE request to API to remove the class or partner
     fetch(`/api/editProfile`, {
       method: "DELETE",
       headers: {
@@ -47,29 +49,25 @@ export default function ProfileDeleteClasses() {
       },
       body: JSON.stringify({
         id: userId,
-        classes: classToDelete.name,
+        type: "class", // Specify whether it's a class or partner
+        classToDelete: classToDelete.name, // Send class name if deleting class
+        email: classToDelete.email, // Send email if deleting partner
       }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error("Failed to delete class");
+          throw new Error("Failed to delete");
         }
         return response.json();
       })
       .then((data) => {
-        console.log("Class deleted successfully:", data);
-
-        // Remove the class from the local state
+        console.log("Delete successful:", data);
         setClassesTaken((prevClasses) =>
           prevClasses.filter((cls) => cls.name !== classToDelete.name),
         );
-
-        // Clear the class to delete state
         setClassToDelete(null);
       })
-      .catch((error) =>
-        console.error("Error deleting class: it don't work bitch", error),
-      );
+      .catch((error) => console.error("Error deleting:", error));
   };
 
   // Cancel delete (reset state)

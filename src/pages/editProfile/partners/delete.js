@@ -12,18 +12,20 @@ export default function DeletePartners() {
   const userId = session?.user?.id;
 
   useEffect(() => {
-    // Fetch user profile data if userId is available
-    fetch(`/api/user/${userId}/userProfile`)
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error("Network response was not ok");
-        }
-        return response.json();
-      })
-      .then((data) => {
-        setPreviousPartners(data.partners || []); // set the partners data
-      })
-      .catch((error) => console.error("Error fetching user profile:", error));
+    // fetch user profile data if userId is available
+    if (userId) {
+      fetch(`/api/user/${userId}/userProfile`)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("network response was not ok");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          setPreviousPartners(data.partners || []); // set the partners data
+        })
+        .catch((error) => console.error("error fetching user profile:", error));
+    }
   }, [userId, router]);
 
   // sets the partner to be deleted
@@ -40,23 +42,24 @@ export default function DeletePartners() {
 
     // send the DELETE request to the API to remove the partner
     fetch("/api/editProfile", {
-      method: "DELETE", // Use DELETE method to remove the partner
+      method: "DELETE", // use DELETE method to remove the partner
       headers: {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
         id: userId,
-        email: partnerToDelete.email, // The partner's email
+        type: "partner", // specify that this is a partner deletion
+        email: partnerToDelete.email, // the partner's email
       }),
     })
       .then((response) => {
         if (!response.ok) {
-          throw new Error(`Failed to delete partner: ${partnerToDelete.email}`);
+          throw new Error(`failed to delete partner: ${partnerToDelete.email}`);
         }
         return response.json();
       })
       .then((data) => {
-        console.log("Partner deleted successfully:", data);
+        console.log("partner deleted successfully:", data);
 
         // remove the partner from the local state
         setPreviousPartners((prevPartners) =>
@@ -69,7 +72,7 @@ export default function DeletePartners() {
         setPartnerToDelete(null);
       })
       .catch((error) => {
-        console.error("Error deleting partner:", error);
+        console.error("error deleting partner:", error);
       });
   };
 
@@ -77,55 +80,56 @@ export default function DeletePartners() {
   const cancelDelete = () => {
     setPartnerToDelete(null);
   };
+
   return (
     <div>
-      <h2>Delete Partner</h2>
+      <h2>delete partner</h2>
 
-      {/* Display the list of previous partners using ScrollBar */}
+      {/* display the list of previous partners using ScrollBar */}
       <ScrollBar previousPartners={previousPartners} />
 
-      {/* Display the list of partners with delete buttons */}
+      {/* display the list of partners with delete buttons */}
       <ul>
         {previousPartners.map((partner) => (
           <li key={partner.email}>
             {partner.name} - {partner.email}
             <button
               type="button"
-              onClick={() => handleDelete(partner.email)} // Trigger handleDelete to select a partner
-              style={{ margin: "10px" }} // Add margin to the button for spacing
+              onClick={() => handleDelete(partner.email)} // trigger handleDelete to select a partner
+              style={{ margin: "10px" }} // add margin to the button for spacing
             >
-              Delete
+              delete
             </button>
           </li>
         ))}
       </ul>
 
-      {/* If a partner is selected for deletion, show confirmation */}
+      {/* if a partner is selected for deletion, show confirmation */}
       {partnerToDelete && (
         <div>
-          <p>Are you sure you want to delete {partnerToDelete.name}?</p>
+          <p>are you sure you want to delete {partnerToDelete.name}?</p>
           <button
             type="button"
             onClick={confirmDelete}
             style={{ marginRight: "10px" }} // margin to space out buttons
           >
-            Confirm Delete
+            confirm delete
           </button>{" "}
-          {/* Confirm will delete */}
+          {/* confirm will delete */}
           <button type="button" onClick={cancelDelete}>
-            Cancel
+            cancel
           </button>{" "}
-          {/* Cancel will reset the state */}
+          {/* cancel will reset the state */}
         </div>
       )}
 
-      {/* Button to cancel and go back to Edit Partners page */}
+      {/* button to cancel and go back to Edit Partners page */}
       <button
         type="button"
         onClick={() => router.push("/editProfile/partners")}
         style={{ marginTop: "20px" }} // margin to space out the back button
       >
-        Back
+        back
       </button>
     </div>
   );
