@@ -14,7 +14,7 @@ export default function ClassesScrollBar({ classesTaken }) {
 
   if (classesTaken.length > 0) {
     return (
-      <div className={styles.classesContainer}>
+      <div data-testid="scrollbar" className={styles.classesContainer}>
         <ul>
           {classesTaken.map((classItem) => (
             <li key={classItem.name}>
