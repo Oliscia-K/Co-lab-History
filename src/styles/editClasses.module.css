@@ -1,0 +1,64 @@
+.savedPopup {
+  position: fixed;
+  top: 10px;
+  right: 10px;
+  background-color: lightgreen;
+  padding: 10px;
+  border-radius: 5px;
+  color: green;
+  font-weight: bold;
+}
+
+/* Classes container */
+.classesContainer {
+  margin: 20px 0;
+}
+
+/* Class item styling */
+.classItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.classSelect {
+  margin-left: 10px;
+}
+
+/* Dropdown and button container */
+.actionContainer {
+  margin: 20px 0;
+}
+
+/* Dropdown styles */
+.dropdown {
+  margin-right: 10px;
+  padding: 5px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+}
+
+/* Add button styles */
+.addButton {
+  background-color: blue;
+  color: white;
+  padding: 5px 10px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+/* Save button */
+.enabledSaveButton {
+  background-color: blue;
+  color: white;
+  padding: 10px 15px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.disabledSaveButton {
+  background-color: grey;
+  cursor: not-allowed;
+}
