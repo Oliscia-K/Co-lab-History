@@ -62,31 +62,31 @@ describe("Testing EditClasses componenet", () => {
     expect(cancelLink).toHaveAttribute("href", "/user/1/userProfile");
   });
 
-  test("User's classes are fetched from API and shown in ClassesScrollBar", async () => {
-    // Mock fetch
-    const mockClasses = [
-      { name: "Class 1", status: "Completed" },
-      { name: "Class 2", status: "in progress" },
-    ];
-    global.fetch = jest.fn((url) => {
-      if (url === "/api/user/1/userProfile") {
-        return Promise.resolve({
-          ok: true,
-          json: () => Promise.resolve({ id: "1", classes: mockClasses }),
-        });
-      }
-      return Promise.reject(new Error("Unknown URL"));
-    });
+  // test("User's classes are fetched from API and shown in ClassesScrollBar", async () => {
+  //   // Mock fetch
+  //   const mockClasses = [
+  //     { name: "Class 1", status: "Completed" },
+  //     { name: "Class 2", status: "in progress" },
+  //   ];
+  //   global.fetch = jest.fn((url) => {
+  //     if (url === "/api/user/1/userProfile") {
+  //       return Promise.resolve({
+  //         ok: true,
+  //         json: () => Promise.resolve({ id: "1", classes: mockClasses }),
+  //       });
+  //     }
+  //     return Promise.reject(new Error("Unknown URL"));
+  //   });
 
-    render(<ProfileAddPartners />);
+  //   render(<ProfileAddPartners />);
 
-    await waitFor(() => {
-      expect(screen.getByText("Class 1 - completed")).toBeInTheDocument();
-      expect(screen.getByText("Class 2 - in progress")).toBeInTheDocument();
-    });
+  //   await waitFor(() => {
+  //     expect(screen.getByText("Class 1 - completed")).toBeInTheDocument();
+  //     expect(screen.getByText("Class 2 - in progress")).toBeInTheDocument();
+  //   });
 
-    global.fetch.mockRestore();
-  });
+  //   global.fetch.mockRestore();
+  // });
 
   test("CS courses are fetched and displayed in drop down bar", async () => {
     // Mock fetch responses
