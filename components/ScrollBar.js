@@ -5,7 +5,7 @@ import PartnerShape from "./PartnerShape";
 export default function ScrollBar({ previousPartners }) {
   if (previousPartners.length > 0) {
     return (
-      <div className={styles.partnersContainer}>
+      <div data-testid="scrollbar" className={styles.partnersContainer}>
         <ul>
           {previousPartners.map((partner) => (
             <li key={partner.id}>{partner.name}</li>
@@ -15,7 +15,7 @@ export default function ScrollBar({ previousPartners }) {
     );
   }
 
-  return <div className={styles.partnersContainer} />;
+  return <div data-testid="scrollbar" className={styles.partnersContainer} />;
 }
 
 ScrollBar.propTypes = {
