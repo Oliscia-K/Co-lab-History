@@ -28,7 +28,7 @@ export default function Editor({ currentUser, complete }) {
   const [name, setName] = useState(currentUser?.name || "");
   const [pronouns, setPronouns] = useState(currentUser?.pronouns || "");
   const [major, setMajor] = useState(currentUser?.major || "");
-  const [gradYear, setGradYear] = useState(currentUser?.["grad-year"] || "");
+  const [gradYear, setGradYear] = useState(currentUser?.gradYear || "");
   const [bio, setBio] = useState(currentUser?.bio || "");
   const [interests, setInterests] = useState(currentUser?.interests || "");
 
@@ -37,7 +37,7 @@ export default function Editor({ currentUser, complete }) {
       setName(currentUser?.name);
       setPronouns(currentUser?.pronouns);
       setMajor(currentUser?.major);
-      setGradYear(currentUser?.gradYear);
+      setGradYear(currentUser?.["grad-year"]);
       setBio(currentUser?.bio);
       setInterests(currentUser?.interests);
     } else {
