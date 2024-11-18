@@ -90,7 +90,7 @@ describe("Testing EditClasses componenet", () => {
 
   test("CS courses are fetched and displayed in drop down bar", async () => {
     // Mock fetch responses
-    fetch.mockImplementation((url) => {
+    global.fetch = jest.fn((url) => {
       if (url === "/api/classes") {
         return Promise.resolve({
           ok: true,
