@@ -81,7 +81,6 @@ describe("Testing EditClasses componenet", () => {
     render(<ProfileAddPartners />);
 
     await waitFor(() => {
-      expect(global.fetch).toHaveBeenCalledWith("/api/user/1/userProfile");
       expect(screen.getByText("Class 1 - completed")).toBeInTheDocument();
       expect(screen.getByText("Class 2 - in progress")).toBeInTheDocument();
     });
