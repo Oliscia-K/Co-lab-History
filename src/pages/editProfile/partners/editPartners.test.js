@@ -97,11 +97,60 @@ describe("Testing EditPartners componenet", () => {
     global.fetch.mockRestore();
   });
 
-  // test("makes API call with correct userId", async () => {
-  //   await act(async () => {
-  //     render(<EditPartners/>);
-  //   });
+  test("Add Partner button with valid input successfully adds partner's name to ScrollBar component", async () => {
+    const mockPartners = [{ name: "Partner 1" }, { name: "Partner 2" }];
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            partners: mockPartners,
+          }),
+      }),
+    );
 
-  //   expect(global.fetch).toHaveBeenCalledWith("/api/user/3/userProfile");
-  // });
+    render(<AddPartners />);
+
+    const partnerNameInput = screen.getByPlaceholderText("Partner Name");
+    const partnerEmailInput = screen.getByPlaceholderText("email@domain.com");
+    const addPartnerButton = screen.getByRole("button", {
+      name: "Add Partner",
+    });
+
+    fireEvent.change(partnerNameInput, { target: { value: "Your Name" } });
+    fireEvent.change(partnerEmailInput, {
+      target: { value: "your.name@example.com" },
+    });
+
+    fireEvent.click(addPartnerButton);
+
+    await waitFor(() => {
+      expect(screen.getByText("Your Name")).toBeInTheDocument();
+    });
+  });
+
+  test("Cancel button redirects user to edit partners page", async () => {
+    const mockPartners = [{ name: "Partner 1" }, { name: "Partner 2" }];
+    global.fetch = jest.fn(() =>
+      Promise.resolve({
+        ok: true,
+        json: () =>
+          Promise.resolve({
+            partners: mockPartners,
+          }),
+      }),
+    );
+
+    render(<AddPartners />);
+
+    const cancelButton = screen.getByText("Cancel");
+
+    // Simulate clicking the "Cancel" button
+    fireEvent.click(cancelButton);
+
+    // Verify if the router.push was called to redirect to the correct page
+    await waitFor(() => {
+      expect(mockRouter.push).toHaveBeenCalledWith("/editProfile/partners");
+    });
+  });
 });
