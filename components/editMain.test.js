@@ -16,17 +16,19 @@ jest.mock("next/router", () => ({
 
 // Wrapper for SessionProvider
 function Wrapper({ children }) {
-  return <SessionProvider
-    session={{
-      user: {
-        email: "test@middlebury.edu",
-        name: "Test User",
-      },
-      expires: "2024-01-01",
-    }}
-  >
-    {children}
-  </SessionProvider>
+  return (
+    <SessionProvider
+      session={{
+        user: {
+          email: "test@middlebury.edu",
+          name: "Test User",
+        },
+        expires: "2024-01-01",
+      }}
+    >
+      {children}
+    </SessionProvider>
+  );
 }
 
 Wrapper.propTypes = {
