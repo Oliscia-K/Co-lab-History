@@ -32,8 +32,8 @@ export default function ClassesCheckBox({
   // This has to be refactored
   if (classes.length > 0) {
     return (
-      <Box sx={{ visibility: { visibility } }}>
-        <FormControl>
+      <Box sx={{ visibility: { visibility }, minWidth: 200 }}>
+        <FormControl fullWidth>
           <InputLabel>Filters</InputLabel>
           <Select onChange={handleChange} value={filters} multiple>
             {classes.map((cls) => (
