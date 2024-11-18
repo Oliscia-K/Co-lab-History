@@ -3,6 +3,7 @@ import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
 import ClassesScrollBar from "../../../../components/ClassesScrollBar";
+import styles from "../../../styles/editClasses.module.css";
 
 export default function ProfileAddPartners() {
   const [user, setUserData] = useState();
@@ -108,30 +109,18 @@ export default function ProfileAddPartners() {
   return (
     <div>
       <h2>Add Classes</h2>
-      {showSavedPopup && (
-        <div
-          style={{
-            position: "fixed",
-            top: "10px",
-            right: "10px",
-            backgroundColor: "lightgreen",
-            padding: "10px",
-            borderRadius: "5px",
-            color: "green",
-            fontWeight: "bold",
-          }}
-        >
-          Saved!
-        </div>
-      )}
-      <ClassesScrollBar classesTaken={classesTaken}>
+      {showSavedPopup && <div classname={styles.savedPopup}>Saved!</div>}
+      <ClassesScrollBar
+        classesTaken={classesTaken}
+        className={styles.classesContainer}
+      >
         {classesTaken.map((cls) => (
-          <div key={cls.name} style={{ display: "flex", alignItems: "center" }}>
+          <div key={cls.name} className={styles.classItem}>
             <span>{cls.name}</span>
             <select
               value={cls.status}
               onChange={(e) => handleStatusChange(cls.name, e.target.value)}
-              style={{ marginLeft: "10px" }}
+              className={styles.classSelect}
             >
               <option value="In Progress">In Progress</option>
               <option value="Completed">Completed</option>
@@ -140,12 +129,13 @@ export default function ProfileAddPartners() {
         ))}
       </ClassesScrollBar>
 
-      <div>
+      <div className={styles.actionContainer}>
         <label htmlFor="classDropdown">Choose a class: </label>
         <select
           id="classDropdown"
           onChange={(e) => setNewClass(e.target.value)}
           value={newClass}
+          className={styles.dropdown}
         >
           <option value="" disabled>
             Select a class
@@ -161,6 +151,7 @@ export default function ProfileAddPartners() {
           id="progressDropdown"
           onChange={(e) => setProgress(e.target.value)}
           value={progress}
+          className={styles.dropdown}
         >
           <option value="" disabled>
             In Progress?
@@ -168,26 +159,29 @@ export default function ProfileAddPartners() {
           <option value="In Progress">In Progress</option>
           <option value="Completed">Completed</option>
         </select>
-
-        <button type="button" onClick={handleAddClass}>
-          Add
-        </button>
       </div>
+
+      <button
+        type="button"
+        className={styles.addButton}
+        onClick={handleAddClass}
+      >
+        Add
+      </button>
       <Link href="/editProfile/classes">
-        <button type="button">Cancel</button>
-        <button onClick={fileUpdate} type="button">
-          Save
+        <button type="button" className={styles.addButton}>
+          Back
         </button>
       </Link>
       <button
         onClick={fileUpdate}
         type="button"
         disabled={!newClass || !progress}
-        style={{
-          backgroundColor: !newClass || !progress ? "grey" : "blue",
-          cursor: !newClass || !progress ? "not-allowed" : "pointer",
-          color: "white",
-        }}
+        classname={
+          !newClass || !progress
+            ? styles.disabledSaveButton
+            : styles.enabledSaveButton
+        }
       >
         Save
       </button>
