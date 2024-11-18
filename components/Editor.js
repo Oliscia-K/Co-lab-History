@@ -37,7 +37,7 @@ export default function Editor({ currentUser, complete }) {
       setName(currentUser?.name);
       setPronouns(currentUser?.pronouns);
       setMajor(currentUser?.major);
-      setGradYear(currentUser?.gradYear);
+      setGradYear(currentUser?.["grad-year"]);
       setBio(currentUser?.bio);
       setInterests(currentUser?.interests);
     } else {
