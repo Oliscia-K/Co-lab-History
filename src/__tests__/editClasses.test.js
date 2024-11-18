@@ -1,7 +1,7 @@
 import { render, screen, waitFor, fireEvent } from "@testing-library/react";
 import { useSession } from "next-auth/react";
-import EditClasses from "./index";
-import ProfileAddPartners from "./add";
+import EditClasses from "../pages/editProfile/classes/index";
+import ProfileAddPartners from "../pages/editProfile/classes/add";
 
 jest.mock("next-auth/react");
 jest.mock("next/router", () => jest.requireActual("next-router-mock"));
