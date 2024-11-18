@@ -66,8 +66,8 @@ export default function Editor({ currentUser, complete }) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.topSection}>
-        <div className={styles.nameSection}>
+      <div className={styles.profileHeader}>
+        <div className={styles.smallName}>
           Name:
           <input
             type="text"
