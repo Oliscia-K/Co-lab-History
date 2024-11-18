@@ -1,16 +1,13 @@
-import { render, screen, fireEvent, getByTestId } from "@testing-library/react";
-import PropTypes from "prop-types";
-import { useSession } from "next-auth/react"
-import EditClasses from "./index"
+import { render, screen, waitFor, fireEvent } from "@testing-library/react";
+import { useSession } from "next-auth/react";
+import EditClasses from "./index";
 import ProfileAddPartners from "./add";
 
 jest.mock("next-auth/react");
-jest.mock('next/router', () => jest.requireActual('next-router-mock'))
+jest.mock("next/router", () => jest.requireActual("next-router-mock"));
 
-describe("Testing editClasses componenet", () => {
-
+describe("Testing EditClasses componenet", () => {
   beforeEach(() => {
-    
     useSession.mockReturnValue({
       data: {
         user: { id: 1 },
@@ -18,178 +15,193 @@ describe("Testing editClasses componenet", () => {
       },
       status: "authenticated",
     });
-
   });
 
-  test("ClassesScrollBar is on the page", () => {
-
+  test("ClassesScrollBar component is on the page", () => {
     const mockedUser = {
       id: 1,
       expires: new Date(Date.now() + 2 * 86400).toISOString(),
     };
 
-    render(<EditClasses currentUser={mockedUser}/>);
+    render(<EditClasses currentUser={mockedUser} />);
     expect(screen.getByTestId("scrollbar")).toBeInTheDocument();
+  });
 
+  test("Add and back buttons are on the page", () => {
+    const mockedUser = {
+      id: 1,
+      expires: new Date(Date.now() + 2 * 86400).toISOString(),
+    };
+
+    render(<EditClasses currentUser={mockedUser} />);
+    expect(screen.getByTestId("add")).toBeVisible();
+    expect(screen.getByTestId("add")).toContainHTML("Add");
+    expect(screen.getByTestId("back")).toBeVisible();
+    expect(screen.getByTestId("back")).toContainHTML("Back");
+  });
+
+  test("Add button redirects user to add page", () => {
+    const mockedUser = {
+      id: 1,
+      expires: new Date(Date.now() + 2 * 86400).toISOString(),
+    };
+
+    render(<EditClasses currentUser={mockedUser} />);
+    const addLink = screen.getByRole("link", { name: "Add" });
+    expect(addLink).toHaveAttribute("href", "/editProfile/classes/add");
+  });
+
+  test("Cancel button redirects user to homepage", () => {
+    const mockedUser = {
+      id: 1,
+      expires: new Date(Date.now() + 2 * 86400).toISOString(),
+    };
+
+    render(<EditClasses currentUser={mockedUser} />);
+    const cancelLink = screen.getByRole("link", { name: "Back" });
+    expect(cancelLink).toHaveAttribute("href", "/user/1/userProfile");
+  });
+
+  test("User's classes are fetched from API and shown in ClassesScrollBar", async () => {
+    // Mock fetch
+    const mockClasses = [
+      { name: "Class 1", status: "Completed" },
+      { name: "Class 2", status: "in progress" },
+    ];
+    global.fetch = jest.fn((url) => {
+      if (url === "/api/user/1/userProfile") {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ id: "1", classes: mockClasses }),
+        });
+      }
+      return Promise.reject(new Error("Unknown URL"));
     });
 
-    test("Add and back buttons are on the page", () => {
+    render(<ProfileAddPartners />);
 
-      const mockedUser = {
-        id: 1,
-        expires: new Date(Date.now() + 2 * 86400).toISOString(),
-      };
-  
-      render(<EditClasses currentUser={mockedUser} />);
-      expect(screen.getByTestId("add")).toBeVisible();
-      expect(screen.getByTestId("add")).toContainHTML("Add");
-      expect(screen.getByTestId("back")).toBeVisible();
-      expect(screen.getByTestId("back")).toContainHTML("Back");
-
+    await waitFor(() => {
+      expect(global.fetch).toHaveBeenCalledWith("/api/user/1/userProfile");
+      expect(screen.getByText("Class 1 - completed")).toBeInTheDocument();
+      expect(screen.getByText("Class 2 - in progress")).toBeInTheDocument();
     });
 
-    test("Add button redirects user to add page", () => {
-      const mockedUser = {
-        id: 1,
-        expires: new Date(Date.now() + 2 * 86400).toISOString(),
-      };
-  
-      render(<EditClasses currentUser={mockedUser} />);
-      const addLink = screen.getByRole("link", {name: "Add" });
-      expect(addLink).toHaveAttribute("href", "/editProfile/classes/add");
-    
+    global.fetch.mockRestore();
+  });
 
-    });  
-
-    test("Back button redirects user to homepage", () => {
-      const mockedUser = {
-        id: 1,
-        expires: new Date(Date.now() + 2 * 86400).toISOString(),
-      };
-  
-      render(<EditClasses currentUser={mockedUser} />);
-      const cancelLink = screen.getByRole("link", {name: "Back"});
-      expect(cancelLink).toHaveAttribute("href", "/user/1/userProfile");
+  test("CS courses are fetched and displayed in drop down bar", async () => {
+    // Mock fetch responses
+    fetch.mockImplementation((url) => {
+      if (url === "/api/classes") {
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve([
+              { id: 1, name: "CS101" },
+              { id: 2, name: "CS102" },
+            ]),
+        });
+      }
+      if (url === "/api/user/1/userProfile") {
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve({
+              id: "1",
+              classes: [],
+            }),
+        });
+      }
+      return Promise.reject(new Error("Unknown URL"));
     });
 
-    // test("Elements of add page are present", () => {
-    //   render(<ProfileAddPartners/>)
-    //   expect(getByTestId("scrollbar")).toBeInTheDocument();
-    //   expect(getByTestId("add")).toBeInTheDocument();
-    //   expect(getByTestId("cancel")).toBeInTheDocument();
-    //   expect(getByTestId("save")).toBeInTheDocument();
+    // Render the component
+    render(<ProfileAddPartners />);
 
-    // });
+    // Wait for the dropdown options to load
+    await waitFor(() => {
+      expect(fetch).toHaveBeenCalledWith("/api/classes");
+      expect(fetch).toHaveBeenCalledWith("/api/user/1/userProfile");
 
-    // test("Adding a test adds it to the classes scrollbar component", () => {
+      // Assert that the dropdown contains the fetched class names
+      const dropdown = screen.getByLabelText("Choose a class:");
+      expect(dropdown).toBeInTheDocument();
+      expect(screen.getByText("CS101")).toBeInTheDocument();
+      expect(screen.getByText("CS102")).toBeInTheDocument();
+    });
+  });
 
-    // });
+  test("Save button adds course with selected progress status", async () => {
+    global.fetch = jest.fn((url) => {
+      if (url === "/api/classes") {
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve([
+              { id: 1, name: "CS101" },
+              { id: 2, name: "CS102" },
+            ]),
+        });
+      }
+      if (url === "/api/user/1/userProfile") {
+        return Promise.resolve({
+          ok: true,
+          json: () => Promise.resolve({ id: "1", classes: [] }),
+        });
+      }
+      return Promise.reject(new Error("Unknown URL"));
+    });
 
-    // test("After adding a class, textboxes go back to default value", () => {
+    render(<ProfileAddPartners />);
 
-    // });
+    await waitFor(() => {
+      const classDropdown = screen.getByLabelText("Choose a class:");
+      const progressDropdown = screen.getByLabelText("Progress Status:");
+      const addButton = screen.getByRole("button", { name: "Add" });
 
-    // test("Expect courses to be properly fetched and displayed as options in select bar", () => {
-    //   render()
+      fireEvent.change(classDropdown, { target: { value: "CS101" } });
+      fireEvent.change(progressDropdown, { target: { value: "Completed" } });
 
-    // });
-  
+      fireEvent.click(addButton);
 
-    // test("Add button does not add a class if none is selected", () => {
+      expect(screen.getByText("CS101 - completed")).toBeInTheDocument();
+    });
+  });
 
-    // });
+  test("After adding a class, textboxes go back to default value", async () => {
+    render(<ProfileAddPartners />);
 
+    // Mock fetch response for classes
+    global.fetch = jest.fn((url) => {
+      if (url === "/api/classes") {
+        return Promise.resolve({
+          ok: true,
+          json: () =>
+            Promise.resolve([
+              { id: 1, name: "CS101" },
+              { id: 2, name: "CS102" },
+            ]),
+        });
+      }
+      return Promise.reject(new Error("Unknown URL"));
+    });
 
+    await waitFor(() => {
+      const classDropdown = screen.getByLabelText("Choose a class:");
+      const progressDropdown = screen.getByLabelText("Progress Status:");
+      const addButton = screen.getByRole("button", { name: "Add" });
 
+      fireEvent.change(classDropdown, { target: { value: "CS101" } });
+      fireEvent.change(progressDropdown, { target: { value: "Completed" } });
 
+      fireEvent.click(addButton);
 
+      // Verify dropdowns reset
+      expect(classDropdown.value).toBe("");
+      expect(progressDropdown.value).toBe("");
+
+      // Verify class was added to the list
+      expect(screen.getByText("CS101")).toBeInTheDocument();
+    });
+  });
 });
-
-
-// import { render, screen, fireEvent } from "@testing-library/react";
-// import { getServerSession } from "next-auth/next";
-// import { knex } from "../../../../knex/knex";
-// import EditClasses from "./index";
-
-// jest.mock("next-auth/next");
-
-// describe("Testing editClasses componenet", () => {
-
-//     beforeAll(() =>
-//       // Ensure test database is initialized before an tests
-//       knex.migrate.rollback().then(() => knex.migrate.latest()),
-//     );
-    
-//     afterAll(() =>
-//       // Ensure database connection is cleaned up after all tests
-//       knex.destroy(),
-//     );
-
-//     beforeEach(() => {
-//       getServerSession.mockReturnValue({
-//         data: {
-//           user: { id: 1 },
-//           expires: new Date(Date.now() + 2 * 86400).toISOString(),
-//         },
-//         status: "authenticated",
-//       });
-//         return knex.seed.run();
-//     });
-
-//     afterEach(() => {
-//       getServerSession.mockReset();
-//     });
-
-//     test("ClassesScrollBar is on the page", () => {
-
-//         render(<EditClasses />);
-//         expect(screen.getByTestId("scrollbar")).toBeVisible();
-//     });
-
-//     test("Add button is on the page", () => {
-  
-//         render(<EditClasses />);
-//         expect(screen.getByTestId("add")).toBeVisible();
-//         expect(screen.getByTestId("add")).toContainHTML("Add");
-//     });
-
-//     test("Cancel button is on the page", () => {
-
-//         render(<EditClasses />);
-//         expect(screen.getByTestId("cancel")).toBeVisible();
-//         expect(screen.getByTestId("cancel")).toContainHTML("Cancel");
-//     });
-
-//     test("Save button is on the page", () => {
-
-//         render(<EditClasses />);
-//         expect(screen.getByTestId("save")).toBeVisible();
-//         expect(screen.getByTestId("save")).toContainHMTL("Save");
-//     });
-//   });
-
-//   //Stuff that needs to be tested later
-//   //   test("Add button redirects user to add page", () => {
-
-//   //     mockRouter.push(`/editProfile/classes/index`);
-//   //     render(<EditClasses />);
-
-//   //     const addButton = screen.getByRole("button", { name: "Add" });
-//   //     fireEvent.click(addButton);
-//   //     expect(mockRouter.asPath).toBe(`/editProfile/classes/add`)
-//   //   });
-
-//   // //   describe("Save button redirects user to home page", () => {
-//   // //     const saveButton = screen.getByRole("button", { name: "Save" });
-//   // //     fireEvent.click(saveButton);
-//   // //   });
-
-//   // test("Cancel button redirects user to home page", () => {
-
-//   //       mockRouter.push(`/editProfile/classes/index`);
-//   //       render(<EditClasses />);
-
-//   //       const cancelButton = screen.getByRole("button", { name: "Cancel" });
-//   //       fireEvent.click(cancelButton);
-//   //       expect(mockRouter.asPath).toBe(`/`);
-//   // });
