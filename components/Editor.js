@@ -14,6 +14,8 @@ const UserShape = {
 
 const majors = ["Undeclared", "Computer Science"];
 const gradYears = [
+  "2024",
+  "2024.5",
   "2025",
   "2025.5",
   "2026",

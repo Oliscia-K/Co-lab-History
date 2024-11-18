@@ -31,8 +31,8 @@ export default function EditMain({ currentUser, setCurrentUser }) {
             "profile-pic": newUser["profile-pic"],
             bio: newUser.bio,
             interests: newUser.interests,
-            classes: newUser.classes,
-            partners: newUser.partners,
+            classes: currentUser.classes,
+            partners: currentUser.partners,
           }),
         });
 
