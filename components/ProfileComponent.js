@@ -32,6 +32,10 @@ function ProfileComponent({ size = "large", user }) {
     const imageURL = URL.createObjectURL(blob);
     setProfilePicture(imageURL);
 
+    // Convert binary data into a format the backend expects (Array of numbers for binary)
+    const binaryArray = Array.from(new Uint8Array(binaryData));
+
+    // Send updated profile picture to the server
     fetch(`/api/editProfile`, {
       method: "PUT",
       headers: {
@@ -44,7 +48,7 @@ function ProfileComponent({ size = "large", user }) {
         pronouns: user?.pronouns,
         major: user?.major,
         "grad-year": user?.["grad-year"],
-        "profile-pic": Array.from(binaryData), // convert the binary data to a plain array
+        "profile-pic": binaryArray, // Convert the binary data to a plain array
         bio: user?.bio,
         interests: user?.interests,
         classes: user?.classes,
