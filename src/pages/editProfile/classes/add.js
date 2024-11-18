@@ -175,6 +175,9 @@ export default function ProfileAddPartners() {
       </div>
       <Link href="/editProfile/classes">
         <button type="button">Cancel</button>
+        <button onClick={fileUpdate} type="button">
+          Save
+        </button>
       </Link>
       <button
         onClick={fileUpdate}

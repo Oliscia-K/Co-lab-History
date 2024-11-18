@@ -18,7 +18,10 @@ describe("Testing ClassesScrollBar component", () => {
 
     classesTaken.forEach((classItem) => {
       const listItem = screen.getByText(
-        new RegExp(`${classItem.name} - ${classItem.progress ? "completed" : "in progress"}`, "i")
+        new RegExp(
+          `${classItem.name} - ${classItem.progress ? "completed" : "in progress"}`,
+          "i",
+        ),
       );
       expect(listItem).toBeVisible();
     });
@@ -36,9 +39,9 @@ describe("Testing ClassesScrollBar component", () => {
       { name: "CSCI 102", progress: false },
       { name: "CSCI 103", progress: true },
     ];
-  
+
     render(<ClassesScrollBar classesTaken={classesTaken} />);
-  
+
     const listItems = screen.getAllByRole("listitem");
     expect(listItems).toHaveLength(classesTaken.length);
   });
