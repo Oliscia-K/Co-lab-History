@@ -28,7 +28,7 @@ export default function EditMain({ currentUser, setCurrentUser }) {
             pronouns: newUser.pronouns,
             major: newUser.major,
             "grad-year": newUser["grad-year"],
-            "profile-pic": newUser["profile-pic"],
+            "profile-pic": currentUser["profile-pic"],
             bio: newUser.bio,
             interests: newUser.interests,
             classes: currentUser.classes,
