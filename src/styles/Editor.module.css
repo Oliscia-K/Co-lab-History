@@ -1,92 +1,66 @@
+/* Container for the entire profile */
 .container {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-}
-
-.topSection {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-}
-
-.profilePictureContainer {
-  position: relative;
-  width: 80px;
-  height: 80px;
-  border-radius: 50%;
-  overflow: hidden;
-  cursor: pointer;
-  border: 2px solid #ddd;
-}
-
-.profilePicture {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.placeholder {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  background-color: #f0f0f0;
-  color: #666;
-  font-size: 12px;
-  text-align: center;
-}
-
-.uploadInput {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  top: 0;
-  left: 0;
-  opacity: 0;
-  cursor: pointer;
-}
-
-.nameSection {
   display: flex;
   flex-direction: column;
+  align-items: center;
+  background-color: white;
+  padding: 20px;
+  border: 3px solid #00296f;
+  border-radius: 20px;
+  max-width: 600px;
+  margin: 10px auto;
 }
 
-.nameSection > strong {
-  font-size: 1.2em;
+/* Profile sections for larger and smaller sizes */
+.large {
+  width: 100%;
 }
 
-.pronouns {
-  margin-left: 6px;
+.small {
+  width: 300px;
   font-size: 0.9em;
-  color: #666;
+  padding: 10px;
 }
 
-.smallText {
-  font-size: 12px;
-  color: #666;
+/* name and pronouns */
+.profileHeader {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: -5px;
 }
 
-.editButton {
-  background: none;
-  border: none;
-  color: #0070f3;
-  cursor: pointer;
-  font-size: 12px;
-  margin-left: 8px;
-  padding: 0;
+/* large and small names for different component sizes*/
+.largeName {
+  font-size: 1.5em;
+  font-weight: bold;
+  color: #00296f;
 }
 
-.editButton:hover {
-  text-decoration: underline;
+.smallName {
+  font-size: 1em;
+  color: #00296f;
+  font-weight: bold;
 }
 
+/* pronouns styles */
+.pronouns {
+  font-size: 0.9em;
+  color: #00296f;
+}
+
+/* (major and year) */
+.basics {
+  font-size: 0.9em;
+  color: #00296f;
+  margin: 1px 0;
+}
+
+/* Bio and Project Interests side-by-side with equal dimensions */
 .middleSection {
   display: flex;
-  justify-content: space-between;
   gap: 20px;
+  width: 100%;
   margin-top: 20px;
 }
 
@@ -96,18 +70,19 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
-}
-
-.sectionHeader {
+  background-color: #f9f9f9;
+  min-width: 0;
+  height: 150px; /* Ensures consistent height for these sections */
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
-  align-items: center;
 }
 
+/* Classes and Past Partners side-by-side with equal dimensions below */
 .bottomSection {
   display: flex;
-  justify-content: space-between;
   gap: 20px;
+  width: 100%;
   margin-top: 20px;
 }
 
@@ -117,4 +92,31 @@
   padding: 10px;
   border: 1px solid #ddd;
   border-radius: 8px;
+  background-color: #f9f9f9;
+  min-width: 0;
+  height: 150px; /* Ensures consistent height for these sections */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+/* Section header with edit button alignment */
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Edit button styling */
+.editButton {
+  background: none;
+  border: none;
+  color: #00296f;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.editButton:hover {
+  text-decoration: underline;
 }

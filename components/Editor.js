@@ -14,6 +14,8 @@ const UserShape = {
 
 const majors = ["Undeclared", "Computer Science"];
 const gradYears = [
+  "2024",
+  "2024.5",
   "2025",
   "2025.5",
   "2026",
@@ -66,8 +68,8 @@ export default function Editor({ currentUser, complete }) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.topSection}>
-        <div className={styles.nameSection}>
+      <div className={styles.profileHeader}>
+        <div className={styles.smallName}>
           Name:
           <input
             type="text"
