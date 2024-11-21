@@ -129,12 +129,16 @@ export default function Editor({ currentUser, complete }) {
         </div>
       </div>
       <div>
-        <button type="button" onClick={handleSave} disabled={!name}>
-          Save
-        </button>
-        <button type="button" onClick={() => complete()}>
-          Cancel
-        </button>
+        <a href={`/user/${currentUser.id}/userProfile`}>
+          <button type="button" onClick={handleSave} disabled={!name}>
+            Save
+          </button>
+        </a>
+        <a href={`/user/${currentUser.id}/userProfile`}>
+          <button type="button" onClick={() => complete()}>
+            Cancel
+          </button>
+        </a>
       </div>
       {!name && <p style={{ color: "red" }}>Name is required.</p>}{" "}
     </div>
