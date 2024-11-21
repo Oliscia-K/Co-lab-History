@@ -84,7 +84,7 @@ export default function DeletePartners() {
 
   return (
     <div>
-      <h2>delete partner</h2>
+      <h2>Delete Partners</h2>
 
       {/* display the list of previous partners using ScrollBar */}
       <ScrollBar previousPartners={previousPartners} />
@@ -99,7 +99,7 @@ export default function DeletePartners() {
               onClick={() => handleDelete(partner.email)} // trigger handleDelete to select a partner
               style={{ margin: "10px" }} // add margin to the button for spacing
             >
-              delete
+              Delete
             </button>
           </li>
         ))}
@@ -114,11 +114,11 @@ export default function DeletePartners() {
             onClick={confirmDelete}
             style={{ marginRight: "10px" }} // margin to space out buttons
           >
-            confirm delete
+            Confirm Delete?
           </button>{" "}
           {/* confirm will delete */}
           <button type="button" onClick={cancelDelete}>
-            cancel
+            Cancel
           </button>{" "}
           {/* cancel will reset the state */}
         </div>
@@ -130,7 +130,7 @@ export default function DeletePartners() {
         onClick={() => router.push("/editProfile/partners")}
         style={{ marginTop: "20px" }} // margin to space out the back button
       >
-        back
+        Back
       </button>
     </div>
   );

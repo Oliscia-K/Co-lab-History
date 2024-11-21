@@ -40,11 +40,16 @@ export default function EditClasses({ currentUser }) {
           Add
         </button>
       </Link>
-      <Link href={`/user/${userId}/userProfile`}>
+      <Link href="/editProfile/classes/delete">
+        <button data-testid="delete" type="button">
+          Delete
+        </button>
+      </Link>
+      <a href={`/user/${userId}/userProfile`}>
         <button data-testid="back" type="button">
           Back
         </button>
-      </Link>
+      </a>
     </div>
   );
 }

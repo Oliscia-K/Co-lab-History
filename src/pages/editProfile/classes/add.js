@@ -10,7 +10,7 @@ export default function ProfileAddPartners() {
   const [classesTaken, setClassesTaken] = useState([{}]);
   const [newClass, setNewClass] = useState("");
   const [allClasses, setAllClasses] = useState([{}]);
-  const [progress, setProgress] = useState({});
+  const [progress, setProgress] = useState("");
   const [showSavedPopup, setShowSavedPopup] = useState(false);
   const { data: session } = useSession();
   const userId = session?.user?.id;
@@ -73,31 +73,54 @@ export default function ProfileAddPartners() {
   };
 
   const fileUpdate = () => {
-    fetch("/api/editProfile", {
-      method: "PUT",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        id: user?.id,
-        name: user?.name,
-        email: user?.email,
-        pronouns: user?.pronouns,
-        major: user?.major,
-        "grad-year": user?.["grad-year"],
-        "profile-pic": user?.["profile-pic"],
-        bio: user?.bio,
-        interests: user?.interests,
-        classes: classesTaken,
-        partners: user?.partners,
+    // Prepare the updated classes for the /api/editUserClasses request
+    const updatedClasses = classesTaken.map((cls) => ({
+      classNumber: cls.number,
+      userEmail: user?.email,
+      completionStatus: cls.progress ? "completed" : "in progress",
+    }));
+
+    // Prepare the updated profile data
+    const updatedProfile = {
+      id: user?.id,
+      name: user?.name,
+      email: user?.email,
+      pronouns: user?.pronouns,
+      major: user?.major,
+      "grad-year": user?.["grad-year"],
+      "profile-pic": user?.["profile-pic"],
+      bio: user?.bio,
+      interests: user?.interests,
+      classes: classesTaken,
+      partners: user?.partners,
+    };
+
+    // Perform both PUT requests in parallel using Promise.all
+    Promise.all([
+      // First PUT request for updating user profile
+      fetch("/api/editProfile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(updatedProfile),
       }),
-    })
-      .then((response) => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
-        return response.json();
-      })
+
+      // Second PUT request for updating user classes
+      fetch("/api/editUserClasses", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          newClasses: updatedClasses,
+        }),
+      }),
+    ])
+      .then((responses) =>
+        // Check both responses
+        Promise.all(responses.map((response) => response.json())),
+      )
       .then((data) => {
         console.log(data);
         setShowSavedPopup(true); // Show the popup
@@ -109,7 +132,7 @@ export default function ProfileAddPartners() {
   return (
     <div>
       <h2>Add Classes</h2>
-      {showSavedPopup && <div classname={styles.savedPopup}>Saved!</div>}
+      {showSavedPopup && <div className={styles.savedPopup}>Saved!</div>}
       <ClassesScrollBar
         classesTaken={classesTaken}
         className={styles.classesContainer}
@@ -118,7 +141,7 @@ export default function ProfileAddPartners() {
           <div key={cls.name} className={styles.classItem}>
             <span>{cls.name}</span>
             <select
-              value={cls.status}
+              value={cls.progress || "In Progress"}
               onChange={(e) => handleStatusChange(cls.name, e.target.value)}
               className={styles.classSelect}
             >
@@ -173,16 +196,7 @@ export default function ProfileAddPartners() {
           Back
         </button>
       </Link>
-      <button
-        onClick={fileUpdate}
-        type="button"
-        disabled={!newClass || !progress}
-        classname={
-          !newClass || !progress
-            ? styles.disabledSaveButton
-            : styles.enabledSaveButton
-        }
-      >
+      <button onClick={fileUpdate} type="button">
         Save
       </button>
     </div>

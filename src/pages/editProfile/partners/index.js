@@ -53,9 +53,9 @@ export default function EditPartners({ currentUser }) {
       </button>
 
       {/* Cancel button */}
-      <button type="button" onClick={() => router.push("/")}>
-        Back
-      </button>
+      <a href={`/user/${userId}/userProfile`}>
+        <button type="button">Back</button>
+      </a>
     </div>
   );
 }
