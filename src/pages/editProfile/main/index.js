@@ -42,7 +42,9 @@ export default function EditMain({ currentUser, setCurrentUser }) {
 
         setCurrentUser(newUser);
 
-        router.push(`/user/${currentUser.id}/userProfile`);
+        router.push(`/user/${currentUser.id}/userProfile`).then(() => {
+          router.reload();
+        });
       } catch (error) {
         console.error("Error updating article:", error);
       }
