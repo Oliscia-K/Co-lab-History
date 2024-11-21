@@ -60,16 +60,15 @@ describe("Testing EditPartners componenet", () => {
     expect(mockRouter.push).toHaveBeenCalledWith("/editProfile/partners/add");
   });
 
-  test("Back button redirects user to homepage", () => {
+  test("Back button redirects user to userProfile", () => {
     const mockedUser = {
       id: 1,
       expires: new Date(Date.now() + 2 * 86400).toISOString(),
     };
 
     render(<EditPartners currentUser={mockedUser} />);
-    const backButton = screen.getByRole("button", { name: "Back" });
-    fireEvent.click(backButton);
-    expect(mockRouter.push).toHaveBeenCalledWith("/");
+    const cancelLink = screen.getByRole("link", { name: "Back" });
+    expect(cancelLink).toHaveAttribute("href", "/user/1/userProfile");
   });
 
   test("User's partners are fetched from API", async () => {

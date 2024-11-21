@@ -36,6 +36,8 @@ describe("Testing EditClasses componenet", () => {
     render(<EditClasses currentUser={mockedUser} />);
     expect(screen.getByTestId("add")).toBeVisible();
     expect(screen.getByTestId("add")).toContainHTML("Add");
+    expect(screen.getByTestId("delete")).toBeVisible();
+    expect(screen.getByTestId("delete")).toContainHTML("Delete");
     expect(screen.getByTestId("back")).toBeVisible();
     expect(screen.getByTestId("back")).toContainHTML("Back");
   });

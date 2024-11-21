@@ -41,7 +41,7 @@ export default function EditClasses({ currentUser }) {
         </button>
       </Link>
       <Link href="/editProfile/classes/delete">
-        <button data-testid="back" type="button">
+        <button data-testid="delete" type="button">
           Delete
         </button>
       </Link>
