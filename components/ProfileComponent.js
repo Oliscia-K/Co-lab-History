@@ -125,6 +125,11 @@ function ProfileComponent({ size = "large", user }) {
           <span className={styles.pronouns}>
             {user?.pronouns || "(they/them)"}
           </span>
+          {session?.user?.id === user?.id && size === "large" && (
+            <a href={`mailto:${user?.email}`}>
+              <button type="button">Message</button>
+            </a>
+          )}
         </div>
         <p className={styles.basics}>Major: {user?.major || "Your Major"}</p>
         <p className={styles.basics}>
