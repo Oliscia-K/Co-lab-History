@@ -173,16 +173,7 @@ export default function ProfileAddPartners() {
           Back
         </button>
       </Link>
-      <button
-        onClick={fileUpdate}
-        type="button"
-        disabled={!newClass || !progress}
-        classname={
-          !newClass || !progress
-            ? styles.disabledSaveButton
-            : styles.enabledSaveButton
-        }
-      >
+      <button onClick={fileUpdate} type="button">
         Save
       </button>
     </div>
