@@ -25,6 +25,7 @@
 /* name and pronouns */
 .profileHeader {
   display: flex;
+  flex-direction: column;
   align-items: center;
   gap: 10px;
   margin-bottom: -5px;
@@ -45,13 +46,15 @@
 
 /* pronouns styles */
 .pronouns {
-  font-size: 0.9em;
+  font-size: 1em;
+  font-weight: bold;
   color: #00296f;
 }
 
 /* (major and year) */
 .basics {
-  font-size: 0.9em;
+  font-size: 1em;
+  font-weight: bold;
   color: #00296f;
   margin: 1px 0;
 }
@@ -75,7 +78,7 @@
   height: 150px; /* Ensures consistent height for these sections */
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: flex-start;
 }
 
 /* Classes and Past Partners side-by-side with equal dimensions below */

@@ -85,7 +85,7 @@ export default function Editor({ currentUser, complete }) {
             onChange={(e) => setPronouns(e.target.value)}
           />
         </label>
-        <label className={styles.major}>
+        <label className={styles.basics}>
           Major:
           <select value={major} onChange={(e) => setMajor(e.target.value)}>
             <option value="">Select your major</option>
@@ -96,7 +96,7 @@ export default function Editor({ currentUser, complete }) {
             ))}
           </select>
         </label>
-        <label>
+        <label className={styles.basics}>
           Graduation Year:
           <select
             value={gradYear}
