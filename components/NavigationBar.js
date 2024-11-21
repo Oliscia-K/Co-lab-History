@@ -8,6 +8,7 @@ import homeIcon from "../public/home_image.svg";
 import profileIcon from "../public/profile_image.svg";
 import styles from "../src/styles/Navigation.module.css";
 import LoginWidget from "../src/components/LoginWidget";
+import feedImage from "../public/feed_image.svg";
 
 export default function NavigationBar({ isActive }) {
   const { data: session } = useSession();
@@ -53,6 +54,20 @@ export default function NavigationBar({ isActive }) {
               alt="Profile Icon"
             />
             <div className={styles.text}>Profile</div>
+          </Link>
+        </li>
+        <li className={styles.sidebaritem}>
+          <Link
+            className={styles.button}
+            // onClick={() => handleNav("/homepage")}
+            href="/feed"
+          >
+            <Image
+              className={styles.homeicon}
+              src={feedImage}
+              alt="Home Icon"
+            />
+            <div className={styles.text}>Feed</div>
           </Link>
         </li>
       </ul>
