@@ -108,10 +108,6 @@ function ProfileComponent({ size = "large", user }) {
     );
   };
 
-  const handleMessageClick = () => {
-    console.log("Message button clicked");
-  };
-
   return (
     <div
       className={`${styles.profileContainer} ${isLarge ? styles.large : styles.small}`}
@@ -129,11 +125,10 @@ function ProfileComponent({ size = "large", user }) {
           <span className={styles.pronouns}>
             {user?.pronouns || "(they/them)"}
           </span>
-          {/* Add Message button */}
           {session?.user?.id === user?.id && size === "large" && (
-            <button type="button" onClick={handleMessageClick}>
-              Message
-            </button>
+            <a href={`mailto:${user?.email}`}>
+              <button type="button">Message</button>
+            </a>
           )}
         </div>
         <p className={styles.basics}>Major: {user?.major || "Your Major"}</p>
