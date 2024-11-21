@@ -8,7 +8,12 @@ export default function DisplaySearchResults({ profiles }) {
         <ul>
           {profiles.map((profile) => (
             <li key={profile.id} data-testid="profile">
-              <ProfileComponent size="small" user={profile} />
+              <a
+                style={{ textDecoration: "none" }}
+                href={`/user/${profile.id}/userProfile`}
+              >
+                <ProfileComponent size="small" user={profile} />
+              </a>
             </li>
           ))}
         </ul>
