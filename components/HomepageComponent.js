@@ -1,6 +1,7 @@
 /* eslint-disable no-console */
 import { TextField, Button, Box } from "@mui/material";
 import { useEffect, useState } from "react";
+import SearchOutlinedIcon from "@mui/icons-material/SearchOutlined";
 import DisplaySearchResults from "./DisplaySearchResults";
 import ClassesCheckBox from "./ClassesCheckBox";
 
@@ -75,42 +76,46 @@ export default function HomepageComponent() {
   };
 
   return (
-    <div>
-      <div style={{ display: "flex", height: "100vh" }}>
-        <div
-          style={{
-            flexGrow: 1, // Takes up all available space
-            display: "flex", // Uses flexbox for its children
-            flexDirection: "column", // Stacks children vertically
-            alignItems: "center", // Centers children horizontally
-          }}
-        >
-          <h1>Homepage</h1>
-
-          <Box>
-            <TextField
-              label="Search by Name"
-              variant="outlined"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              disabled={visibility === "visible"}
-            />
+    <div style={{ width: "100%" }}>
+      <div style={{ textAlign: "center" }}>
+        <h1>Search for Profiles</h1>
+        <div>
+          <Box
+            sx={{ display: "flex", justifyContent: "center", margin: "auto" }}
+          >
+            {visibility === "hidden" && (
+              <TextField
+                label="Search"
+                variant="outlined"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                disabled={visibility === "visible"}
+                sx={{ width: "50%" }}
+                slotProps={{
+                  input: { startAdornment: <SearchOutlinedIcon /> },
+                }}
+              />
+            )}
           </Box>
-
-          <Button onClick={handleVisibility} variant="contained">
-            Toggle Search By Class
-          </Button>
 
           {visibility === "visible" && (
             <ClassesCheckBox
               classes={classes}
               filters={filters}
               setFilters={setFilters}
-              visibility={visibility}
             />
           )}
 
           <Button
+            sx={{
+              fontSize: 8,
+              paddingInline: 3,
+              paddingBlock: 1,
+              margin: "20px",
+              backgroundImage: "linear-gradient(to right, #376DFE , #0ED7FE)",
+              width: "90px",
+              height: "30px",
+            }}
             onClick={
               visibility === "visible" ? handleSearchClass : handleSearchName
             }
@@ -118,9 +123,27 @@ export default function HomepageComponent() {
           >
             Search
           </Button>
-          {profiles && <DisplaySearchResults profiles={profiles} />}
+
+          <Button
+            sx={{
+              fontSize: 8,
+              paddingInline: 3,
+              paddingBlock: 1,
+              margin: "20px",
+              color: "#376DFE",
+              boxShadow: 3,
+              width: "90px",
+              height: "30px",
+              padding: "8px",
+            }}
+            onClick={handleVisibility}
+          >
+            Toggle Filters
+          </Button>
         </div>
       </div>
+
+      <div>{profiles && <DisplaySearchResults profiles={profiles} />}</div>
     </div>
   );
 }

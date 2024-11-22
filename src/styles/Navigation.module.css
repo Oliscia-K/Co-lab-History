@@ -8,7 +8,7 @@
   top: 0;
   left: 0;
   margin-right: 20px;
-  background-color: rgb(222, 222, 222);
+  background-image: linear-gradient(#376dfe, #0ed7fe);
   overflow-x: hidden;
   position: relative;
   margin-left: -260px;
