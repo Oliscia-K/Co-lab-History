@@ -31,7 +31,9 @@ export default function MainApp({ setCurrentUser }) {
     return (
       <div style={{ display: "flex" }}>
         <NavigationBarButton />
-        <HomepageComponent />
+        <div style={{ flexGrow: "1" }}>
+          <HomepageComponent />
+        </div>
       </div>
     );
   }
