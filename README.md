@@ -1,3 +1,5 @@
+# Co-lab-History
+Began as a software dev final project with plans to expand outside of the course. This is meant to be used by students to connect to each other for project-partner interests
 # Project Skeleton
 
 ![workflow status](https://github.com/csci312-f24/project-cutts/actions/workflows/node.js.yml/badge.svg)
