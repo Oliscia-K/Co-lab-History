@@ -60,19 +60,18 @@ const mockProfileData = {
   bio: "Test bio content",
   interests: "Test project interests",
   classes: [
-    { id: 1, name: "Class 1" },
-    { id: 2, name: "Class 2" },
+    { name: "Class 1", progress: false },
+    { name: "Class 2", progress: true },
   ],
   partners: [
-    { id: 1, name: "Partner 1", email: "partner1@test.com" },
-    { id: 2, name: "Partner 2", email: "partner2@test.com" },
+    { name: "Partner 1", email: "partner1@test.com" },
+    { name: "Partner 2", email: "partner2@test.com" },
   ],
 };
 
 // Mock helper functions
-const renderWithSessionProvider = (component, session = mockSession) => render(
-    <SessionProvider session={session}>{component}</SessionProvider>,
-  );
+const renderWithSessionProvider = (component, session = mockSession) =>
+  render(<SessionProvider session={session}>{component}</SessionProvider>);
 
 beforeEach(() => {
   // Mock fetch API
@@ -127,8 +126,8 @@ describe("UserProfile Component", () => {
     await waitFor(() => {
       expect(screen.getByText("Test bio content")).toBeInTheDocument();
       expect(screen.getByText("Test project interests")).toBeInTheDocument();
-      expect(screen.getByText("Class 1")).toBeInTheDocument();
-      expect(screen.getByText("Class 2")).toBeInTheDocument();
+      expect(screen.getByText("Class 1 - in progress")).toBeInTheDocument();
+      expect(screen.getByText("Class 2 - completed")).toBeInTheDocument();
       expect(screen.getByText("Partner 1")).toBeInTheDocument();
       expect(screen.getByText("Partner 2")).toBeInTheDocument();
     });
@@ -165,8 +164,8 @@ describe("UserProfile Component", () => {
       id: 3,
       bio: "Test bio",
       interests: "Test interests",
-      classes: [{ id: 1, name: "Class 1" }],
-      partners: [{ id: 1, name: "Partner 1", email: "partner1@test.com" }],
+      classes: [{ name: "Class 1", progress: true }],
+      partners: [{ name: "Partner 1", email: "partner1@test.com" }],
     };
 
     renderWithSessionProvider(

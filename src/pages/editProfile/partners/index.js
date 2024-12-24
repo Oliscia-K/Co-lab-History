@@ -1,9 +1,10 @@
 /* eslint-disable no-console */
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { useRouter } from "next/router";
 import PropTypes from "prop-types";
 import { useSession } from "next-auth/react";
 import ScrollBar from "../../../../components/ScrollBar";
+import styles from "../../../styles/EditPartners.module.css";
 
 export default function EditPartners({ currentUser }) {
   const router = useRouter();
@@ -16,7 +17,7 @@ export default function EditPartners({ currentUser }) {
   const userId = session?.user?.id;
 
   useEffect(() => {
-    // fetch user data from the API, with useEffect to make sure the data is correctly displayed
+    // Fetch user data from the API
     fetch(`/api/user/${userId}/userProfile`)
       .then((response) => {
         if (!response.ok) {
@@ -31,31 +32,61 @@ export default function EditPartners({ currentUser }) {
       .catch((error) => console.log("Error fetching user profile:", error));
   }, [userId]);
 
+  const linkRef = useRef(null); // Create a ref for the <a> tag
+
+  // Function to handle button click
+  const handleButtonClick = () => {
+    if (linkRef.current) {
+      linkRef.current.click(); // Trigger click on the <a> tag
+    }
+  };
+
   return (
-    <div>
-      <h2>Edit Partners</h2>
-      {/* Pass previousPartners as props to the ScrollBar component */}
-      <ScrollBar previousPartners={previousPartners} />
+    <div className={styles.container}>
+      <div className={styles.editPartnersContainer}>
+        <h2 className={styles.title}>Edit Partners</h2>
 
-      {/* Button to navigate to the Add Partners page */}
-      <button
-        type="button"
-        onClick={() => router.push("/editProfile/partners/add")}
-      >
-        Add
-      </button>
+        {/* Display the list of previous partners using ScrollBar */}
+        <div className={styles.scrollbarContainer}>
+          <ScrollBar previousPartners={previousPartners} />
+        </div>
 
-      <button
-        type="button"
-        onClick={() => router.push("/editProfile/partners/delete")}
-      >
-        Delete
-      </button>
+        {/* Button container for navigating */}
+        <div className={styles.buttonContainer}>
+          <button
+            className={styles.button}
+            type="button"
+            onClick={() => router.push("/editProfile/partners/add")}
+          >
+            Add
+          </button>
+          <button
+            className={styles.button}
+            type="button"
+            onClick={() => router.push("/editProfile/partners/delete")}
+          >
+            Delete
+          </button>
 
-      {/* Cancel button */}
-      <a href={`/user/${userId}/userProfile`}>
-        <button type="button">Back</button>
-      </a>
+          {/* Cancel button */}
+          <button
+            className={styles.button} // Use your button styles
+            type="button"
+            onClick={handleButtonClick} // Trigger the function on click
+          >
+            Back
+          </button>
+
+          {/* Hidden <a> tag that will be clicked programmatically */}
+          <a
+            ref={linkRef} // Attach the ref to the <a> tag
+            href={`/user/${userId}/userProfile`} // Your desired link
+            style={{ display: "none" }} // Hide the <a> tag from the UI
+          >
+            Back
+          </a>
+        </div>
+      </div>
     </div>
   );
 }

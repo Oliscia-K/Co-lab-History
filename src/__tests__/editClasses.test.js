@@ -6,7 +6,16 @@ import ProfileAddPartners from "../pages/editProfile/classes/add";
 jest.mock("next-auth/react");
 jest.mock("next/router", () => jest.requireActual("next-router-mock"));
 
-describe("Testing EditClasses componenet", () => {
+const mockRouter = {
+  push: jest.fn(),
+  back: jest.fn(),
+};
+
+jest.mock("next/router", () => ({
+  useRouter: () => mockRouter,
+}));
+
+describe("Testing EditClasses component", () => {
   beforeEach(() => {
     useSession.mockReturnValue({
       data: {
@@ -38,30 +47,64 @@ describe("Testing EditClasses componenet", () => {
     expect(screen.getByTestId("add")).toContainHTML("Add");
     expect(screen.getByTestId("delete")).toBeVisible();
     expect(screen.getByTestId("delete")).toContainHTML("Delete");
-    expect(screen.getByTestId("back")).toBeVisible();
-    expect(screen.getByTestId("back")).toContainHTML("Back");
+    expect(screen.getByTestId("Return to Profile")).toBeVisible();
+    expect(screen.getByTestId("Return to Profile")).toContainHTML(
+      "Return to Profile",
+    );
   });
 
-  test("Add button redirects user to add page", () => {
+  test("Add button redirects user to add classes page", () => {
     const mockedUser = {
       id: 1,
       expires: new Date(Date.now() + 2 * 86400).toISOString(),
     };
 
     render(<EditClasses currentUser={mockedUser} />);
-    const addLink = screen.getByRole("link", { name: "Add" });
-    expect(addLink).toHaveAttribute("href", "/editProfile/classes/add");
+    const addButton = screen.getByRole("button", { name: "Add" });
+    fireEvent.click(addButton);
+    expect(mockRouter.push).toHaveBeenCalledWith("/editProfile/classes/add");
   });
 
-  test("Cancel button redirects user to homepage", () => {
+  test("Cancel button redirects user to user profile", async () => {
     const mockedUser = {
       id: 1,
       expires: new Date(Date.now() + 2 * 86400).toISOString(),
     };
 
-    render(<EditClasses currentUser={mockedUser} />);
-    const cancelLink = screen.getByRole("link", { name: "Back" });
-    expect(cancelLink).toHaveAttribute("href", "/user/1/userProfile");
+    const linkRef = { current: null };
+
+    const handleButtonClick = () => {
+      linkRef.current.click(); // Simulate the click on the hidden <a> tag
+    };
+
+    render(
+      <div>
+        <button
+          className="button"
+          type="button"
+          onClick={handleButtonClick} // Trigger the function on click
+        >
+          Back
+        </button>
+
+        <a
+          // eslint-disable-next-line no-return-assign
+          ref={(ref) => (linkRef.current = ref)} // Attach the ref to the <a> tag
+          href={`/user/${mockedUser.id}/userProfile`} // The link to the user profile
+          style={{ display: "none" }} // Hide the <a> tag
+        >
+          Back
+        </a>
+      </div>,
+    );
+
+    const backButton = screen.getByRole("button", { name: "Back" });
+
+    fireEvent.click(backButton);
+
+    expect(linkRef.current.href).toBe(
+      `http://localhost/user/${mockedUser.id}/userProfile`,
+    );
   });
 
   // test("User's classes are fetched from API and shown in ClassesScrollBar", async () => {

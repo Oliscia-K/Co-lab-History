@@ -1,3 +1,20 @@
 .fileInput {
-  color: #ff0000;
+  opacity: 0;
+  width: 0.1px;
+  height: 0.1px;
+  position: absolute;
+}
+
+.uploadButton {
+  display: inline-block;
+  padding: 6px 12px;
+  cursor: pointer;
+  background-color: #f8f9fa;
+  border: 1px solid #dee2e6;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+.uploadButton:hover {
+  background-color: #e9ecef;
 }

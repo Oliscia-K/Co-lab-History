@@ -6,9 +6,10 @@ import User from "../../../../models/User";
 
 const router = createRouter();
 
-router.post(async (req, res) => {
-  let users;
-  const { classes } = req.body;
+router.get(async (req, res) => {
+  const users = [];
+  const uniqueProfiles = new Set();
+  const classes = req.query.classes.split(",").map((num) => parseInt(num, 10));
   const usersEmails = await Promise.all(
     classes.map((classNumber) => UserClasses.query().where({ classNumber })),
   );
@@ -20,9 +21,17 @@ router.post(async (req, res) => {
         uniqueEmails.add(usersEmails[i][j].userEmail);
       }
       // eslint-disable-next-line no-await-in-loop
-      users = await Promise.all(
+      const results = await Promise.all(
         Array.from(uniqueEmails).map((email) => User.query().where({ email })),
       );
+      results.forEach((result) => {
+        result.forEach((person) => {
+          if (!uniqueProfiles.has(person.email)) {
+            uniqueProfiles.add(person.email);
+            users.push(person);
+          }
+        });
+      });
     }
   }
   if (users) {
@@ -36,13 +45,7 @@ export default router.handler({ onError });
 
 /**
  
-fetch('/api/searchByClass', {
-  method: 'POST',
-  headers: {
-    'Content-Type': 'application/json'
-  },
-  body: JSON.stringify({classes: [201, 202]})
-})
+fetch('/api/searchByClass?classes=201,202')
   .then(response => {
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);

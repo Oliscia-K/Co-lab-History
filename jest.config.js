@@ -15,6 +15,7 @@ const customJestConfig = {
   // We note that is not the recommended approach, but it is the only one that works for us so far without downgrading
   // Next, etc.
   testEnvironment: "<rootDir>/jsdom-extended.js",
+  moduleNameMapper: { "^uuid$": "uuid" },
 };
 
 // createJestConfig is exported this way to ensure that next/jest can load the Next.js config which is async

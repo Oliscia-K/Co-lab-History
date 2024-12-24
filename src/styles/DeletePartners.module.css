@@ -1,0 +1,161 @@
+/* Container for DeletePartners */
+.deletePartnersContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: white; /* Same background color as AddPartners and EditPartners */
+  padding: 20px;
+  box-sizing: border-box;
+  flex-direction: column; /* Stack elements vertically */
+}
+
+/* Title styling for DeletePartners */
+.deletePartnerTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333; /* Same color as AddPartners and EditPartners */
+  margin-bottom: 20px;
+  text-align: left; /* Same alignment as AddPartners and EditPartners */
+}
+
+/* Main content box for DeletePartners */
+.deletePartnerFormContainer {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  border: 3px solid #f2f2f2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Same box shadow as AddPartners and EditPartners */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Space between form and delete button container */
+}
+
+/* ScrollBar container styling */
+.scrollbarContainer {
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  margin-left: 50%;
+}
+
+/* Styling for the scrollbar itself */
+.scrollbarContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbarContainer::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 10px;
+}
+
+.scrollbarContainer::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* List container for the list of previous partners */
+.previousPartnersList {
+  width: 100%;
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+}
+
+/* Individual partner list items */
+.previousPartnersList ul {
+  list-style-type: none;
+  padding-left: 0;
+  margin: 0;
+}
+
+.previousPartnersList li {
+  background-color: #fff;
+  margin: 8px 0;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Button for delete in partner list */
+.previousPartnersList button {
+  background-color: #dc3545; /* Red color for delete */
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.previousPartnersList button:hover {
+  background-color: #c82333; /* Darker red when hovered */
+}
+
+/* Confirmation box styling */
+.confirmationBox {
+  background-color: #f0f8ff;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  margin-top: 20px;
+  text-align: center;
+  width: 100%;
+  max-width: 500px;
+}
+
+/* Confirmation buttons inside the box */
+.confirmationBox button {
+  margin: 5px;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
+.confirmationBox .confirmButton {
+  background-color: #28a745;
+  color: white; /* Green for confirm */
+}
+
+.confirmationBox .cancelButton {
+  background-color: #6c757d; /* Gray for cancel */
+  color: white;
+}
+
+.confirmationBox .confirmButton:hover {
+  background-color: #218838; /* Darker green for confirm on hover */
+  color: white;
+}
+
+.confirmationBox .cancelButton:hover {
+  background-color: #5a6268; /* Darker gray for cancel on hover */
+  color: white;
+}
+
+/* Back button container */
+.backButtonContainer {
+  margin-top: 20px;
+  display: flex;
+  justify-content: center;
+}
+
+.backButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin: 5px;
+}
+
+.backButton:hover {
+  background-color: #085a9e;
+  color: white;
+}

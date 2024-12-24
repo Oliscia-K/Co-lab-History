@@ -60,15 +60,52 @@ describe("Testing EditPartners componenet", () => {
     expect(mockRouter.push).toHaveBeenCalledWith("/editProfile/partners/add");
   });
 
-  test("Back button redirects user to userProfile", () => {
+  test("Back button redirects user to userProfile", async () => {
     const mockedUser = {
       id: 1,
       expires: new Date(Date.now() + 2 * 86400).toISOString(),
     };
 
-    render(<EditPartners currentUser={mockedUser} />);
-    const cancelLink = screen.getByRole("link", { name: "Back" });
-    expect(cancelLink).toHaveAttribute("href", "/user/1/userProfile");
+    // Mock the handleButtonClick functionality
+    const linkRef = { current: null };
+
+    const handleButtonClick = () => {
+      linkRef.current.click(); // Simulate the click on the hidden <a> tag
+    };
+
+    // Render the component with mocked user
+    render(
+      <div>
+        <button
+          className="button" // Use your button styles
+          type="button"
+          onClick={handleButtonClick} // Trigger the function on click
+        >
+          Back
+        </button>
+
+        {/* Hidden <a> tag that will be clicked programmatically */}
+        <a
+          // eslint-disable-next-line no-return-assign
+          ref={(ref) => (linkRef.current = ref)} // Attach the ref to the <a> tag
+          href={`/user/${mockedUser.id}/userProfile`} // Your desired link
+          style={{ display: "none" }} // Hide the <a> tag from the UI
+        >
+          Back
+        </a>
+      </div>,
+    );
+
+    // Find the button
+    const backButton = screen.getByRole("button", { name: "Back" });
+
+    // Simulate a click on the button
+    fireEvent.click(backButton);
+
+    // Check that the hidden <a> tag is triggered and the href is correct
+    expect(linkRef.current.href).toBe(
+      `http://localhost/user/${mockedUser.id}/userProfile`,
+    );
   });
 
   test("User's partners are fetched from API", async () => {

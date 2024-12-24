@@ -1,62 +1,59 @@
-/* Container for the entire profile */
-.container {
+.editorContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 200px;
+}
+
+.topContainer {
+  display: flex;
+  flex-direction: row; /* Two columns */
+  justify-content: space-between; /* Ensures left and right are spaced out */
+  background-color: white;
+  padding: 20px;
+  border: 3px solid #f2f2f2;
+  border-radius: 20px;
+  margin-top: 10px;
+  width: 56%;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
+}
+
+.bottomContainer {
   display: flex;
   flex-direction: column;
   align-items: center;
   background-color: white;
   padding: 20px;
-  border: 3px solid #00296f;
+  border: 3px solid #f2f2f2;
   border-radius: 20px;
-  max-width: 600px;
-  margin: 10px auto;
+  margin-top: 10px;
+  width: 56%;
+  max-width: 90%;
+  margin-left: auto;
+  margin-right: auto;
+  height: auto;
 }
 
-/* Profile sections for larger and smaller sizes */
-.large {
-  width: 100%;
-}
-
-.small {
-  width: 300px;
-  font-size: 0.9em;
-  padding: 10px;
-}
-
-/* name and pronouns */
-.profileHeader {
+.leftColumn,
+.rightColumn {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  margin-bottom: -5px;
+  gap: 15px;
+  flex: 1; /* Each column will take up equal width */
 }
 
-/* large and small names for different component sizes*/
-.largeName {
-  font-size: 1.5em;
-  font-weight: bold;
-  color: #00296f;
-}
-
-.smallName {
+/* Adjust input box and dropdown */
+.basics input,
+.basics select {
+  width: 100%; /* Ensure inputs and selects fit within their containers */
+  max-width: 250px;
+  padding: 8px;
   font-size: 1em;
-  color: #00296f;
-  font-weight: bold;
-}
-
-/* pronouns styles */
-.pronouns {
-  font-size: 1em;
-  font-weight: bold;
-  color: #00296f;
-}
-
-/* (major and year) */
-.basics {
-  font-size: 1em;
-  font-weight: bold;
-  color: #00296f;
-  margin: 1px 0;
+  border-radius: 6px;
+  border: 1px solid #ccc;
 }
 
 /* Bio and Project Interests side-by-side with equal dimensions */
@@ -71,55 +68,87 @@
 .projectInterests {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid black;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #f2f2f2;
   min-width: 0;
-  height: 150px; /* Ensures consistent height for these sections */
+  height: auto; /* Let the height adjust based on content */
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
+  gap: 10px; /* Add some space between section header and textarea */
 }
 
-/* Classes and Past Partners side-by-side with equal dimensions below */
-.bottomSection {
-  display: flex;
-  gap: 20px;
-  width: 100%;
-  margin-top: 20px;
-}
-
-.classes,
-.pastPartners {
-  flex: 1;
-  padding: 10px;
-  border: 1px solid #ddd;
-  border-radius: 8px;
-  background-color: #f9f9f9;
-  min-width: 0;
-  height: 150px; /* Ensures consistent height for these sections */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+.bio textarea,
+.projectInterests textarea {
+  width: 96%; /* Make the textarea take the full width of its container */
+  height: 200px; /* Make the textarea much larger (you can increase this if needed) */
+  padding: 10px; /* Add some padding inside the textarea */
+  font-size: 1em; /* Optional: make the text larger for readability */
+  border-radius: 6px; /* Rounded corners for the textarea */
+  resize: vertical; /* Allow vertical resizing by the user */
 }
 
 /* Section header with edit button alignment */
 .sectionHeader {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
+  align-items: flex-start;
   margin-bottom: 10px;
+  width: 100%;
+}
+
+.sectionHeader h3 {
+  margin: 0;
+  font-size: 1.2em;
+  color: #00296f;
+}
+
+.sectionHeader textarea {
+  margin-top: 10px; /* Ensure there's space between the title and textarea */
 }
 
 /* Edit button styling */
 .editButton {
-  background: none;
-  border: none;
-  color: #00296f;
+  background-color: white;
+  text-decoration: none;
+  color: black;
   cursor: pointer;
-  font-size: 12px;
+  border-radius: 6vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
 }
 
 .editButton:hover {
-  text-decoration: underline;
+  background-color: #085a9e;
+  color: white;
+}
+
+.submitButton {
+  font-size: 1em;
+  padding-inline: 3;
+  padding-block: 1;
+  margin: 20px;
+  background-image: linear-gradient(to right, #376dfe, #0ed7fe);
+  border: none;
+  border-radius: 1vh;
+  width: 120px;
+  height: 35px;
+  color: white;
+  cursor: pointer;
+}
+
+.cancelButton {
+  font-size: 1em;
+  padding-inline: 3;
+  padding-block: 1;
+  margin: 20px;
+  background-color: white;
+  color: #376dfe;
+  /* background-image: linear-gradient(to right, #376dfe, #0ed7fe); */
+  border: none;
+  border-radius: 1vh;
+  width: 120px;
+  height: 35px;
+  cursor: pointer;
+  box-shadow: 3px;
 }

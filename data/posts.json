@@ -1,8 +1,23 @@
 [
   {
+    "id": 1,
     "creator": "okthornton@middlebury.edu",
     "title": "Need help with CSCI 318",
     "content": "I am struggling with the final project for CSCI 318. And by that I mean my will to do it is pretty low. Help.",
-    "edited": "2024-11-01T00:00:00.000Z"
+    "edited": "October 28, 2024 at 8:00 PM"
+  },
+  {
+    "id": 2,
+    "creator": "okthornton@middlebury.edu",
+    "title": "New Project Idea",
+    "content": "Hi! I have a new idea for a project that I think would be really cool. I'm looking for a partner to work on it with me. Let me know if you're interested!",
+    "edited": "November 1, 2024 at 12:00 AM"
+  },
+  {
+    "id": 3,
+    "creator": "chudson@middlebury.edu",
+    "title": "A cool post",
+    "content": "I think this post is very cool and interesting",
+    "edited": "December 10, 2024 at 1:30 PM"
   }
 ]

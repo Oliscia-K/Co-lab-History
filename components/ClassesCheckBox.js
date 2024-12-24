@@ -24,14 +24,9 @@ export default function ClassesCheckBox({
       target: { value },
     } = event;
 
-    setFilters(
-      // On autofill we get a stringified value.
-      // typeof value === "string" ? value.split(",") : value,
-      value,
-    );
+    setFilters(value);
   };
 
-  // This has to be refactored
   if (classes.length > 0) {
     return (
       <Box sx={{ visibility: { visibility }, marginTop: "10px" }}>

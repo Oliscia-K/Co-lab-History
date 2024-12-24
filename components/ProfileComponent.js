@@ -3,12 +3,14 @@
 import React, { useState, useEffect } from "react";
 import PropTypes from "prop-types";
 import { useSession } from "next-auth/react";
+import { useRouter } from "next/router";
 import styles from "../src/styles/ProfileComponent.module.css";
 import ImageUploader from "./ImageUploader";
 
 function ProfileComponent({ size = "large", user }) {
   const isLarge = size === "large";
   const { data: session } = useSession();
+  const router = useRouter();
 
   // State for user profile data
   const [profilePicture, setProfilePicture] = useState(null);
@@ -125,10 +127,19 @@ function ProfileComponent({ size = "large", user }) {
           <span className={styles.pronouns}>
             {user?.pronouns || "(they/them)"}
           </span>
-          {size === "large" && (
+          {size === "large" && session?.user?.id !== user?.id && (
             <a href={`mailto:${user?.email}`}>
               <button type="button">Message</button>
             </a>
+          )}
+          {session?.user?.id === user?.id && size === "large" && (
+            <button
+              type="button"
+              onClick={() => router.push("/editProfile/main")}
+              className={styles.editButton}
+            >
+              Edit
+            </button>
           )}
         </div>
         <p className={styles.basics}>Major: {user?.major || "Your Major"}</p>

@@ -8,7 +8,11 @@ router.get(async (req, res) => {
   // we query by class year, major, and name
   let users;
   if (req.query.name) {
-    users = await knex("User").where("name", "like", `%${req.query.name}%`);
+    users = await knex("User").where(
+      "name",
+      "like",
+      `%${req.query.name[0].toUpperCase()}%`,
+    );
   } else {
     users = await knex("User");
   }

@@ -2,7 +2,8 @@
 import React, { useState, useEffect } from "react";
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
-import ScrollBar from "../../../../components/ScrollBar";
+import ScrollBar from "../../../../components/ScrollBar"; // Make sure ScrollBar is correctly imported
+import styles from "../../../styles/DeletePartners.module.css"; // Import the styles
 
 export default function DeletePartners() {
   const [previousPartners, setPreviousPartners] = useState([]); // local state to hold the list of partners
@@ -83,55 +84,65 @@ export default function DeletePartners() {
   };
 
   return (
-    <div>
-      <h2>Delete Partners</h2>
+    <div className={styles.deletePartnersContainer}>
+      <div className={styles.deletePartnerFormContainer}>
+        <h2 className={styles.deletePartnerTitle}>Delete Partners</h2>
 
-      {/* display the list of previous partners using ScrollBar */}
-      <ScrollBar previousPartners={previousPartners} />
+        {/* ScrollBar component for displaying the partners */}
+        <div className={styles.scrollbarContainer}>
+          <ScrollBar previousPartners={previousPartners} />
+        </div>
 
-      {/* display the list of partners with delete buttons */}
-      <ul>
-        {previousPartners.map((partner) => (
-          <li key={partner.email}>
-            {partner.name} - {partner.email}
-            <button
-              type="button"
-              onClick={() => handleDelete(partner.email)} // trigger handleDelete to select a partner
-              style={{ margin: "10px" }} // add margin to the button for spacing
-            >
-              Delete
-            </button>
-          </li>
-        ))}
-      </ul>
+        {/* display the list of previous partners */}
+        <div className={styles.previousPartnersList}>
+          <ul>
+            {previousPartners.map((partner) => (
+              <li key={partner.email}>
+                {partner.name} - {partner.email}
+                <button
+                  type="button"
+                  onClick={() => handleDelete(partner.email)} // trigger handleDelete to select a partner
+                  className={styles.button}
+                >
+                  Delete
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </div>
 
       {/* if a partner is selected for deletion, show confirmation */}
       {partnerToDelete && (
-        <div>
-          <p>are you sure you want to delete {partnerToDelete.name}?</p>
+        <div className={styles.confirmationBox}>
+          <p>Are you sure you want to delete {partnerToDelete.name}?</p>
           <button
             type="button"
             onClick={confirmDelete}
-            style={{ marginRight: "10px" }} // margin to space out buttons
+            className={`${styles.button} ${styles.confirmButton}`}
           >
-            Confirm Delete?
-          </button>{" "}
-          {/* confirm will delete */}
-          <button type="button" onClick={cancelDelete}>
+            Confirm Delete
+          </button>
+          <button
+            type="button"
+            onClick={cancelDelete}
+            className={`${styles.button} ${styles.cancelButton}`}
+          >
             Cancel
-          </button>{" "}
-          {/* cancel will reset the state */}
+          </button>
         </div>
       )}
 
-      {/* button to cancel and go back to Edit Partners page */}
-      <button
-        type="button"
-        onClick={() => router.push("/editProfile/partners")}
-        style={{ marginTop: "20px" }} // margin to space out the back button
-      >
-        Back
-      </button>
+      {/* Button to go back to the Edit Partners page */}
+      <div className={styles.backButtonContainer}>
+        <button
+          type="button"
+          onClick={() => router.push("/editProfile/partners")}
+          className={styles.backButton}
+        >
+          Back
+        </button>
+      </div>
     </div>
   );
 }

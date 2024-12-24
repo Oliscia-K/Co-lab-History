@@ -23,12 +23,15 @@ function ImageUploader({ onImageUpload }) {
 
   return (
     <div>
-      <input
-        type="file"
-        accept="image/*"
-        onChange={handleImageChange}
-        className={styles.fileInput}
-      />
+      <label className={styles.uploadButton}>
+        Upload Image
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+          className={styles.fileInput}
+        />
+      </label>
     </div>
   );
 }

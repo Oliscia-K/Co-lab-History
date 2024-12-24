@@ -5,10 +5,9 @@
   align-items: center;
   background-color: white;
   padding: 20px;
-  border: 3px solid #00296f;
+  border: 3px solid #f2f2f2;
   border-radius: 20px;
-  max-width: 600px;
-  margin: 10px auto;
+  margin-top: 10px;
 }
 
 /* Profile sections for larger and smaller sizes */
@@ -26,7 +25,7 @@
 .middleSection {
   display: flex;
   gap: 20px;
-  width: 100%;
+  width: 100vh;
   margin-top: 20px;
 }
 
@@ -34,21 +33,22 @@
 .projectInterests {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid black;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  background-color: #f2f2f2;
   min-width: 0;
   height: 150px; /* Ensures consistent height for these sections */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: auto; /* Added for scrolling */
 }
 
 /* Classes and Past Partners side-by-side with equal dimensions below */
 .bottomSection {
   display: flex;
   gap: 20px;
-  width: 100%;
+  width: 100vh;
   margin-top: 20px;
 }
 
@@ -56,14 +56,14 @@
 .pastPartners {
   flex: 1;
   padding: 10px;
-  border: 1px solid #ddd;
+  border: 1px solid black;
   border-radius: 8px;
-  background-color: #f9f9f9;
-  min-width: 0;
+  background-color: #f2f2f2;
   height: 150px; /* Ensures consistent height for these sections */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  overflow-y: auto; /* Added for scrolling */
 }
 
 /* Section header with edit button alignment */
@@ -76,13 +76,70 @@
 
 /* Edit button styling */
 .editButton {
-  background: none;
-  border: none;
-  color: #00296f;
+  background-color: white;
+  text-decoration: none;
+  color: black;
   cursor: pointer;
-  font-size: 12px;
+  border-radius: 6vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
 }
 
 .editButton:hover {
+  background-color: #085a9e;
+  color: white;
+}
+
+/* Replace your current .partner class with this */
+.partner {
+  flex: 1;
+  padding: 10px;
+  border: 1px solid black;
+  border-radius: 8px;
+  background-color: #f2f2f2;
+  height: 150px; /* Same height as other sections */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  overflow-y: auto; /* Added for scrolling */
+}
+
+/* Update your partner list styles */
+.partner ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.partner li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 8px;
+}
+
+/* Style for the partner buttons */
+.partner button {
+  background-color: white;
+  border: 1px solid black;
+  color: black;
+  cursor: pointer;
+  border-radius: 6vh;
+  padding-left: 2vh;
+  padding-right: 2vh;
+}
+
+.partner button:hover {
+  background-color: #085a9e;
+  color: white;
+}
+
+/* Keep your existing partner link styles */
+.partner a {
+  text-decoration: none;
+  color: black;
+}
+
+.partner a:hover {
   text-decoration: underline;
 }

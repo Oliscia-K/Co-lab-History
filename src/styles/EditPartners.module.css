@@ -1,0 +1,169 @@
+/* EditPartners.module.css */
+
+/* Container for EditPartners */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: white; /* Same background color as AddPartners */
+  padding: 20px;
+  box-sizing: border-box;
+  flex-direction: column; /* Stack elements vertically like AddPartners */
+}
+
+/* Title styling for EditPartners */
+.title {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333; /* Same color as AddPartners */
+  margin-bottom: 20px;
+  text-align: left; /* Same alignment as AddPartners */
+}
+
+/* Main content box for EditPartners */
+.editPartnersContainer {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  background-color: white;
+  border-radius: 8px;
+  border: 3px solid #f2f2f2;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1); /* Same box shadow as AddPartners */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 20px; /* Same spacing as AddPartners */
+}
+
+/* Style for the ScrollBar container */
+.scrollbarContainer {
+  max-height: 400px;
+  overflow-y: auto;
+  margin-bottom: 20px;
+  width: 100%;
+  margin-left: 50%;
+}
+
+.scrollbarContainer::-webkit-scrollbar {
+  width: 8px;
+}
+
+.scrollbarContainer::-webkit-scrollbar-thumb {
+  background-color: #007bff;
+  border-radius: 10px;
+}
+
+.scrollbarContainer::-webkit-scrollbar-track {
+  background-color: #f1f1f1;
+}
+
+/* Button container styling for EditPartners */
+.buttonContainer {
+  display: flex;
+  justify-content: space-evenly;
+  width: 100%;
+  margin-top: 20px; /* Space between scrollbar and buttons */
+}
+.buttonLink {
+  text-decoration: none; /* Remove the underline */
+  display: inline-block; /* Make it behave like a block-level button */
+}
+
+/* Button styling for EditPartners */
+.button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 30%; /* Make buttons consistent in width */
+  margin: 5px; /* Margin between buttons */
+}
+
+.button:hover {
+  background-color: #085a9e;
+  color: white;
+}
+
+.button:focus {
+  outline: none;
+}
+/* Container for the Add Partners Page */
+.addPartnerContainer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: white;
+  padding: 20px;
+  box-sizing: border-box;
+  flex-direction: column;
+}
+
+/* Title styling for AddPartners */
+.addPartnerTitle {
+  font-size: 24px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+/* Main content box for adding partners */
+.addPartnerFormContainer {
+  width: 100%;
+  max-width: 900px;
+  padding: 20px;
+  background-color: white;
+  border: 3px solid #f2f2f2;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Style for the input fields */
+.addPartnerInput {
+  margin-top: 10px;
+  padding: 10px;
+  margin-bottom: 10px;
+  width: 80%;
+  max-width: 400px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  font-size: 16px;
+}
+
+/* Button container styling */
+.addPartnerButtonContainer {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* Button styling */
+.addPartnerButton {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  width: 30%;
+  margin: 5px;
+}
+
+.addPartnerButton:hover {
+  background-color: #085a9e;
+  color: white;
+}
+
+.addPartnerButton:focus {
+  outline: none;
+}

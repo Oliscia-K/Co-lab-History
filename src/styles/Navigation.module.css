@@ -4,14 +4,16 @@
 
 .sidebar {
   height: 100vh;
-  width: 250px;
+  width: 20vh;
+  display: flex;
+  flex-direction: column;
   top: 0;
   left: 0;
   margin-right: 20px;
   background-image: linear-gradient(#376dfe, #0ed7fe);
   overflow-x: hidden;
   position: relative;
-  margin-left: -260px;
+  margin-left: -22vh;
   transition: margin 0.3s ease-out;
 }
 
@@ -23,14 +25,16 @@
   list-style-type: none;
   padding-left: 0px;
   margin: 0px;
+  align-items: flex-start;
 }
 
 .sidebarelements .sidebaritem {
-  padding-left: 10px;
   border-bottom: 1px solid #bdb8d7;
   border-bottom: 1px solid rgba(0, 0, 0, 0.05);
   border-top: 1px solid rgba(255, 255, 255, 0.05);
   transition: background-color 0.2s ease;
+  background-color: white;
+  margin: 2vh;
 }
 
 .sidebaritem:hover {
@@ -51,13 +55,14 @@
 }
 
 .navbutton:hover {
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+  /* box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); */
+  background-color: rgba(0, 0, 0, 0.3);
 }
 
 .button {
   display: flex;
   align-items: center;
-  gap: 30px;
+  text-align: left;
   width: 100%;
   background-color: #00000000;
   color: black;
@@ -68,12 +73,14 @@
 
 .button .text {
   font-size: 20px;
+  margin: auto;
+  text-align: left;
 }
 
 .homeicon,
 .profileicon {
-  width: 50px;
-  height: 50px;
+  width: 3vh;
+  height: 3vh;
   transition: box-shadow 0.3s ease;
   border: none;
   background: none;

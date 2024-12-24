@@ -1,6 +1,5 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable react/jsx-props-no-spreading */
-// import "@/styles/globals.css";
 import { SessionProvider } from "next-auth/react";
 import { useState } from "react";
 import PropTypes from "prop-types";

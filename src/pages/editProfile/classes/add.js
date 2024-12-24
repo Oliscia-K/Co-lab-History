@@ -1,19 +1,22 @@
 /* eslint-disable no-console */
 import { useState, useEffect } from "react";
 import { useSession } from "next-auth/react";
-import Link from "next/link";
+import { useRouter } from "next/router";
 import ClassesScrollBar from "../../../../components/ClassesScrollBar";
 import styles from "../../../styles/editClasses.module.css";
 
 export default function ProfileAddPartners() {
   const [user, setUserData] = useState();
   const [classesTaken, setClassesTaken] = useState([{}]);
+  const [savedClasses, setSavedClasses] = useState([]);
   const [newClass, setNewClass] = useState("");
   const [allClasses, setAllClasses] = useState([{}]);
   const [progress, setProgress] = useState("");
   const [showSavedPopup, setShowSavedPopup] = useState(false);
   const { data: session } = useSession();
   const userId = session?.user?.id;
+
+  const router = useRouter();
 
   // Fetch classes from the cs-courses.json file
   useEffect(() => {
@@ -40,26 +43,41 @@ export default function ProfileAddPartners() {
       .then((data) => {
         setUserData(data);
         setClassesTaken(data.classes || []);
+        setSavedClasses(data.classes || []);
       })
       .catch((error) => console.log(error));
   }, [userId]);
 
   // Handle adding a new class
   const handleAddClass = () => {
-    if (
-      newClass &&
-      progress &&
-      !classesTaken.some((cls) => cls.name === newClass)
-    ) {
-      const selectedClass = allClasses.find((cls) => cls.name === newClass);
-      if (selectedClass) {
-        setClassesTaken([
-          ...classesTaken,
-          { ...selectedClass, progress: progress === "Completed" },
-        ]);
-        setNewClass("");
-        setProgress("");
+    if (newClass && progress) {
+      const existingClassIndex = classesTaken.findIndex(
+        (cls) => cls.name === newClass,
+      );
+
+      if (existingClassIndex !== -1) {
+        // If the class already exists, update its progress
+        setClassesTaken((prevClasses) =>
+          prevClasses.map((cls, index) =>
+            index === existingClassIndex
+              ? { ...cls, progress: progress === "Completed" }
+              : cls,
+          ),
+        );
+      } else {
+        // Add a new class if it doesn't already exist
+        const selectedClass = allClasses.find((cls) => cls.name === newClass);
+        if (selectedClass) {
+          setClassesTaken((prevClasses) => [
+            ...prevClasses,
+            { ...selectedClass, progress: progress === "Completed" },
+          ]);
+        }
       }
+
+      // Reset the dropdowns after adding or updating
+      setNewClass("");
+      setProgress("");
     }
   };
 
@@ -129,76 +147,93 @@ export default function ProfileAddPartners() {
       .catch((error) => console.error("Fetch error:", error));
   };
 
+  // Check if there are unsaved changes
+  const hasUnsavedChanges =
+    JSON.stringify(classesTaken) !== JSON.stringify(savedClasses);
+
   return (
-    <div>
-      <h2>Add Classes</h2>
+    <div className={styles.container}>
       {showSavedPopup && <div className={styles.savedPopup}>Saved!</div>}
-      <ClassesScrollBar
-        classesTaken={classesTaken}
-        className={styles.classesContainer}
-      >
-        {classesTaken.map((cls) => (
-          <div key={cls.name} className={styles.classItem}>
-            <span>{cls.name}</span>
-            <select
-              value={cls.progress || "In Progress"}
-              onChange={(e) => handleStatusChange(cls.name, e.target.value)}
-              className={styles.classSelect}
-            >
-              <option value="In Progress">In Progress</option>
-              <option value="Completed">Completed</option>
-            </select>
-          </div>
-        ))}
-      </ClassesScrollBar>
 
-      <div className={styles.actionContainer}>
-        <label htmlFor="classDropdown">Choose a class: </label>
-        <select
-          id="classDropdown"
-          onChange={(e) => setNewClass(e.target.value)}
-          value={newClass}
-          className={styles.dropdown}
+      <div className={styles.classesContainer}>
+        <h2 className={styles.title}>Add Classes</h2>
+        <ClassesScrollBar
+          classesTaken={classesTaken}
+          className={styles.classesContainer}
         >
-          <option value="" disabled>
-            Select a class
-          </option>
-          {allClasses.map((cls) => (
-            <option key={cls.id} value={cls.name}>
-              {cls.name}
-            </option>
+          {classesTaken.map((cls) => (
+            <div key={cls.name} className={styles.classItem}>
+              <span>{cls.name}</span>
+              <select
+                value={cls.progress || "In Progress"}
+                onChange={(e) => handleStatusChange(cls.name, e.target.value)}
+                className={styles.classSelect}
+              >
+                <option value="In Progress">In Progress</option>
+                <option value="Completed">Completed</option>
+              </select>
+            </div>
           ))}
-        </select>
-        <label htmlFor="progressDropdown">Progress Status: </label>
-        <select
-          id="progressDropdown"
-          onChange={(e) => setProgress(e.target.value)}
-          value={progress}
-          className={styles.dropdown}
-        >
-          <option value="" disabled>
-            In Progress?
-          </option>
-          <option value="In Progress">In Progress</option>
-          <option value="Completed">Completed</option>
-        </select>
-      </div>
+        </ClassesScrollBar>
+        <div className={styles.actionContainer}>
+          <label htmlFor="classDropdown">Choose a class: </label>
+          <select
+            id="classDropdown"
+            onChange={(e) => setNewClass(e.target.value)}
+            value={newClass}
+            className={styles.dropdown}
+          >
+            <option value="" disabled>
+              Select a class
+            </option>
+            {allClasses
+              .sort((a, b) => a.number - b.number)
+              .map((cls) => (
+                <option key={cls.id} value={cls.name}>
+                  {cls.name}
+                </option>
+              ))}
+          </select>
+          <label htmlFor="progressDropdown">Progress Status: </label>
+          <select
+            id="progressDropdown"
+            onChange={(e) => setProgress(e.target.value)}
+            value={progress}
+            className={styles.dropdown}
+          >
+            <option value="" disabled>
+              Not Defined
+            </option>
+            <option value="In Progress">In Progress</option>
+            <option value="Completed">Completed</option>
+          </select>
+        </div>
 
-      <button
-        type="button"
-        className={styles.addButton}
-        onClick={handleAddClass}
-      >
-        Add
-      </button>
-      <Link href="/editProfile/classes">
-        <button type="button" className={styles.addButton}>
-          Back
-        </button>
-      </Link>
-      <button onClick={fileUpdate} type="button">
-        Save
-      </button>
+        <div className={styles.buttonContainer}>
+          <button
+            type="button"
+            className={`${styles.button} ${styles.addButton}`}
+            onClick={handleAddClass}
+          >
+            Add
+          </button>
+          <button
+            className={styles.button}
+            type="button"
+            onClick={() => router.push("/editProfile/classes")}
+          >
+            Back
+          </button>
+          <button
+            onClick={fileUpdate}
+            type="button"
+            className={`${styles.button} ${!hasUnsavedChanges ? styles.disabledSaveButton : styles.enabledSaveButton}`}
+            disabled={!hasUnsavedChanges}
+          >
+            Save
+          </button>
+        </div>
+      </div>
     </div>
   );
 }

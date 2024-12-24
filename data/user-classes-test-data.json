@@ -13,5 +13,10 @@
     "classNumber": 318,
     "userEmail": "okthornton@middlebury.edu",
     "completionStatus": "in progress"
+  },
+  {
+    "classNumber": 201,
+    "userEmail": "elin@middlebury.edu",
+    "completionStatus": "completed"
   }
 ]

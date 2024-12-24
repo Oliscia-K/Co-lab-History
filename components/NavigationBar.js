@@ -9,6 +9,8 @@ import profileIcon from "../public/profile_image.svg";
 import styles from "../src/styles/Navigation.module.css";
 import LoginWidget from "../src/components/LoginWidget";
 import feedImage from "../public/feed_image.svg";
+import createPostImage from "../public/createPost_image.svg";
+import searchImage from "../public/search_image.svg";
 
 export default function NavigationBar({ isActive }) {
   const { data: session } = useSession();
@@ -31,22 +33,22 @@ export default function NavigationBar({ isActive }) {
   return (
     <div className={`${styles.sidebar} ${isActive ? styles.open : ""}`}>
       <ul className={styles.sidebarelements}>
-        <LoginWidget />
+        <LoginWidget size="small" />
         <li className={styles.sidebaritem}>
           <Link
             className={styles.button}
-            // onClick={() => handleNav("/homepage")}
             href="/"
+            style={{ textDecoration: "none" }}
           >
             <Image className={styles.homeicon} src={homeIcon} alt="Home Icon" />
             <div className={styles.text}>Home</div>
           </Link>
         </li>
         <li className={styles.sidebaritem}>
-          <Link
+          <a
             className={styles.button}
-            // onClick={() => handleNav("/")}
             href={`/user/${id}/userProfile`}
+            style={{ textDecoration: "none" }}
           >
             <Image
               className={styles.profileicon}
@@ -54,20 +56,48 @@ export default function NavigationBar({ isActive }) {
               alt="Profile Icon"
             />
             <div className={styles.text}>Profile</div>
+          </a>
+        </li>
+        <li className={styles.sidebaritem}>
+          <Link
+            className={styles.button}
+            href="/search"
+            style={{ textDecoration: "none" }}
+          >
+            <Image
+              className={styles.homeicon}
+              src={searchImage}
+              alt="Feed Icon"
+            />
+            <div className={styles.text}>Search</div>
           </Link>
         </li>
         <li className={styles.sidebaritem}>
           <Link
             className={styles.button}
-            // onClick={() => handleNav("/homepage")}
-            href="/feed"
+            href="/feed/create"
+            style={{ textDecoration: "none" }}
+          >
+            <Image
+              className={styles.homeicon}
+              src={createPostImage}
+              alt="Post Icon"
+            />
+            <div className={styles.text}>Post</div>
+          </Link>
+        </li>
+        <li className={styles.sidebaritem}>
+          <Link
+            className={styles.button}
+            href="/myPosts"
+            style={{ textDecoration: "none" }}
           >
             <Image
               className={styles.homeicon}
               src={feedImage}
-              alt="Home Icon"
+              alt="Feed Icon"
             />
-            <div className={styles.text}>Feed</div>
+            <div className={styles.text}>My Posts</div>
           </Link>
         </li>
       </ul>

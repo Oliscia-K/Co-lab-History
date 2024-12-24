@@ -1,5 +1,3 @@
-# Co-lab-History
-Began as a software dev final project with plans to expand outside of the course. This is meant to be used by students to connect to each other for project-partner interests
 # Project Skeleton
 
 ![workflow status](https://github.com/csci312-f24/project-cutts/actions/workflows/node.js.yml/badge.svg)
@@ -32,6 +30,23 @@ Other dependencies installed with:
 ```
 
 ### Additional tools you might need
+
+#### Local and Production database
+
+In order to use the seed files and database, the .env files must be updated to use your specific docker and database URL. Once these
+are properly setup, follow these steps to pool
+in the seed files:
+npx knex migrate: latest
+npx knex seed:run
+
+The current database was made with neon, so it is recommended to recreate the tables as seen in
+the data section of the code through this site.
+If another is used, be aware that there is potential for the need to alter the models.
+
+#### Authenticator
+
+The google authenticator (.env) will also need to be updated to use the ID and Secret code for
+the newely created client. See https://console.developers.google.com/apis/credentials to create the credentials.
 
 #### Mocking fetch
 

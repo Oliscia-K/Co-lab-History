@@ -3,21 +3,21 @@
   align-items: flex-start;
   background-color: white;
   padding: 20px;
-  border: 3px solid #00296f;
+  border: 3px solid #f2f2f2;
   border-radius: 20px;
-  max-width: 500px;
-  margin: 10px auto;
 }
 
 /* large and small profile sizes */
 .large {
-  width: 100%;
+  width: 100vh;
 }
 
 .small {
-  width: 300px;
+  border: 3px solid black;
+  width: fit-container;
   font-size: 0.9em;
-  padding: 10px;
+  margin-bottom: 10px;
+  color: black;
 }
 
 /* profile image container */
@@ -32,8 +32,8 @@
 .profilePicture {
   margin-top: 15px;
   margin-bottom: 15px;
-  width: 110px;
-  height: 110px;
+  width: 20vh;
+  height: 18vh;
   border-radius: 50%;
   object-fit: cover;
 }
@@ -45,6 +45,7 @@
   height: 50px;
   border-radius: 50%;
   object-fit: cover;
+  border: none;
 }
 
 /* placeholder for image, with just initials */
@@ -63,7 +64,7 @@
   font-weight: bold;
 }
 
-.small .initialsCircle {
+.initialsCircle {
   width: 50px;
   height: 50px;
   font-size: 20px;
@@ -84,26 +85,24 @@
 
 /* large and small names for different component sizes*/
 .largeName {
-  font-size: 1.5em;
+  font-size: 2em;
   font-weight: bold;
-  color: #00296f;
+  color: black;
 }
 
 .smallName {
   font-size: 1em;
-  color: #00296f;
+  color: black;
   font-weight: bold;
 }
 
 /* pronouns styles */
 .pronouns {
   font-size: 0.9em;
-  color: #00296f;
 }
 
 /* (major and year) */
 .basics {
   font-size: 0.9em;
-  color: #00296f;
   margin: 1px 0;
 }

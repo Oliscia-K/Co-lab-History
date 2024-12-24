@@ -67,78 +67,89 @@ export default function Editor({ currentUser, complete }) {
   };
 
   return (
-    <div className={styles.container}>
-      <div className={styles.profileHeader}>
-        <div className={styles.smallName}>
-          Name:
-          <input
-            type="text"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-        </div>
-        <label className={styles.pronouns}>
-          Pronouns:
-          <input
-            type="text"
-            value={pronouns}
-            onChange={(e) => setPronouns(e.target.value)}
-          />
-        </label>
-        <label className={styles.basics}>
-          Major:
-          <select value={major} onChange={(e) => setMajor(e.target.value)}>
-            <option value="">Select your major</option>
-            {majors.map((m) => (
-              <option key={m} value={m}>
-                {m}
-              </option>
-            ))}
-          </select>
-        </label>
-        <label className={styles.basics}>
-          Graduation Year:
-          <select
-            value={gradYear}
-            onChange={(e) => setGradYear(e.target.value)}
-          >
-            <option value="">Select your graduation year</option>
-            {gradYears.map((year) => (
-              <option key={year} value={year}>
-                {year}
-              </option>
-            ))}
-          </select>
-        </label>
-      </div>
-      <div className={styles.middleSection}>
-        <div className={styles.sectionHeader}>
-          <label className={styles.bio}>
-            <h3>Bio:</h3>
-            <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
-          </label>
-        </div>
-        <div className={styles.sectionHeader}>
-          <label className={styles.projectInterests}>
-            <h3>Project Interests:</h3>
-            <textarea
-              value={interests}
-              onChange={(e) => setInterests(e.target.value)}
+    <div className={styles.editorContainer}>
+      <div className={styles.topContainer}>
+        <div className={styles.leftColumn}>
+          <div className={styles.basics}>
+            Name:
+            <input
+              type="text"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
             />
-          </label>
+          </div>
+          <div className={styles.basics}>
+            Pronouns:
+            <input
+              type="text"
+              value={pronouns}
+              onChange={(e) => setPronouns(e.target.value)}
+            />
+          </div>
+        </div>
+        <div className={styles.rightColumn}>
+          <div className={styles.basics}>
+            Major:
+            <select value={major} onChange={(e) => setMajor(e.target.value)}>
+              <option value="">Select your major</option>
+              {majors.map((m) => (
+                <option key={m} value={m}>
+                  {m}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className={styles.basics}>
+            Graduation Year:
+            <select
+              value={gradYear}
+              onChange={(e) => setGradYear(e.target.value)}
+            >
+              <option value="">Select your graduation year</option>
+              {gradYears.map((year) => (
+                <option key={year} value={year}>
+                  {year}
+                </option>
+              ))}
+            </select>
+          </div>
+        </div>
+      </div>
+      <div className={styles.bottomContainer}>
+        <div className={styles.middleSection}>
+          <div className={styles.bio}>
+            <label className={styles.sectionHeader}>
+              <h3>Bio:</h3>
+              <textarea value={bio} onChange={(e) => setBio(e.target.value)} />
+            </label>
+          </div>
+          <div className={styles.projectInterests}>
+            <label className={styles.sectionHeader}>
+              <h3>Project Interests:</h3>
+              <textarea
+                value={interests}
+                onChange={(e) => setInterests(e.target.value)}
+              />
+            </label>
+          </div>
         </div>
       </div>
       <div>
-        <a href={`/user/${currentUser?.id}/userProfile`}>
-          <button type="button" onClick={handleSave} disabled={!name}>
-            Save
-          </button>
-        </a>
-        <a href={`/user/${currentUser?.id}/userProfile`}>
-          <button type="button" onClick={() => complete()}>
-            Cancel
-          </button>
-        </a>
+        <button
+          className={styles.submitButton}
+          type="button"
+          onClick={handleSave}
+          disabled={!name}
+        >
+          Save
+        </button>
+        <button
+          className={styles.cancelButton}
+          type="button"
+          onClick={() => complete()}
+        >
+          Cancel
+        </button>
       </div>
       {!name && <p style={{ color: "red" }}>Name is required.</p>}{" "}
     </div>

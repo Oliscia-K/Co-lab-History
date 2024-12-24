@@ -6,12 +6,18 @@ const router = createRouter();
 
 router
   .get(async (req, res) => {
+    if (req.query.email) {
+      const userPosts = await Posts.query().where({ creator: req.query.email });
+      if (userPosts) {
+        return res.status(200).json(userPosts);
+      }
+      return res.status(200).json([]);
+    }
     const allPosts = await Posts.query();
     if (allPosts) {
-      res.status(200).json(allPosts);
-    } else {
-      res.status(200).json([]);
+      return res.status(200).json(allPosts);
     }
+    return res.status(200).json([]);
   })
   .put(async (req, res) => {
     const { newPost } = req.body;
@@ -20,10 +26,10 @@ router
     res.status(201).json(post);
   })
   .post(async (req, res) => {
-    const { alteredClass } = req.body;
+    const { alteredPost } = req.body;
     const updatedPost = await Posts.query()
-      .where({ id: alteredClass.id })
-      .update({ ...alteredClass })
+      .where({ id: alteredPost.id })
+      .update({ ...alteredPost })
       .returning("*");
     res.status(200).json(updatedPost);
   });
@@ -33,6 +39,18 @@ export default router.handler({ onError });
 /* How to get all posts from Posts table
 
 fetch('/api/posts')
+    .then(response => {
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then(data => console.log(data))
+    .catch(error => console.error('Fetch error:', error)); */
+
+/* How to get user specific posts from Posts table
+
+fetch('/api/posts?email=okthornton@middlebury.edu')
     .then(response => {
       if (!response.ok) {
         throw new Error(`HTTP error! status: ${response.status}`);
@@ -75,7 +93,7 @@ fetch('/api/posts', {
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        alteredClass: {
+        alteredPost: {
             id: 5,
             creator: "okthornton@middlebury.edu",
             title: "Senior Seminar Team? (Edited)",
